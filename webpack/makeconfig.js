@@ -55,11 +55,11 @@ module.exports = function(isDevelopment) {
     },
     output: isDevelopment ? {
       path: path.join(__dirname, '/build/'),
-      filename: 'app.js',
+      filename: '[name].js',
       publicPath: 'http://localhost:8888/build/'
     } : {
       path: 'build/',
-      filename: 'app.js'
+      filename: '[name].js'
     },
     plugins: (function() {
       var plugins = [

@@ -1,11 +1,12 @@
 import React from 'react'
 import compression from 'compression'
+import config from './config'
 import express from 'express'
 import render from './render'
 
-export default (config) => {
+export default function() {
 
-  const app = express()
+  let app = express()
 
   app.use(compression())
 
@@ -13,7 +14,7 @@ export default (config) => {
   app.use('/assets', express.static('assets'))
 
   app.get('*', (req, res) => {
-    render(req.path, config)
+    render(req.path)
       .then((result) => {
         res.status(result.status).send(result.html)
       })

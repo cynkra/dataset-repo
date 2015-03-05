@@ -18,6 +18,8 @@ gulp.task('build-webpack', (args.production ? webpackBuild : webpackDevServer)
 
 gulp.task('build', ['build-webpack'])
 
+gulp.task('test', webpackBuild(makeWebpackConfig(false)))
+
 gulp.task('server', ['env', 'build'], bg('node', 'src/server'))
 
 gulp.task('default', ['server'])

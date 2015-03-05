@@ -5,7 +5,6 @@ export default class State extends EventEmitter {
 
   constructor(opt_json) {
     this._state = null
-    this._previousState = null
     this.load(opt_json || {})
   }
 
@@ -15,9 +14,8 @@ export default class State extends EventEmitter {
 
   set(state) {
     if (this._state === state) return
-    this._previousState = this._state
     this._state = state
-    this.emit('change', this._state, this._previousState)
+    this.emit('change', this._state)
   }
 
   get() {

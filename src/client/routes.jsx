@@ -1,7 +1,7 @@
 import App from './components/app'
 import NotFound from './components/notfound'
 import React from 'react'
-import Datasets from './components/home'
+import Datasets from './components/datasets'
 import {DefaultRoute, NotFoundRoute, Route} from 'react-router'
 
 export default (

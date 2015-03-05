@@ -3,8 +3,10 @@ if (!process.env.NODE_ENV)
 
 require('babel/register');
 
+var config = require('./config');
+
 // Ignore webpack custom loaders on server.
-['css', 'less', 'sass', 'scss', 'styl'].forEach(function(ext) {
+config.webpackStylesExtensions.forEach(function(ext) {
   require.extensions['.' + ext] = function() {}
 });
 
