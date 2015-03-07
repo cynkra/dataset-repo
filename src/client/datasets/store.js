@@ -7,6 +7,7 @@ import {datasetsCursor} from '../state'
 
 export const Dataset = Record({
   TABLE_SCHEMA: '',
+  original_database_name: '',
   uploader: '',
   upload_date: null,
   domain: '',

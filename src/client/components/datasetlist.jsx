@@ -16,6 +16,7 @@ export default React.createClass({
       <table>
         <thead>
           <th>TABLE_SCHEMA</th>
+          <th>original_database_name</th>
           <th>table_count</th>
           <th>row_count</th>
           <th>row_max_count</th>

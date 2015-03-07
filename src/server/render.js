@@ -27,6 +27,7 @@ function loadData(path, locale) {
         rows.map((row,i) => {
           datasets.push(new Dataset({
             TABLE_SCHEMA: row.TABLE_SCHEMA,
+            original_database_name: row.original_database_name,
             uploader: row.uploader,
             upload_date: row.upload_date,
             domain: row.domain,

@@ -16,6 +16,7 @@ export default React.createClass({
     return (
       <tr>
         <th>{dataset.get('TABLE_SCHEMA')}</th>
+        <th>{dataset.get('original_database_name')}</th>
         <td>{dataset.get('uploader')}</td>
         <td>{dataset.get('upload_date')}</td>
         <td>{dataset.get('domain')}</td>
