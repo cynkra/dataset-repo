@@ -21,42 +21,33 @@ function loadData(path, locale) {
       password: '******'
     })
     connection.query('USE meta')
-    connection.query('SELECT * FROM information', (err, rows) => {
+    connection.query('SELECT * FROM background', (err, rows) => {
       let datasets = []
-      rows.map((row,i) => {
-        datasets.push(new Dataset({
-          TABLE_SCHEMA: row.TABLE_SCHEMA,
-          table_count: row.table_count,
-          row_count: row.row_count,
-          row_max_count: row.row_max_count,
-          column_count: row.column_count,
-          geo_count: row.geo_count,
-          date_count: row.date_count,
-          lob_count: row.lob_count,
-          string_count: row.string_count,
-          numeric_count: row.numeric_count,
-          id_count: row.id_count,
-          self_referencing_table_count: row.self_referencing_table_count,
-          target_table_count: row.target_table_count,
-          qc_column_count: row.qc_column_count,
-          uploader: row.uploader,
-          upload_date: row.upload_date,
-          domain: row.domain,
-          origin: row.origin,
-          modifications: row.modifications,
-          loop_count: row.loop_count,
-          null_count: row.null_count,
-          is_artificial: row.is_artificial,
-          target_table: row.target_table,
-          target_column: row.target_column,
-          target_id: row.target_id,
-          target_date: row.target_date,
-          task: row.task,
-          propagated_table_count: row.propagated_table_count,
-          runtime: row.runtime,
-          accuracy: row.accuracy,
-        }).toMap())
-      })
+      if(!err) {
+        rows.map((row,i) => {
+          datasets.push(new Dataset({
+            TABLE_SCHEMA: row.TABLE_SCHEMA,
+            uploader: row.uploader,
+            upload_date: row.upload_date,
+            domain: row.domain,
+            origin: row.origin,
+            description: row.description,
+            modified_by: row.modified_by,
+            modifications: row.modifications,
+            loop_count: row.loop_count,
+            null_count: row.null_count,
+            is_artificial: row.is_artificial,
+            target_table: row.target_table,
+            target_column: row.target_column,
+            target_id: row.target_id,
+            target_date: row.target_date,
+            task: row.task,
+            propagated_table_count: row.propagated_table_count,
+            runtime: row.runtime,
+            accuracy: row.accuracy,
+          }).toMap())
+        })
+      }
       
       resolve({
         path,
