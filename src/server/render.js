@@ -91,7 +91,7 @@ function getPageHtml(Handler, appState) {
           s.parentNode.insertBefore(app, s);
       })();
     </script>`
-  scriptHtml = ``
+  // scriptHtml = ``
   let title = DocumentTitle.rewind()
 
   return '<!DOCTYPE html>' + React.renderToStaticMarkup(

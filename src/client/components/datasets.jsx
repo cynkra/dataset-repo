@@ -8,11 +8,11 @@ export default React.createClass({
     const datasets = getDatasets()
 
     return (
-      <section id="datasets">
-        <header id="header">
+      <section className="datasets">
+        <header>
           <h1>Datasets</h1>
         </header>
-        <section id="main">
+        <section className="main">
           <DatasetList datasets={datasets} />
         </section>
       </section>

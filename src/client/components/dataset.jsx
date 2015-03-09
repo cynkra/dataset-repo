@@ -14,28 +14,21 @@ export default React.createClass({
     const dataset = this.props.dataset
 
     return (
-      <tr>
-        <th>{dataset.get('TABLE_SCHEMA')}</th>
-        <th>{dataset.get('original_database_name')}</th>
-        <td>{dataset.get('uploader')}</td>
-        <td>{dataset.get('upload_date')}</td>
-        <td>{dataset.get('domain')}</td>
-        <td>{dataset.get('origin')}</td>
-        <td>{dataset.get('description')}</td>
-        <td>{dataset.get('modified_by')}</td>
-        <td>{dataset.get('modifications')}</td>
-        <td>{dataset.get('loop_count')}</td>
-        <td>{dataset.get('null_count')}</td>
-        <td>{dataset.get('is_artificial')}</td>
-        <td>{dataset.get('target_table')}</td>
-        <td>{dataset.get('target_column')}</td>
-        <td>{dataset.get('target_id')}</td>
-        <td>{dataset.get('target_date')}</td>
-        <td>{dataset.get('task')}</td>
-        <td>{dataset.get('propagated_table_count')}</td>
-        <td>{dataset.get('runtime')}</td>
-        <td>{dataset.get('accuracy')}</td>
-      </tr>
+      <li className="dataset">
+        <h3 className="dataset-title">
+          {dataset.get('original_database_name')} 
+          <small>({dataset.get('TABLE_SCHEMA')})</small>
+        </h3>
+        <div className="dataset-uploader">
+          {dataset.get('uploader')}
+          <small>(<a href={dataset.get('origin')}>Origin</a>)</small>
+        </div>
+        {dataset.get('task')}
+        <div className="tags">
+          <div className="tag tag--domain">{dataset.get('domain')}</div>
+          <div className="tag tag--artificial">{dataset.get('is_artificial') == 1 ? "artificial" : "real"}</div>
+        </div>
+      </li>
     )
   }
 })

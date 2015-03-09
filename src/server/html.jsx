@@ -4,7 +4,7 @@ export default React.createClass({
 
   render() {
     // Only for production. For dev, it's handled by webpack with livereload.
-    let linkStyles = this.props.isProduction &&
+    let linkStyles = /*this.props.isProduction && */
       <link
         href={`/build/app.css?v=${this.props.version}`}
         rel="stylesheet"
