@@ -42,7 +42,7 @@ TODO (Feel free to add anything)
 [ ] Vložení datasetu
 [ ] Počítání zobrazení a downloadů
     [ ] Založit Google Analytics
-    [ ] Vložení GA kódu do aplikace
+    [✓] Vložení GA kódu do aplikace
 
 Ukázky repositářů s komentářem:
 1) http://archive.ics.uci.edu/ml/
