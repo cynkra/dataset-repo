@@ -3,6 +3,8 @@ import React from 'react'
 import DatasetList from './datasetlist'
 import {getDatasets} from '../../datasets/store'
 
+require('../../../../assets/css/datasets/datasets.styl')
+
 export default React.createClass({
 
   render() {
@@ -15,7 +17,12 @@ export default React.createClass({
             <h1>Datasets</h1>
           </header>
           <section className="main">
-            <DatasetList datasets={datasets} />
+            <section className="primary">
+              <DatasetList datasets={datasets} />
+            </section>
+            <section className="sidebar">
+              ... Filter ...
+            </section>
           </section>
         </section>
       </DocumentTitle>

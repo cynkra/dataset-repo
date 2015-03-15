@@ -3,7 +3,6 @@ import React from 'react'
 import {Link, RouteHandler} from 'react-router'
 import {state} from '../state'
 
-// Leverage webpack require goodness for feature toggle based dead code removal.
 require('../../../assets/css/app.styl')
 
 export default React.createClass({
@@ -15,9 +14,7 @@ export default React.createClass({
   render() {
     return (
       <DocumentTitle title={'Dataset repo'}>
-        <div className="page">
-          <RouteHandler />
-        </div>
+        <RouteHandler />
       </DocumentTitle>
     )
   }

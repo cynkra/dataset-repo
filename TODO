@@ -4,16 +4,16 @@ TODO (Feel free to add anything)
 [✓] Připojení k db
 [✓] Vykreslení obsahu
 [ ] Podpora pro tagy
-    [ ] Tags component
-    [ ] Tag component
-        [ ] Size - green
-        [ ] #Tables - green
+    [✓] Taglist component
+    [✓] Tag component
+        [✓] Size {KB, MB, GB}- green
+        [✓] #Tables - green
         [ ] Data Levels {nominal, ordinal, continuous} - blue
-        [ ] Data Types {numerical, string, time, geo} - red
+        [✓] Data Types {numerical, string, date, lob, geo} - red
         [ ] Missing values - yellow
-        [ ] Real/Artificial - yellow
-        [ ] Domain {retail, financial, health, chemical, biological, geo} - beige
-    [ ] Databáze
+        [✓] Real/Artificial - yellow
+        [✓] Domain {retail, financial, health, chemical, biological, geo} - beige
+    [✓] Tagy - databáze
 [ ] Vyhledávání
     [ ] Search component
     [ ] Search - databáze

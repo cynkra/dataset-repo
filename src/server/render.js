@@ -22,29 +22,45 @@ function loadData(path) {
       password: '******'
     })
     connection.query('USE meta')
-    connection.query('SELECT * FROM background', (err, rows) => {
+    connection.query('SELECT * FROM information', (err, rows) => {
       let datasets = []
       if(!err) {
         rows.map((row,i) => {
           datasets.push(new Dataset({
-            TABLE_SCHEMA: row.TABLE_SCHEMA,
-            original_database_name: row.original_database_name,
+            tableSchema: row.TABLE_SCHEMA,
+            tableCount: row.table_count,
+            databaseSize: row.database_size,
+            rowCount: row.row_count,
+            rowMax: row.row_max,
+            columnCount: row.column_count,
+            geoCount: row.geo_count,
+            dateCount: row.date_count,
+            lobCount: row.lob_count,
+            stringCount: row.string_count,
+            numericCount: row.numeric_count,
+            idCount: row.id_count,
+            referenceCount: row.reference_count,
+            selfRefencingTableCount: row.self_refencing_table_count,
+            targetTableRowCount: row.target_table_row_count,
+            qcHasEmptyTable: row.qc_has_empty_table,
+            qcColumnCount: row.qc_column_count,
+            originalDatabaseName: row.original_database_name,
             uploader: row.uploader,
-            upload_date: row.upload_date,
+            uploadDate: row.upload_date,
             domain: row.domain,
             origin: row.origin,
             description: row.description,
-            modified_by: row.modified_by,
+            modifiedBy: row.modified_by,
             modifications: row.modifications,
-            loop_count: row.loop_count,
-            null_count: row.null_count,
-            is_artificial: row.is_artificial,
-            target_table: row.target_table,
-            target_column: row.target_column,
-            target_id: row.target_id,
-            target_date: row.target_date,
+            loopCount: row.loop_count,
+            nullCount: row.null_count,
+            isArtificial: row.is_artificial,
+            targetTable: row.target_table,
+            targetColumn: row.target_column,
+            targetId: row.target_id,
+            targetDate: row.target_date,
             task: row.task,
-            propagated_table_count: row.propagated_table_count,
+            propagatedTableCount: row.propagated_table_count,
             runtime: row.runtime,
             accuracy: row.accuracy,
           }).toMap())
