@@ -1,3 +1,4 @@
-import dispatcher from '../dispatcher'
+import setToString from '../../lib/settostring'
+import {dispatch} from '../dispatcher'
 
-dispatcher.setToString('datasets', {})
+setToString('datasets', {})

@@ -1,17 +1,15 @@
-import flux from 'flux'
-import setToString from '../lib/settostring'
+import {Dispatcher} from 'flux'
 
-export default new class Dispatcher extends flux.Dispatcher {
+const dispatcher = new Dispatcher
 
-  dispatch(action: Function, data: Object) {
-    // Log all app actions.
-  	console.log(action)
-    super.dispatch({action, data})
+export function register(callback: Function): string {
+  return dispatcher.register(callback)
+}
+
+export function dispatch(action: Function, data: ?Object) {
+  if ('production' != process.env.NODE_ENV) {
+    console.log(action)
   }
 
-  // Little helper giving action name for logging.
-  setToString(prefix, actions) {
-  	return setToString(prefix, actions)
-  }
-
+  dispatcher.dispatch({action, data})
 }

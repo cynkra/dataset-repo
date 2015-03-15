@@ -4,16 +4,17 @@ import Promise from 'bluebird'
 import React from 'react'
 import Router from 'react-router'
 import config from './config'
+import initialState from './initialstate'
 import routes from '../client/routes'
 import {state} from '../client/state'
 import mysql from 'mysql'
 import {Dataset} from '../client/datasets/store'
 
-export default function(path, locale) {
-  return loadData(path, locale).then(renderPage)
+export default function(path) {
+  return loadData(path).then(renderPage)
 }
 
-function loadData(path, locale) {
+function loadData(path) {
   return new Promise((resolve, reject) => {
     let connection = mysql.createConnection({
       host:     'relational.fit.cvut.cz',
@@ -49,7 +50,7 @@ function loadData(path, locale) {
           }).toMap())
         })
       }
-      
+
       resolve({
         path,
         appState: {
@@ -75,24 +76,23 @@ function renderPage({path, appState}) {
 }
 
 function getPageHtml(Handler, appState) {
-  let appHtml = React.renderToString(<Handler />)
-  let appScriptSrc = config.isProduction
+  const appHtml = `<div id="app">${React.renderToString(<Handler />)}</div>`
+  const appScriptSrc = config.isProduction
     ? 'build/app.js?v=' + config.version
     : '//localhost:8888/build/app.js'
-  let scriptHtml = `
+  const scriptHtml = `
     <script>
       (function() {
         window._appState = ${JSON.stringify(appState)};
-        var app = document.createElement('script'); 
-          app.type = 'text/javascript'; 
+        var app = document.createElement('script');
+          app.type = 'text/javascript';
           app.async = true;
           app.src = '${appScriptSrc}';
         var s = document.getElementsByTagName('script')[0];
           s.parentNode.insertBefore(app, s);
       })();
     </script>`
-  // scriptHtml = ``
-  let title = DocumentTitle.rewind()
+  const title = DocumentTitle.rewind()
 
   return '<!DOCTYPE html>' + React.renderToStaticMarkup(
     <Html

@@ -1,9 +1,7 @@
 import * as actions from './actions'
-import dispatcher from '../dispatcher'
+import {register} from '../dispatcher'
 import {Record} from 'immutable'
 import {datasetsCursor} from '../state'
-
-// Note store is state-less. It's must for isomorphic app.
 
 export const Dataset = Record({
   TABLE_SCHEMA: '',
@@ -28,13 +26,10 @@ export const Dataset = Record({
   accuracy: null,
 })
 
-export const dispatchToken = dispatcher.register((payload) => {
-  let {action, data} = payload
+export const dispatchToken = register(({action, data}) => {
 
   switch (action) {
-    case actions.initDatasets:
-    datasetsCursor(datasets => data)
-    break
+
   }
 
 })

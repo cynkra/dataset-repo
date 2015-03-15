@@ -30,20 +30,23 @@ module.exports = function(isDevelopment) {
   var config = {
     cache: isDevelopment,
     debug: isDevelopment,
-    // This is not as dirty as it looks. It just generates source maps without
-    // being crazy slow. http://webpack.github.io/docs/configuration.html#devtool
-    devtool: isDevelopment ? 'eval' : '',
-    entry: isDevelopment ? [
-      'webpack-dev-server/client?http://localhost:8888',
-      // Why only-dev-server instead of dev-server:
-      // https://github.com/webpack/webpack/issues/418#issuecomment-54288041
-      'webpack/hot/only-dev-server',
-      './src/client/main.js'
-    ] : [
-      './src/client/main.js'
-    ],
+    devtool: isDevelopment ? 'eval-source-map' : '',
+    entry: {
+      app: isDevelopment ? [
+        'webpack-dev-server/client?http://localhost:8888',
+        // Why only-dev-server instead of dev-server:
+        // https://github.com/webpack/webpack/issues/418#issuecomment-54288041
+        'webpack/hot/only-dev-server',
+        './src/client/main.js'
+      ] : [
+        './src/client/main.js'
+      ]
+    },
     module: {
       loaders: [{
+        loader: 'url-loader?limit=100000',
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/
+      }, {
         exclude: /node_modules/,
         loaders: isDevelopment ? [
           'react-hot', 'babel-loader'
@@ -65,8 +68,8 @@ module.exports = function(isDevelopment) {
       var plugins = [
         new webpack.DefinePlugin({
           'process.env': {
-            NODE_ENV: JSON.stringify(isDevelopment ? 'development' :
-              'production')
+            NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
+            IS_BROWSER: true
           }
         })
       ]

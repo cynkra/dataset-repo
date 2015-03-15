@@ -16,7 +16,7 @@ export default React.createClass({
     return (
       <li className="dataset">
         <h3 className="dataset-title">
-          {dataset.get('original_database_name')} 
+          {dataset.get('original_database_name')}
           <small>({dataset.get('TABLE_SCHEMA')})</small>
         </h3>
         <div className="dataset-uploader">

@@ -6,7 +6,7 @@ import render from './render'
 
 export default function() {
 
-  let app = express()
+  const app = express()
 
   app.use(compression())
 

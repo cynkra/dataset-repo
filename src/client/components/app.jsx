@@ -15,7 +15,7 @@ export default React.createClass({
   render() {
     return (
       <DocumentTitle title={'Dataset repo'}>
-        <div className="app">
+        <div className="page">
           <RouteHandler />
         </div>
       </DocumentTitle>
