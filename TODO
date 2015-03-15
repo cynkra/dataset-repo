@@ -1,0 +1,63 @@
+TODO (Feel free to add anything)
+================================
+[✓] Dev stack
+[✓] Připojení k db
+[✓] Vykreslení obsahu
+[ ] Podpora pro tagy
+    [ ] Tags component
+    [ ] Tag component
+        [ ] Size - green
+        [ ] #Tables - green
+        [ ] Data Levels {nominal, ordinal, continuous} - blue
+        [ ] Data Types {numerical, string, time, geo} - red
+        [ ] Missing values - yellow
+        [ ] Real/Artificial - yellow
+        [ ] Domain {retail, financial, health, chemical, biological, geo} - beige
+    [ ] Databáze
+[ ] Vyhledávání
+    [ ] Search component
+    [ ] Search - databáze
+    [ ] Search - API call
+    [ ] Podle jména datasetu
+    [ ] Podle tagu
+[ ] Filtrování
+    [ ] Filter component
+    [ ] Filter - databáze
+    [ ] Filter - API call
+    [ ] Podle velikosti datasetu (range)
+    [ ] Podle počtu tabulek (range)
+    [ ] Podle tagů
+[ ] Detail datasetu
+    [ ] Detail component
+    [ ] Detail - API call?
+    [ ] Náhled schématu
+[ ] Leaderboard připsvěvovatelů
+    [ ] Leaderboard component
+    [ ] Leaderboard - Databáze
+    [ ] Leaderboard - API call
+    [ ] Bargraf z highcharts knihovny
+[ ] Kontaktní formulář / kontaktní informace
+    [ ] Contact component (on every page)
+    [ ] "Typo, suggestion, complain?"
+[ ] Vložení datasetu
+[ ] Počítání zobrazení a downloadů
+    [ ] Založit Google Analytics
+    [ ] Vložení GA kódu do aplikace
+
+Ukázky repositářů s komentářem:
+1) http://archive.ics.uci.edu/ml/
+    Žebříček nejstahovanějších datasetů
+    Filtrování (na http://archive.ics.uci.edu/ml/datasets.html)
+2) http://snap.stanford.edu/data/
+    Detaily datasetů
+3) http://datahub.io/dataset?tags=format-rdf
+    Tagy.
+4) http://www.kde.cs.uni-kassel.de/ws/dc09/dataset
+    Instrukce pro validaci datasetu. A jak nastavit databázi.
+5) http://expdb.cs.kuleuven.be/expdb/search
+    Interaktivní vizualizace schematu (nice to have - tím bych nezačínal)
+    Zápatí s logy univerzit (tohle je projekt ve spolupráci s Fraser University v Kanadě)
+6) http://dataverse.org/
+    Působivá úvodní stránka. Ale nepraktická - preferuji rovnou skočit do seznamu datasetů.
+7) http://www.kaggle.com/
+    Vzhled
