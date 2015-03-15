@@ -1,16 +1,20 @@
-- Written in [BabelScript](https://babeljs.io/). It handles next generation JavaScripts with [React JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) syntax spiced by [Flowtype](http://flowtype.org/) type [annotations](http://flowtype.org/docs/type-annotations.html#_) already.
+- Written in [BabelScript](https://babeljs.io/).
 - [React](http://facebook.github.io/react/), [Flux](https://facebook.github.io/flux/), [react-router](https://github.com/rackt/react-router), [immutable.js](http://facebook.github.io/immutable-js/).
-- Isomorphic architecture with state-less stores, server rendering, and routing inside expressjs.
-- Global immutable app state like Om with cursors, so app state can be snapshotted and reloaded. Undo redo is super easy.
-- The state of art performance thanks to [immutable.js](http://facebook.github.io/immutable-js) and [PureRenderMixin](http://facebook.github.io/react/docs/pure-render-mixin.html) combo.
-- Well tuned dev stack based on [gulp.js](http://gulpjs.com/) and [webpack](http://webpack.github.io/) configured both for dev and production.
-- CSS livereload and webpack module hot reload, so you can tweak React in real time.
-- Isomorphic 404 and 500 pages.
+- Dev stack based on [gulp.js](http://gulpjs.com/) and [webpack](http://webpack.github.io/) configured both for dev and production.
+- Server side rendering.
+- CSS livereload and webpack module hot reload.
+
+## Prerequisites
+
+Install [iojs](https://iojs.org/) or [node.js](http://nodejs.org).
+Then install [gulp.js](http://gulpjs.com/).
+```shell
+  npm install -g gulp
+```
 
 ## Install
 
-```
-  npm install --global gulp
+```shell
   git clone https://gitlab.fit.cvut.cz/ostrovac/dataset-repo.git
   cd dataset-repo
   npm install
@@ -20,4 +24,13 @@
 
 - `gulp` start development
 - `gulp -p` run app in production mode
-- `gulp build -p` build in production mode for continuous integration (CI)
+- `gulp build -p` build in production mode
+
+## Useful links for developers
+- [React.js](http://facebook.github.io/react/). 
+- [What is the Flux application architecture](https://medium.com/brigade-engineering/what-is-the-flux-application-architecture-b57ebca85b9e). 
+- [Learn ES6](https://babeljs.io/docs/learn-es6/). 
+- [Immutable.js](http://facebook.github.io/immutable-js/) and [the case for immutability](https://github.com/facebook/immutable-js/#the-case-for-immutability). 
+- [Express.js](http://expressjs.com/) 
+- [Node.js](http://nodejs.org/api/) 
+- [Isomorphic javascript](http://isomorphic.net/javascript)
