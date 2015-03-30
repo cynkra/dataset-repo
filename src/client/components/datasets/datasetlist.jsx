@@ -17,7 +17,7 @@ export default React.createClass({
     return (
       <ul className="datasetList">
         {this.props.datasets.map((dataset, i) => {
-          return <Dataset dataset={dataset} key={dataset.get('tableSchema')} />
+          return <Dataset dataset={dataset} key={dataset.get('originalDatabaseName')} />
         }).toArray()}
       </ul>
     )
