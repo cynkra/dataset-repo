@@ -16,18 +16,15 @@ export default React.createClass({
 
   render() {
     const dataset = this.props.dataset
+    const title = dataset.get('originalDatabaseName')
 
     return (
       <li className="dataset">
-        <h3 className="dataset-title">
-          {dataset.get('originalDatabaseName')}
-          <small>({dataset.get('tableSchema')})</small>
-        </h3>
-        <div className="dataset-uploader">
-          {dataset.get('uploader')}
-          <small>(<a href={dataset.get('origin')}>Origin</a>)</small>
-        </div>
-        {dataset.get('task')}
+        <h3 className="dataset-title">{title}</h3>
+        {dataset.get('description') ?
+          <p>{dataset.get('description').slice(0, 300)}</p> :
+          ''
+        }
         <TagList tags={getTags(dataset)} />
       </li>
     )

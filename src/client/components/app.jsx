@@ -2,6 +2,7 @@ import DocumentTitle from 'react-document-title'
 import React from 'react'
 import {Link, RouteHandler} from 'react-router'
 import {state} from '../state'
+import Header from './header'
 
 require('../../../assets/css/app.styl')
 
@@ -14,7 +15,10 @@ export default React.createClass({
   render() {
     return (
       <DocumentTitle title={'Dataset repo'}>
-        <RouteHandler />
+        <div className="page">
+          <Header />
+          <RouteHandler />
+        </div>
       </DocumentTitle>
     )
   }

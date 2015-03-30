@@ -1,3 +1,5 @@
+@import '../colors'
+
 .tag
   display inline-block
   border-radius 3px
@@ -7,19 +9,24 @@
   font-weight bold
   color #fff
   text-decoration none
-  text-shadow 1px 1px 3px rgba(0,0,0,.3)
+  text-shadow 1px 1px 2px rgba(0,0,0,.5)
+  box-shadow 0 0 5px rgba(0,0,0,0.26)
 
   &--size
-    background-color #27ae60
+    background-color green-500
 
   &--tableCount
-    background-color #2ecc71
-
-  &--dataType
-    background-color #c0392b
+    background-color amber-500
 
   &--type
-    background-color #f7ca18
+    background-color cyan-500
 
   &--domain
-    background-color #f4b350
+    background-color pink-500
+
+  &--missingValues
+    background-color teal-500
+
+  &--dataType
+    background-color deep-orange-500
+

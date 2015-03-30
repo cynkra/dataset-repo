@@ -12,17 +12,9 @@ export default React.createClass({
 
     return (
       <DocumentTitle title="Datasets">
-        <section className="datasets">
-          <header>
-            <h1>Datasets</h1>
-          </header>
-          <section className="main">
-            <section className="primary">
-              <DatasetList datasets={datasets} />
-            </section>
-            <section className="sidebar">
-              ... Filter ...
-            </section>
+        <section className="content">
+          <section className="primary">
+            <DatasetList datasets={datasets} />
           </section>
         </section>
       </DocumentTitle>

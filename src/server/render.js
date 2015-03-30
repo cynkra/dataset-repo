@@ -22,48 +22,29 @@ function loadData(path) {
       password: '******'
     })
     connection.query('USE meta')
-    connection.query('SELECT * FROM information', (err, rows) => {
+    connection.query('SELECT original_database_name, description, database_size, table_count, is_artificial, domain, null_count, numeric_count, string_count, lob_count, date_count, geo_count FROM information WHERE original_database_name IS NOT NULL',
+      (err, rows) => {
       let datasets = []
+      let names = []
       if(!err) {
         rows.map((row,i) => {
-          datasets.push(new Dataset({
-            tableSchema: row.TABLE_SCHEMA,
-            tableCount: row.table_count,
-            databaseSize: row.database_size,
-            rowCount: row.row_count,
-            rowMax: row.row_max,
-            columnCount: row.column_count,
-            geoCount: row.geo_count,
-            dateCount: row.date_count,
-            lobCount: row.lob_count,
-            stringCount: row.string_count,
-            numericCount: row.numeric_count,
-            idCount: row.id_count,
-            referenceCount: row.reference_count,
-            selfRefencingTableCount: row.self_refencing_table_count,
-            targetTableRowCount: row.target_table_row_count,
-            qcHasEmptyTable: row.qc_has_empty_table,
-            qcColumnCount: row.qc_column_count,
-            originalDatabaseName: row.original_database_name,
-            uploader: row.uploader,
-            uploadDate: row.upload_date,
-            domain: row.domain,
-            origin: row.origin,
-            description: row.description,
-            modifiedBy: row.modified_by,
-            modifications: row.modifications,
-            loopCount: row.loop_count,
-            nullCount: row.null_count,
-            isArtificial: row.is_artificial,
-            targetTable: row.target_table,
-            targetColumn: row.target_column,
-            targetId: row.target_id,
-            targetDate: row.target_date,
-            task: row.task,
-            propagatedTableCount: row.propagated_table_count,
-            runtime: row.runtime,
-            accuracy: row.accuracy,
-          }).toMap())
+          if(names.indexOf(row.original_database_name) == -1) {
+            names.push(row.original_database_name)
+            datasets.push(new Dataset({
+              originalDatabaseName: row.original_database_name,
+              description: row.description,
+              databaseSize: row.database_size,
+              tableCount: row.table_count,
+              isArtificial: row.is_artificial,
+              domain: row.domain,
+              nullCount: row.null_count,
+              numericCount: row.numeric_count,
+              stringCount: row.string_count,
+              lobCount: row.lob_count,
+              dateCount: row.date_count,
+              geoCount: row.geo_count,
+            }).toMap())
+          }
         })
       }
 
