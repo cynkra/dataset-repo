@@ -10,7 +10,7 @@ TODO (Feel free to add anything)
         [✓] #Tables - green
         [ ] Data Levels {nominal, ordinal, continuous} - blue
         [✓] Data Types {numerical, string, date, lob, geo} - red
-        [ ] Missing values - yellow
+        [✓] Missing values - yellow
         [✓] Real/Artificial - yellow
         [✓] Domain {retail, financial, health, chemical, biological, geo} - beige
     [✓] Tagy - databáze
@@ -40,8 +40,8 @@ TODO (Feel free to add anything)
     [ ] Contact component (on every page)
     [ ] "Typo, suggestion, complain?"
 [ ] Vložení datasetu
-[ ] Počítání zobrazení a downloadů
-    [ ] Založit Google Analytics
+[✓] Počítání zobrazení a downloadů
+    [✓] Založit Google Analytics
     [✓] Vložení GA kódu do aplikace
 
 Ukázky repositářů s komentářem:

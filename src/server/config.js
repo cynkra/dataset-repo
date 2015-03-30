@@ -1,5 +1,5 @@
 module.exports = {
-  googleAnalyticsId: 'UA-XXXXXXX-X',
+  googleAnalyticsId: 'UA-61229872-1',
   isProduction: process.env.NODE_ENV == 'production',
   piping: {
     // Ignore webpack custom loaders on server. TODO: Reuse index.js config.
