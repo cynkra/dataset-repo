@@ -1,30 +1,33 @@
 /* @flow weak */
 
-"use strict"
+'use strict';
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var NotifyPlugin = require('./notifyplugin')
-var path = require('path')
-var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var NotifyPlugin = require('./notifyplugin');
+var path = require('path');
+var webpack = require('webpack');
 
 var loaders = {
-  'css': 'css-loader',
-  'less': 'css-loader!less-loader',
-  'scss|sass': 'css-loader!sass-loader',
-  'styl': 'css-loader!stylus-loader'
-}
+  'css': '',
+  'less': '!less-loader',
+  'scss|sass': '!sass-loader',
+  'styl': '!stylus-loader'
+};
 
 module.exports = function(isDevelopment) {
 
   function stylesLoaders() {
     return Object.keys(loaders).map(function(ext) {
-      var loader = isDevelopment ? 'style-loader!' + loaders[ext] :
-        ExtractTextPlugin.extract('style-loader', loaders[ext])
+      var prefix = 'css-loader!autoprefixer-loader?browsers=last 2 version';
+      var extLoaders = prefix + loaders[ext];
+      var loader = isDevelopment
+        ? 'style-loader!' + extLoaders
+        : ExtractTextPlugin.extract('style-loader', extLoaders);
       return {
         loader: loader,
         test: new RegExp('\\.(' + ext + ')$')
-      }
-    })
+      };
+    });
   }
 
   var config = {
@@ -45,7 +48,7 @@ module.exports = function(isDevelopment) {
     module: {
       loaders: [{
         loader: 'url-loader?limit=100000',
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/
+        test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/
       }, {
         exclude: /node_modules/,
         loaders: isDevelopment ? [
@@ -53,7 +56,7 @@ module.exports = function(isDevelopment) {
         ] : [
           'babel-loader'
         ],
-        test: /\.jsx?$/
+        test: /\.js$/
       }].concat(stylesLoaders())
     },
     output: isDevelopment ? {
@@ -72,14 +75,14 @@ module.exports = function(isDevelopment) {
             IS_BROWSER: true
           }
         })
-      ]
+      ];
       if (isDevelopment)
         plugins.push(
           NotifyPlugin,
           new webpack.HotModuleReplacementPlugin(),
           // Tell reloader to not reload if there is an error.
           new webpack.NoErrorsPlugin()
-        )
+        );
       else
         plugins.push(
           // Render styles into separate cacheable file to prevent FOUC and
@@ -94,15 +97,14 @@ module.exports = function(isDevelopment) {
               warnings: false
             }
           })
-        )
-      return plugins
+        );
+      return plugins;
     })(),
     resolve: {
-      // To allow require('file') instead of require('file.jsx')
-      extensions: ['', '.js', '.jsx', '.json']
-    },
-  }
+      extensions: ['', '.js', '.json']
+    }
+  };
 
-  return config
+  return config;
 
-}
+};

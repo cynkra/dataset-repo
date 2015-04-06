@@ -1,4 +1,4 @@
-const config = require('./config')
+const config = require('./config');
 
 if (config.isProduction || require('piping')(config.piping)) {
   if (!process.env.NODE_ENV)

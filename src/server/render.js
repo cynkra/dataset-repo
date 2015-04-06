@@ -1,17 +1,19 @@
-import DocumentTitle from 'react-document-title'
-import Html from './html'
-import Promise from 'bluebird'
-import React from 'react'
-import Router from 'react-router'
-import config from './config'
-import initialState from './initialstate'
-import routes from '../client/routes'
-import {state} from '../client/state'
-import mysql from 'mysql'
-import {Dataset} from '../client/datasets/store'
+import DocumentTitle from 'react-document-title';
+import Html from './html';
+import Promise from 'bluebird';
+import React from 'react';
+import Router from 'react-router';
+import config from './config';
+import initialState from './initialstate';
+import routes from '../client/routes';
+import {state} from '../client/state';
+import mysql from 'mysql';
+import {Dataset} from '../client/datasets/store';
 
-export default function(path) {
-  return loadData(path).then(renderPage)
+export default function render(req, res) {
+  const path = req.path;
+  return loadData(path)
+    .then((appState) => renderPage(res, appState, path));
 }
 
 function loadData(path) {
@@ -20,16 +22,16 @@ function loadData(path) {
       host:     'relational.fit.cvut.cz',
       user:     'guest',
       password: '******'
-    })
-    connection.query('USE meta')
+    });
+    connection.query('USE meta');
     connection.query('SELECT original_database_name, description, database_size, table_count, is_artificial, domain, null_count, numeric_count, string_count, lob_count, date_count, geo_count FROM information WHERE original_database_name IS NOT NULL',
       (err, rows) => {
-      let datasets = []
-      let names = []
+      let datasets = [];
+      let names = [];
       if(!err) {
         rows.map((row,i) => {
           if(names.indexOf(row.original_database_name) == -1) {
-            names.push(row.original_database_name)
+            names.push(row.original_database_name);
             datasets.push(new Dataset({
               originalDatabaseName: row.original_database_name,
               description: row.description,
@@ -43,40 +45,54 @@ function loadData(path) {
               lobCount: row.lob_count,
               dateCount: row.date_count,
               geoCount: row.geo_count,
-            }).toMap())
+            }).toMap());
           }
-        })
+        });
       }
 
-      resolve({
-        path,
-        appState: {
-          datasets: datasets
-        }
-      })
+      const appState = {
+        datasets: datasets
+      };
+
+      resolve(appState);
     })
   })
 }
 
-function renderPage({path, appState}) {
+function renderPage(res, appState, path) {
   return new Promise((resolve, reject) => {
-    Router.run(routes, path, (Handler, routerState) => {
-      state.load(appState)
-      let html = getPageHtml(Handler, appState)
-      let isNotFound = routerState.routes.some(route => route.name == 'not-found')
-      resolve({
-        html: html,
-        status: isNotFound ? 404 : 200
-      })
-    })
-  })
+    const router = Router.create({
+      routes,
+      location: path,
+      onError: reject,
+      onAbort: (abortReason) => {
+        if (abortReason.constructor.name === 'Redirect') {
+          const {to, params, query} = abortReason;
+          const path = router.makePath(to, params, query);
+          res.redirect(path);
+          resolve();
+          return;
+        }
+        reject(abortReason);
+      }
+    });
+    router.run((Handler, routerState) => {
+      state.load(appState);
+      const html = getPageHtml(Handler, appState);
+      const notFound = routerState.routes.some(route => route.name == 'not-found');
+      const status = notFound ? 404 : 200;
+      res.status(status).send(html);
+      resolve();
+    });
+  });
 }
 
 function getPageHtml(Handler, appState) {
-  const appHtml = `<div id="app">${React.renderToString(<Handler />)}</div>`
+  const appHtml = `<div id="app">${React.renderToString(<Handler />)}</div>`;
   const appScriptSrc = config.isProduction
     ? 'build/app.js?v=' + config.version
-    : '//localhost:8888/build/app.js'
+    : '//localhost:8888/build/app.js';
+
   let scriptHtml = `
     <script>
       (function() {
@@ -88,9 +104,9 @@ function getPageHtml(Handler, appState) {
         var s = document.getElementsByTagName('script')[0];
           s.parentNode.insertBefore(app, s);
       })();
-    </script>`
+    </script>`;
 
-  if (config.googleAnalyticsId != 'UA-XXXXXXX-X') {
+  if (config.googleAnalyticsId != 'UA-XXXXXXX-X')
     scriptHtml += `
       <script>
         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -99,9 +115,9 @@ function getPageHtml(Handler, appState) {
         e.src='//www.google-analytics.com/analytics.js';
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
         ga('create','${config.googleAnalyticsId}');ga('send','pageview');
-      </script>`
-  }
-  const title = DocumentTitle.rewind()
+      </script>`;
+
+  const title = DocumentTitle.rewind();
 
   return '<!DOCTYPE html>' + React.renderToStaticMarkup(
     <Html
@@ -110,5 +126,5 @@ function getPageHtml(Handler, appState) {
       title={title}
       version={config.version}
     />
-  )
+  );
 }

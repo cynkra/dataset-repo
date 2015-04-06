@@ -1,3 +1,5 @@
+/*eslint-disable no-console */
+
 import React from 'react'
 import compression from 'compression'
 import config from './config'
@@ -6,27 +8,24 @@ import render from './render'
 
 export default function() {
 
-  const app = express()
+  const app = express();
 
-  app.use(compression())
+  app.use(compression());
 
-  app.use('/build', express.static('build'))
-  app.use('/assets', express.static('assets'))
+  app.use('/build', express.static('build'));
+  app.use('/assets', express.static('assets'));
 
   app.get('*', (req, res) => {
-    render(req.path)
-      .then((result) => {
-        res.status(result.status).send(result.html)
-      })
+    render(req, res)
       .catch((error) => {
-        const msg = error.stack || error
-        console.log(msg)
-        res.status(500).send('500: ' + msg)
-      })
-  })
+        const msg = error.stack || error;
+        console.log(msg);
+        res.status(500).send('500: ' + msg);
+      });
+  });
 
-  app.listen(config.port)
+  app.listen(config.port);
 
-  console.log(`App started on port ${config.port}`)
+  console.log(`App started on port ${config.port}`);
 
 }

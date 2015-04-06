@@ -1,8 +1,8 @@
-import * as actions from './actions'
-import {register} from '../dispatcher'
-import {Record, List} from 'immutable'
-import {datasetsCursor} from '../state'
-import {getTagsFromDataset} from '../tags/store'
+import * as actions from './actions';
+import {register} from '../dispatcher';
+import {Record, List} from 'immutable';
+import {datasetsCursor} from '../state';
+import {getTagsFromDataset} from '../tags/store';
 
 export const Dataset = Record({
   originalDatabaseName: null,
@@ -17,7 +17,7 @@ export const Dataset = Record({
   lobCount: null,
   dateCount: null,
   geoCount: null,
-})
+});
 
 export const dispatchToken = register(({action, data}) => {
 
@@ -25,12 +25,12 @@ export const dispatchToken = register(({action, data}) => {
 
   }
 
-})
+});
 
 export function getDatasets() {
-  return datasetsCursor()
+  return datasetsCursor();
 }
 
 export function getTags(dataset) {
-  return getTagsFromDataset(dataset)
+  return getTagsFromDataset(dataset);
 }

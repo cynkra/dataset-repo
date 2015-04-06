@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-export default React.createClass({
+export default class Html extends React.Component {
 
   render() {
     // Only for production. For dev, it's handled by webpack with livereload.
@@ -21,7 +21,14 @@ export default React.createClass({
         </head>
         <body dangerouslySetInnerHTML={{__html: this.props.bodyHtml}} />
       </html>
-    )
+    );
   }
 
-})
+}
+
+Html.propTypes = {
+  bodyHtml: React.PropTypes.string.isRequired,
+  isProduction: React.PropTypes.bool.isRequired,
+  title: React.PropTypes.string.isRequired,
+  version: React.PropTypes.string.isRequired
+};
