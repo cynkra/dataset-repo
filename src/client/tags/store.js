@@ -1,6 +1,7 @@
 import * as actions from './actions';
 import {register} from '../dispatcher';
 import {Record, List} from 'immutable';
+import {capitalize, round} from '../../lib/helpers';
 
 export const Tag = Record({
   type: null,
@@ -26,12 +27,11 @@ export const dispatchToken = register(({action, data}) => {
 });
 
 export function getTagsFromDataset(dataset) {
-  let tags = List.of(
-    getSizeTagFromDataset(dataset),
-    getTableCountTagFromDataset(dataset),
-    getTypeTagFromDataset(dataset),
-    getDomainTagFromDataset(dataset)
-  );
+  let tags = List();
+  tags = tags.push(getSizeTagFromDataset(dataset));
+  tags = tags.push(getTableCountTagFromDataset(dataset));
+  tags = tags.concat(getTypeTagFromDataset(dataset));
+  tags = tags.push(getDomainTagFromDataset(dataset));
   tags = tags.concat(getMissingValuesTagFromDataset(dataset));
   tags = tags.concat(getDataTypeTagsFromDataset(dataset));
   return tags;
@@ -46,10 +46,10 @@ function getSizeTagFromDataset(dataset) {
       ? 'MB'
       : 'KB';
   const sizeTag2 = size >= 1000
-    ? size / 1000 + ' GB'
+    ? round(size / 1000) + ' GB'
     : size >= 1
-      ? size + ' MB'
-      : size * 1000 + ' KB';
+      ? round(size) + ' MB'
+      : round(size * 1000) + ' KB';
 
   return new Tag({
     type: "size",
@@ -72,9 +72,9 @@ function getDataTypeTagsFromDataset(dataset) {
   dataTypes.map(dataType => {
     if(dataset.get(dataType + 'Count') > 0) {
       tags = tags.push(new Tag({
-        type: "dataType",
-        name: "Data type",
-        value: dataType.charAt(0).toUpperCase() + dataType.slice(1) // TODO create method
+        type: 'dataType',
+        name: 'Data type',
+        value: capitalize(dataType)
       }).toMap());
     }
   });
@@ -83,15 +83,17 @@ function getDataTypeTagsFromDataset(dataset) {
 }
 
 function getTypeTagFromDataset(dataset) {
-  const typeTag = dataset.get('isArtificial')
-    ? "Artificial"
-    : "Real";
+  const typeTag = dataset.get('isArtificial');
+  let tags = List();
 
-  return new Tag({
-    type: "type",
-    name: "Type",
-    value: typeTag
-  }).toMap();
+  if (typeTag)
+    tags = tags.push(new Tag({
+      type: 'type',
+      name: 'Type',
+      value: 'Artificial'
+    }).toMap());
+
+  return tags;
 }
 
 function getDomainTagFromDataset(dataset) {
