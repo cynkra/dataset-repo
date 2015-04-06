@@ -9,11 +9,11 @@ export default class Tag extends PureComponent {
 
   render() {
     const tag = this.props.tag;
-    const className = "tag tag--" + tag.get('type');
+    const className = 'tag tag--' + tag.get('type');
 
     return (
       <li>
-        <a href="javascript:;" className={className} title={tag.get('name')}>{tag.get('value')}</a>
+        <a href='#' className={className} title={tag.get('name')}>{tag.get('value')}</a>
       </li>
     );
   }

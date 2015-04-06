@@ -16,14 +16,10 @@ export const Dataset = Record({
   stringCount: null,
   lobCount: null,
   dateCount: null,
-  geoCount: null,
+  geoCount: null
 });
 
 export const dispatchToken = register(({action, data}) => {
-
-  switch (action) {
-
-  }
 
 });
 

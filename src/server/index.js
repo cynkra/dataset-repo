@@ -8,7 +8,7 @@ if (config.isProduction || require('piping')(config.piping)) {
 
   // Ignore webpack custom loaders on server.
   config.webpackStylesExtensions.forEach(function(ext) {
-    require.extensions['.' + ext] = function() {}
+    require.extensions['.' + ext] = function() {};
   });
 
   require('./main');

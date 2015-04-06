@@ -26,37 +26,36 @@ function loadData(path) {
     connection.query('USE meta');
     connection.query('SELECT original_database_name, description, database_size, table_count, is_artificial, domain, null_count, numeric_count, string_count, lob_count, date_count, geo_count FROM information WHERE original_database_name IS NOT NULL',
       (err, rows) => {
-      let datasets = [];
-      let names = [];
-      if(!err) {
-        rows.map((row,i) => {
-          if(names.indexOf(row.original_database_name) == -1) {
-            names.push(row.original_database_name);
-            datasets.push(new Dataset({
-              originalDatabaseName: row.original_database_name,
-              description: row.description,
-              databaseSize: row.database_size,
-              tableCount: row.table_count,
-              isArtificial: row.is_artificial,
-              domain: row.domain,
-              nullCount: row.null_count,
-              numericCount: row.numeric_count,
-              stringCount: row.string_count,
-              lobCount: row.lob_count,
-              dateCount: row.date_count,
-              geoCount: row.geo_count,
-            }).toMap());
-          }
-        });
-      }
+        let datasets = [];
+        let names = [];
+        if (!err)
+          rows.map((row, i) => {
+            if (names.indexOf(row.original_database_name) === -1) {
+              names.push(row.original_database_name);
+              datasets.push(new Dataset({
+                originalDatabaseName: row.original_database_name,
+                description: row.description,
+                databaseSize: row.database_size,
+                tableCount: row.table_count,
+                isArtificial: row.is_artificial,
+                domain: row.domain,
+                nullCount: row.null_count,
+                numericCount: row.numeric_count,
+                stringCount: row.string_count,
+                lobCount: row.lob_count,
+                dateCount: row.date_count,
+                geoCount: row.geo_count
+              }).toMap());
+            }
+          });
 
-      const appState = {
-        datasets: datasets
-      };
+        const appState = {
+          datasets: datasets
+        };
 
-      resolve(appState);
-    })
-  })
+        resolve(appState);
+      });
+  });
 }
 
 function renderPage(res, appState, path) {
@@ -79,7 +78,7 @@ function renderPage(res, appState, path) {
     router.run((Handler, routerState) => {
       state.load(appState);
       const html = getPageHtml(Handler, appState);
-      const notFound = routerState.routes.some(route => route.name == 'not-found');
+      const notFound = routerState.routes.some(route => route.name === 'not-found');
       const status = notFound ? 404 : 200;
       res.status(status).send(html);
       resolve();
@@ -106,7 +105,7 @@ function getPageHtml(Handler, appState) {
       })();
     </script>`;
 
-  if (config.googleAnalyticsId != 'UA-XXXXXXX-X')
+  if (config.googleAnalyticsId !== 'UA-XXXXXXX-X')
     scriptHtml += `
       <script>
         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

@@ -6,23 +6,18 @@ import {capitalize, round} from '../../lib/helpers';
 export const Tag = Record({
   type: null,
   name: null,
-  value: null,
+  value: null
 });
 
 const dataTypes = [
-  "numeric",
-  "string",
-  "lob",
-  "date",
-  "geo"
+  'numeric',
+  'string',
+  'lob',
+  'date',
+  'geo'
 ];
 
-
 export const dispatchToken = register(({action, data}) => {
-
-  switch (action) {
-
-  }
 
 });
 
@@ -40,11 +35,6 @@ export function getTagsFromDataset(dataset) {
 function getSizeTagFromDataset(dataset) {
   const size = dataset.get('databaseSize');
 
-  const sizeTag = size >= 1000
-    ? 'GB'
-    : size >= 1
-      ? 'MB'
-      : 'KB';
   const sizeTag2 = size >= 1000
     ? round(size / 1000) + ' GB'
     : size >= 1
@@ -52,17 +42,17 @@ function getSizeTagFromDataset(dataset) {
       : round(size * 1000) + ' KB';
 
   return new Tag({
-    type: "size",
-    name: "Size",
+    type: 'size',
+    name: 'Size',
     value: sizeTag2
   }).toMap();
 }
 
 function getTableCountTagFromDataset(dataset) {
   return new Tag({
-    type: "tableCount",
-    name: "Table count",
-    value: dataset.get('tableCount') + " Tables"
+    type: 'tableCount',
+    name: 'Table count',
+    value: dataset.get('tableCount') + ' Tables'
   }).toMap();
 }
 
@@ -70,13 +60,12 @@ function getDataTypeTagsFromDataset(dataset) {
   let tags = List();
 
   dataTypes.map(dataType => {
-    if(dataset.get(dataType + 'Count') > 0) {
+    if (dataset.get(dataType + 'Count') > 0)
       tags = tags.push(new Tag({
         type: 'dataType',
         name: 'Data type',
         value: capitalize(dataType)
       }).toMap());
-    }
   });
 
   return tags;
@@ -98,9 +87,10 @@ function getTypeTagFromDataset(dataset) {
 
 function getDomainTagFromDataset(dataset) {
   const domain = dataset.get('domain');
+
   return new Tag({
-    type: "domain",
-    name: "Domain",
+    type: 'domain',
+    name: 'Domain',
     value: domain
   }).toMap();
 }
@@ -108,13 +98,13 @@ function getDomainTagFromDataset(dataset) {
 function getMissingValuesTagFromDataset(dataset) {
   const missingValues = dataset.get('nullCount');
   let tags = List();
-  if(missingValues > 0) {
+
+  if (missingValues > 0)
     tags = tags.push(new Tag({
-      type: "missingValues",
-      name: "Missing values",
-      value: "Missing values"
+      type: 'missingValues',
+      name: 'Missing values',
+      value: 'Missing values'
     }).toMap());
-  }
 
   return tags;
 }

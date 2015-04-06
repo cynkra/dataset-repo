@@ -8,7 +8,7 @@ export default class Html extends React.Component {
       <link
         href={`/build/app.css?v=${this.props.version}`}
         rel="stylesheet"
-      />
+      />;
 
     return (
       <html lang="en">

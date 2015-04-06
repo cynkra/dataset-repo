@@ -12,10 +12,10 @@ export default class TagList extends PureComponent {
     return (
       <ul className="tagList">
         {this.props.tags.map((tag, i) => {
-          const value = tag.get('value')
-          if(value !== null) {
-            const key = tag.get('name') + '-' + value
-            return <Tag tag={tag} key={key} />
+          const value = tag.get('value');
+          if (value !== null) {
+            const key = tag.get('name') + '-' + value;
+            return <Tag tag={tag} key={key} />;
           }
         }).toArray()}
       </ul>
