@@ -3,7 +3,7 @@ import Html from './html';
 import React from 'react';
 import Router from 'react-router';
 import config from './config';
-import initialState from './initialstate';
+// import initialState from './initialstate';
 import routes from '../client/routes';
 import {state} from '../client/state';
 import mysql from 'mysql';

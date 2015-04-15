@@ -1,7 +1,6 @@
 import PureComponent from '../components/purecomponent.react.js';
 import React from 'react';
 import immutable from 'immutable';
-import {addons} from 'react/addons';
 import Tag from './tag.react';
 
 require('./taglist.styl');

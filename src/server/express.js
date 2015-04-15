@@ -1,10 +1,9 @@
 /*eslint-disable no-console */
 
-import React from 'react'
-import compression from 'compression'
-import config from './config'
-import express from 'express'
-import render from './render'
+import compression from 'compression';
+import config from './config';
+import express from 'express';
+import render from './render';
 
 export default function() {
 

@@ -1,7 +1,6 @@
 import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import immutable from 'immutable';
-import {addons} from 'react/addons';
 import TagList from '../tags/taglist.react';
 import {getTags} from './store';
 

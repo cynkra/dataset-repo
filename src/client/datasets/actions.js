@@ -1,4 +1,4 @@
 import setToString from '../../lib/settostring';
-import {dispatch} from '../dispatcher';
+// import {dispatch} from '../dispatcher';
 
 setToString('datasets', {});

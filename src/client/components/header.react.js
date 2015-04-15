@@ -1,6 +1,4 @@
 import React from 'react';
-import immutable from 'immutable';
-import {addons} from 'react/addons';
 import {Link} from 'react-router';
 
 require('./header.styl');

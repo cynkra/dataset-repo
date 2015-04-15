@@ -1,7 +1,6 @@
 import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import immutable from 'immutable';
-import {addons} from 'react/addons';
 import Dataset from './dataset.react';
 
 require('./datasetlist.styl');
