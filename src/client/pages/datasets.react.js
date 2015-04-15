@@ -3,8 +3,6 @@ import React from 'react';
 import DatasetList from '../datasets/datasetlist.react';
 import {getDatasets} from '../datasets/store';
 
-require('./datasets.styl');
-
 export default class Datasets extends React.Component {
 
   render() {
