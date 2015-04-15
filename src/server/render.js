@@ -27,7 +27,7 @@ function loadData(path) {
       (err, rows) => {
         let datasets = [];
         let names = [];
-        if (!err)
+        if (!err) {
           rows.map((row, i) => {
             if (names.indexOf(row.original_database_name) === -1) {
               names.push(row.original_database_name);
@@ -47,6 +47,7 @@ function loadData(path) {
               }).toMap());
             }
           });
+        }
 
         const appState = {
           datasets: datasets
@@ -104,7 +105,7 @@ function getPageHtml(Handler, appState) {
       })();
     </script>`;
 
-  if (config.googleAnalyticsId !== 'UA-XXXXXXX-X')
+  if (config.googleAnalyticsId !== 'UA-XXXXXXX-X') {
     scriptHtml += `
       <script>
         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -114,6 +115,7 @@ function getPageHtml(Handler, appState) {
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
         ga('create','${config.googleAnalyticsId}');ga('send','pageview');
       </script>`;
+  }
 
   const title = DocumentTitle.rewind();
 

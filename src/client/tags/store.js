@@ -60,12 +60,13 @@ function getDataTypeTagsFromDataset(dataset) {
   let tags = List();
 
   dataTypes.map(dataType => {
-    if (dataset.get(dataType + 'Count') > 0)
+    if (dataset.get(dataType + 'Count') > 0) {
       tags = tags.push(new Tag({
         type: 'dataType',
         name: 'Data type',
         value: capitalize(dataType)
       }).toMap());
+    }
   });
 
   return tags;
@@ -75,12 +76,13 @@ function getTypeTagFromDataset(dataset) {
   const typeTag = dataset.get('isArtificial');
   let tags = List();
 
-  if (typeTag)
+  if (typeTag) {
     tags = tags.push(new Tag({
       type: 'type',
       name: 'Type',
       value: 'Artificial'
     }).toMap());
+  }
 
   return tags;
 }
@@ -99,14 +101,13 @@ function getMissingValuesTagFromDataset(dataset) {
   const missingValues = dataset.get('nullCount');
   let tags = List();
 
-  if (missingValues > 0)
+  if (missingValues > 0) {
     tags = tags.push(new Tag({
       type: 'missingValues',
       name: 'Missing values',
       value: 'Missing values'
     }).toMap());
+  }
 
   return tags;
 }
-
-

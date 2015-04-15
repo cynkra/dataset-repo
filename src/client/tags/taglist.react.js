@@ -14,7 +14,7 @@ export default class TagList extends PureComponent {
           const value = tag.get('value');
           if (value !== null) {
             const key = tag.get('name') + '-' + value;
-            return <Tag tag={tag} key={key} />;
+            return <Tag key={key} tag={tag} />;
           }
         }).toArray()}
       </ul>
