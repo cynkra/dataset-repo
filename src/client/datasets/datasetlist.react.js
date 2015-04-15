@@ -1,4 +1,4 @@
-import PureComponent from '../components/purecomponent.react';
+import PureComponent from '../common/purecomponent.react';
 import React from 'react';
 import immutable from 'immutable';
 import Dataset from './dataset.react';

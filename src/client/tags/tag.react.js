@@ -1,4 +1,4 @@
-import PureComponent from '../components/purecomponent.react.js';
+import PureComponent from '../common/purecomponent.react.js';
 import React from 'react';
 import immutable from 'immutable';
 

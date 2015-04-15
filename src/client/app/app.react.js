@@ -1,7 +1,7 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
 import {RouteHandler} from 'react-router';
-import Header from '../components/header.react';
+import Header from '../common/header.react';
 
 require('./app.styl');
 

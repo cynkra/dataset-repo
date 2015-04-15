@@ -1,4 +1,4 @@
-import PureComponent from '../client/components/purecomponent.react';
+import PureComponent from '../client/common/purecomponent.react';
 import React from 'react';
 
 export default class Html extends PureComponent {
