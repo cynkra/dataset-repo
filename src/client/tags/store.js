@@ -36,10 +36,10 @@ function getSizeTagFromDataset(dataset) {
   const size = dataset.get('databaseSize');
 
   const sizeTag2 = size >= 1000
-    ? round(size / 1000) + ' GB'
+    ? round(size / 1000, 1) + ' GB'
     : size >= 1
-      ? round(size) + ' MB'
-      : round(size * 1000) + ' KB';
+      ? round(size, 1) + ' MB'
+      : round(size * 1000, 1) + ' KB';
 
   return new Tag({
     type: 'size',

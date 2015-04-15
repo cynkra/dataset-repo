@@ -1,7 +1,13 @@
+/**
+ * Returns a capitalized string
+ */
 export function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function round(number: number, digits: number = 1) {
-  return Math.round((number + Math.pow(10, -digits - 2)) * Math.pow(10, digits)) / Math.pow(10, digits);
+/**
+ * Rounds a float to specified precision(number of digits after the decimal point).
+ */
+export function round(number: number, precision: number = 0) {
+  return Math.round((number + Math.pow(10, -precision - 2)) * Math.pow(10, precision)) / Math.pow(10, precision);
 }
