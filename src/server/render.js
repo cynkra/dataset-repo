@@ -1,6 +1,5 @@
 import DocumentTitle from 'react-document-title';
 import Html from './html';
-import Promise from 'bluebird';
 import React from 'react';
 import Router from 'react-router';
 import config from './config';
