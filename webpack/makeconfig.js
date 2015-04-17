@@ -80,7 +80,6 @@ module.exports = function(isDevelopment) {
         plugins.push(
           NotifyPlugin,
           new webpack.HotModuleReplacementPlugin(),
-          // Tell reloader to not reload if there is an error.
           new webpack.NoErrorsPlugin()
         );
       } else {

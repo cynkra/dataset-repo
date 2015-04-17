@@ -19,7 +19,6 @@ function getLocMessage(error, loc) {
 
 module.exports = function() {
   this.plugin('done', function(stats) {
-    // TODO: Handle warnings as well.
     var error = stats.compilation.errors[0];
     if (!error) {
       return;
