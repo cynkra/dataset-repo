@@ -12,7 +12,7 @@ export default class DatasetList extends PureComponent {
       <ul className="datasetList">
         {this.props.datasets.map((dataset, i) => {
           return <Dataset dataset={dataset} key={dataset.get('originalDatabaseName')} />;
-        }).toArray()}
+        })}
       </ul>
     );
   }
