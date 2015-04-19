@@ -2,6 +2,12 @@ module.exports = {
   api: {
     url: '/api'
   },
+  database: {
+    host:     'relational.fit.cvut.cz',
+    user:     'guest',
+    password: '******',
+    database: 'meta'
+  },
   googleAnalyticsId: 'UA-61229872-1',
   isProduction: process.env.NODE_ENV === 'production',
   piping: {

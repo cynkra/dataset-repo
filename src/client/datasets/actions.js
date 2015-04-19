@@ -7,7 +7,7 @@ export function fetchDatasets() {
   const promise = (resolve) => {
     getDatasets()
       .then((data) => {
-        fetchDatasetsSuccess();
+        fetchDatasetsSuccess(data);
         resolve();
       });
   };

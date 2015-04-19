@@ -29,7 +29,7 @@ TODO (Feel free to add anything)
     [ ] Podle tagů
 [ ] Detail datasetu
     [ ] Detail component
-    [ ] Detail - API call?
+    [✓] Detail - API call
     [ ] Náhled schématu
 [ ] Leaderboard připsvěvovatelů
     [ ] Leaderboard component
