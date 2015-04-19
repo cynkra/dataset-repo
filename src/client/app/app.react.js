@@ -13,6 +13,7 @@ export default class App extends React.Component {
 
     state.on('change', () => {
       this.forceUpdate();
+      // track page view (if route changed)
     });
   }
 
