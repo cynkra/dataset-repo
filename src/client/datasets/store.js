@@ -1,7 +1,7 @@
-// import * as actions from './actions';
+import * as actions from './actions';
 import {register} from '../dispatcher';
 import {Record} from 'immutable';
-import {datasetsCursor} from '../state';
+import {datasetsCursor, currentDatasetCursor} from '../state';
 import {getTagsFromDataset} from '../tags/store';
 
 export const Dataset = Record({
@@ -20,11 +20,34 @@ export const Dataset = Record({
 });
 
 export const dispatchToken = register(({action, data}) => {
-
+  switch (action) {
+    case actions.fetchDatasetsSuccess:
+      datasetsCursor(datasets => {
+        const dataset = new Dataset({
+          originalDatabaseName: (new Date).getTime(),
+          description: 'I am here'
+        }).toMap();
+        return datasets.push(dataset);
+      });
+      break;
+    case actions.fetchDatasetSuccess:
+      currentDatasetCursor(currentDataset => {
+        const newDataset = new Dataset({
+          originalDatabaseName: data,
+          description: 'I am the new one.'
+        }).toMap();
+        return newDataset;
+      });
+      break;
+  }
 });
 
 export function getDatasets() {
   return datasetsCursor();
+}
+
+export function getDataset() {
+  return currentDatasetCursor();
 }
 
 export function getTags(dataset) {

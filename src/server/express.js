@@ -4,6 +4,7 @@ import compression from 'compression';
 import config from './config';
 import express from 'express';
 import render from './render';
+import api from './api';
 
 export default function() {
 
@@ -14,8 +15,9 @@ export default function() {
   app.use('/build', express.static('build'));
   app.use('/assets', express.static('assets'));
 
-  app.get('*', (req, res) => {
-    render(req, res)
+  // Use constant
+  app.use('/api', api);
+
       .catch((error) => {
         const msg = error.stack || error;
         console.log(msg);

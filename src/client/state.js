@@ -7,3 +7,4 @@ const initialState = process.env.IS_BROWSER
 export const state = new State(initialState);
 export const $pendingActionsCursor = state.cursor(['$pendingActions']);
 export const datasetsCursor = state.cursor(['datasets']);
+export const currentDatasetCursor = state.cursor(['currentDataset']);
