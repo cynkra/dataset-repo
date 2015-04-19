@@ -4,7 +4,7 @@ import DatasetList from '../datasets/datasetlist.react';
 import {getDatasets} from '../datasets/store';
 import {fetchDatasets} from '../datasets/actions';
 
-export default class Datasets extends React.Component {
+export default class DatasetsPage extends React.Component {
 
   componentWillMount() {
     return fetchDatasets();
