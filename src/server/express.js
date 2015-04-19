@@ -5,6 +5,7 @@ import config from './config';
 import express from 'express';
 import render from './render';
 import api from './api';
+import fetcher from '../lib/fetcher';
 
 export default function() {
 
@@ -15,13 +16,21 @@ export default function() {
   app.use('/build', express.static('build'));
   app.use('/assets', express.static('assets'));
 
-  // Use constant
-  app.use('/api', api);
+  fetcher.register('dataset', require('../services/dataset/fetcher'));
 
+  app.use((request, response, next) => {
+    request.fetcher = fetcher;
+    next();
+  });
+
+  app.use(config.api.url, api);
+
+  app.get('*', (request, response) => {
+    render(request, response)
       .catch((error) => {
         const msg = error.stack || error;
         console.log(msg);
-        res.status(500).send('500: ' + msg);
+        response.status(500).send('500: ' + msg);
       });
   });
 

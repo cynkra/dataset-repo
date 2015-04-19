@@ -1,7 +1,4 @@
-import Fetcher from '../lib/fetcher';
-import {underscoreToCamelCase} from '../lib/helpers';
-
-Fetcher.register('dataset', require('../services/dataset/fetcher'));
+import {underscoreToCamelCase, objectToArray} from '../lib/helpers';
 
 export default (request, response) => {
   const path = request.path.split('\/');
@@ -9,11 +6,9 @@ export default (request, response) => {
   const methodName = path[2];
 
   try {
-    const fetcher = Fetcher.get(fetcherName);
+    const fetcher = request.fetcher.get(fetcherName);
     const method = underscoreToCamelCase(methodName);
-    const params = Object.keys(request.query).map((key) => {
-      return request.query[key];
-    });
+    const params = objectToArray(request.query);
 
     if (typeof fetcher[method] === 'function') {
       fetcher[method].apply(null, params)

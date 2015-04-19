@@ -5,17 +5,18 @@ import config from './config';
 export default class Html extends PureComponent {
 
   render() {
+    const version = require('../../package').version;
     // Only for production. For dev, it's handled by webpack with livereload.
     const linkStyles = config.isProduction &&
       <link
-        href={`/build/app.css?v=${config.version}`}
+        href={`/build/app.css?v=${version}`}
         rel="stylesheet"
       />;
 
     const appHtml = `<div id="app">${this.props.appHtml}</div>`;
 
     const appScriptSrc = config.isProduction
-    ? '/build/app.js?v=' + config.version
+    ? '/build/app.js?v=' + version
     : '//localhost:8888/build/app.js';
 
     let scriptHtml = `

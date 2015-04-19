@@ -7,11 +7,11 @@ export default class NotFound extends React.Component {
   render() {
     return (
       <DocumentTitle title='Page Not Found'>
-        <div>
+        <section className="content">
           <h1>{`This page isn't available`}</h1>
-          <p>{'The link may be broken, or the page may have been removed.'}</p>
-          <Link to="home">{'Continue here please.'}</Link>
-        </div>
+          <p>The link may be broken, or the page may have been removed.</p>
+          <Link to="home">Continue here please.</Link>
+        </section>
       </DocumentTitle>
     );
   }

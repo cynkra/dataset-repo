@@ -25,3 +25,12 @@ export function camelCaseToUnderscore(string: string) {
 export function round(number: number, precision: number = 0) {
   return Math.round((number + Math.pow(10, -precision - 2)) * Math.pow(10, precision)) / Math.pow(10, precision);
 }
+
+/**
+ * Converts javascript object (associative array) to a simple array
+ */
+export function objectToArray(object: Object) {
+  return Object.keys(object).map((key) => {
+    return object[key];
+  });
+}

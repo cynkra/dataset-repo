@@ -1,42 +1,13 @@
-import request from 'superagent';
 import resource from './resource';
+import {getAPI} from '../APIUtils.js';
 
-const isBrowser = process.env.IS_BROWSER;
+const datasetAPI = getAPI('dataset');
 
 export default {
   getDatasets: () => {
-    if (isBrowser) {
-      return new Promise(function(resolve, reject) {
-        var URL = 'http://localhost:8000' + '/api/dataset/get_datasets';
-
-        request
-          .get(URL)
-          .set('Accept', 'application/json')
-          .end((err, res) => {
-            if (err || !res.ok || !res.body) { return reject(); }
-            resolve(res.body);
-          });
-      });
-    } else {
-      return resource.getDatasets();
-    }
+    return datasetAPI.get(resource.getDatasets);
   },
   getDataset: (dataset: string) => {
-    if (isBrowser) {
-      return new Promise(function(resolve, reject) {
-        var URL = 'http://localhost:8000' + '/api/dataset/get_dataset';
-
-        request
-          .get(URL)
-          .query({dataset: dataset})
-          .set('Accept', 'application/json')
-          .end((err, res) => {
-            if (err || !res.ok || !res.body) { return reject(); }
-            resolve(res.body);
-          });
-      });
-    } else {
-      return resource.getDataset(dataset);
-    }
+    return datasetAPI.get(resource.getDataset, {dataset: dataset});
   }
 };
