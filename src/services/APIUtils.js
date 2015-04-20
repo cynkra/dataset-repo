@@ -1,14 +1,14 @@
 import request from 'superagent';
 import config from '../server/config';
-import {camelCaseToUnderscore, objectToArray} from '../lib/helpers';
+import {objectToArray} from '../lib/helpers';
 
 const isBrowser = process.env.IS_BROWSER;
 
 export const API = {
-  get: (fetcher, fn, params = []) => {
+  get: (fetcher: string, mapping: object, fn: string, params = []) => {
     if (isBrowser) {
       return new Promise(function(resolve, reject) {
-        var URL = config.api.url + '/' + fetcher + '/' + camelCaseToUnderscore(fn.name);
+        var URL = config.api.url + '/' + fetcher + '/' + fn;
 
         request
           .get(URL)
@@ -20,16 +20,17 @@ export const API = {
           });
       });
     } else {
-      return fn.apply(null, objectToArray(params));
+      return mapping[fn].apply(null, objectToArray(params));
     }
   }
 };
 
-export function getAPI(fetcher) {
+export function getAPI(fetcher: string, mapping: object) {
   let localAPI = {};
 
   Object.keys(API).forEach((key) => {
     localAPI[key] = (...params) => {
+      params.unshift(mapping);
       params.unshift(fetcher);
       return API[key].apply(API, params);
     };

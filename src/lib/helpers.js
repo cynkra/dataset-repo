@@ -5,20 +5,6 @@ export function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-/*
- * Converts underscored string into camelCased
- */
-export function underscoreToCamelCase(string: string) {
-  return string.replace(/_([a-z])/gi, function($0, $1) { return $1.toUpperCase(); });
-}
-
-/*
- * Converts camelCased string into underscored.
- */
-export function camelCaseToUnderscore(string: string) {
-  return string.replace(/([a-z][A-Z])/g, function(m) { return m[0] + '_' + m[1].toLowerCase(); });
-}
-
 /**
  * Rounds a float to specified precision(number of digits after the decimal point).
  */

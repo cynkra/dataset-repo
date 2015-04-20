@@ -1,4 +1,4 @@
-import {underscoreToCamelCase, objectToArray} from '../lib/helpers';
+import {objectToArray} from '../lib/helpers';
 
 export default (request, response) => {
   const path = request.path.split('\/');
@@ -7,11 +7,11 @@ export default (request, response) => {
 
   try {
     const fetcher = request.fetcher.get(fetcherName);
-    const method = underscoreToCamelCase(methodName);
+    const method = fetcher.mapping[methodName];
     const params = objectToArray(request.query);
 
-    if (typeof fetcher[method] === 'function') {
-      fetcher[method].apply(null, params)
+    if (typeof method === 'function') {
+      method.apply(null, params)
         .then((data) => {
           response.json(data);
         });

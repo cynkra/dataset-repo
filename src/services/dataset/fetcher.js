@@ -1,16 +1,24 @@
-import resource from './resource';
 import {getAPI} from '../APIUtils.js';
+import resource from './resource';
 
-const datasetAPI = getAPI('dataset');
+const mapping = {
+  'get_datasets'       : resource.getDatasets,
+  'get_dataset'        : resource.getDataset,
+  'get_search_results' : resource.getSearchResults
+};
+
+const datasetAPI = getAPI('dataset', mapping);
 
 export default {
+  mapping: mapping,
+
   getDatasets: () => {
-    return datasetAPI.get(resource.getDatasets);
+    return datasetAPI.get('get_datasets');
   },
   getDataset: (dataset: string) => {
-    return datasetAPI.get(resource.getDataset, {dataset: dataset});
+    return datasetAPI.get('get_dataset', {dataset: dataset});
   },
   getSearchResults: (query: string) => {
-    return datasetAPI.get(resource.getSearchResults, {query: query});
+    return datasetAPI.get('get_search_results', {query: query});
   }
 };
