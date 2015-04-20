@@ -12,7 +12,7 @@ export default class Tag extends PureComponent {
 
     return (
       <li>
-        <a className={className} href='#' title={tag.get('name')}>{tag.get('value')}</a>
+        <a className={className} href='#' role='button' title={tag.get('name')}>{tag.get('value')}</a>
       </li>
     );
   }

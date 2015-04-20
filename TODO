@@ -14,12 +14,12 @@ TODO (Feel free to add anything)
         [✓] Real/Artificial - yellow
         [✓] Domain {retail, financial, health, chemical, biological, geo} - beige
     [✓] Tagy - databáze
-[ ] Vyhledávání
-    [ ] Search component
-    [ ] Search - databáze
-    [ ] Search - API call
-    [ ] Podle jména datasetu
-    [ ] Podle tagu
+[✓] Vyhledávání
+    [✓] Search component
+    [✓] Search - databáze
+    [✓] Search - API call
+    [✓] Podle jména datasetu
+    [?] Podle tagu
 [ ] Filtrování
     [ ] Filter component
     [ ] Filter - databáze

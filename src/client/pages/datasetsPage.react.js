@@ -1,6 +1,7 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
 import DatasetList from '../datasets/datasetlist.react';
+import Sidebar from '../common/sidebar.react';
 import {getDatasets} from '../datasets/store';
 import {fetchDatasets} from '../datasets/actions';
 
@@ -19,6 +20,7 @@ export default class DatasetsPage extends React.Component {
           <section className="primary">
             <DatasetList datasets={datasets} />
           </section>
+          <Sidebar />
         </section>
       </DocumentTitle>
     );

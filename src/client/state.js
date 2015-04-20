@@ -8,3 +8,5 @@ export const state = new State(initialState);
 export const $pendingActionsCursor = state.cursor(['$pendingActions']);
 export const datasetsCursor = state.cursor(['datasets']);
 export const currentDatasetCursor = state.cursor(['currentDataset']);
+export const searchFormCursor = state.cursor(['searchForm']);
+export const searchResultsCursor = state.cursor(['searchResults']);

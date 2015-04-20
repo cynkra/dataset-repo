@@ -1,7 +1,7 @@
 import DocumentTitle from 'react-document-title';
 import exposeRouter from '../common/exposerouter.react';
 import React from 'react';
-import {Link} from 'react-router';
+import Sidebar from '../common/sidebar.react';
 import {getDataset} from '../datasets/store';
 import {fetchDataset} from '../datasets/actions';
 
@@ -21,6 +21,7 @@ class DatasetPage extends React.Component {
           <section className="primary">
             Name: {dataset.get('originalDatabaseName')}
           </section>
+          <Sidebar />
         </section>
       </DocumentTitle>
     );

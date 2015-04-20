@@ -9,5 +9,8 @@ export default {
   },
   getDataset: (dataset: string) => {
     return datasetAPI.get(resource.getDataset, {dataset: dataset});
+  },
+  getSearchResults: (query: string) => {
+    return datasetAPI.get(resource.getSearchResults, {query: query});
   }
 };

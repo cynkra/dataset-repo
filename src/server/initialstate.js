@@ -1,5 +1,12 @@
 export default {
   $pendingActions: {},
   datasets: [],
-  currentDataset: {}
+  currentDataset: {},
+  searchForm: {
+    q: ''
+  },
+  searchResults: {
+    query: '',
+    datasets: []
+  }
 };
