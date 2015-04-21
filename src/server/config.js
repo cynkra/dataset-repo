@@ -3,6 +3,7 @@ module.exports = {
     url: '/api'
   },
   database: {
+    client:   'mysql',
     host:     'relational.fit.cvut.cz',
     user:     'guest',
     password: '******',

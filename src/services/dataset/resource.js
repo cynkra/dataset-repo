@@ -1,49 +1,71 @@
 if (!process.env.IS_BROWSER) {
-  var connection = require('../../server/db');
+  var db = require('../../server/db');
 }
+
+const table = 'information';
+const columns = {
+  originalDatabaseName: 'original_database_name',
+  description: 'description',
+  databaseSize: 'database_size',
+  tableCount: 'table_count',
+  isArtificial: 'is_artificial',
+  domain: 'domain',
+  nullCount: 'null_count',
+  numericCount: 'numeric_count',
+  stringCount: 'string_count',
+  lobCount: 'lob_count',
+  dateCount: 'date_count',
+  geoCount: 'geo_count'
+};
 
 export default {
   getDatasets: () => {
     return new Promise((resolve, reject) => {
-      connection.query(`SELECT original_database_name, description, database_size, table_count, is_artificial, domain, null_count, numeric_count, string_count, lob_count, date_count, geo_count FROM information WHERE original_database_name IS NOT NULL`,
-        (err, rows, fields) => {
-          if (err) { throw err; }
-          let datasets = [];
-          let names = [];
-          rows.forEach((row, i) => {
-            if (names.indexOf(row.original_database_name) === -1) {
-              names.push(row.original_database_name);
-              datasets.push(row);
-            }
-          });
-          resolve(datasets);
-        });
+      let datasets = [];
+      db
+        .select(getValues(columns))
+        .from(table)
+        .whereNotNull('original_database_name')
+        .map(getUniqueDatasets(datasets))
+        .catch((err) => { throw err; })
+        .then(() => resolve(datasets));
     });
   },
   getDataset: (dataset: string) => {
     return new Promise((resolve, reject) => {
-      connection.query(`SELECT * FROM information WHERE original_database_name='${dataset}' LIMIT 1`,
-        (err, rows, fields) => {
-          if (err) { throw err; }
-          resolve(rows[0]);
-        });
+      db
+        .select()
+        .from(table)
+        .where('original_database_name', dataset)
+        .limit(1)
+        .catch((err) => { throw err; })
+        .then((rows) => resolve(rows[0]));
     });
   },
   getSearchResults: (query: string) => {
     return new Promise((resolve, reject) => {
-      connection.query(`SELECT original_database_name, description, database_size, table_count, is_artificial, domain, null_count, numeric_count, string_count, lob_count, date_count, geo_count FROM information WHERE original_database_name LIKE '%${query}%'`,
-        (err, rows, fields) => {
-          if (err) { throw err; }
-          let datasets = [];
-          let names = [];
-          rows.forEach((row, i) => {
-            if (names.indexOf(row.original_database_name) === -1) {
-              names.push(row.original_database_name);
-              datasets.push(row);
-            }
-          });
-          resolve(datasets);
-        });
+      let datasets = [];
+      db
+        .select(getValues(columns))
+        .from(table)
+        .where('original_database_name', 'like', '%'+query+'%')
+        .map(getUniqueDatasets(datasets))
+        .catch((err) => { throw err; })
+        .then(() => resolve(datasets));
     });
   }
 };
+
+function getValues(object: Object) {
+  return Object.keys(object).map(function(k) {return object[k]; });
+}
+
+function getUniqueDatasets(datasets) {
+  let names = [];
+  return (row) => {
+    if (names.indexOf(row.original_database_name) === -1) {
+      names.push(row.original_database_name);
+      datasets.push(row);
+    }
+  };
+}
