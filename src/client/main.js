@@ -1,6 +1,5 @@
 import React from 'react';
-import Router from 'react-router';
-import routes from './routes';
+import router from './router';
 
 const app = document.getElementById('app');
 
@@ -8,6 +7,6 @@ if (process.env.NODE_ENV !== 'production') {
   require('react-a11y')();
 }
 
-Router.run(routes, Router.HistoryLocation, (Handler) => {
+router.run((Handler) => {
   React.render(<Handler />, app);
 });
