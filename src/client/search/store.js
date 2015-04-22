@@ -1,7 +1,8 @@
 import * as actions from './actions';
+import * as datasetsActions from '../datasets/actions';
 import {register} from '../dispatcher';
 import {searchFormCursor, searchResultsCursor} from '../state';
-import {List} from 'immutable';
+import immutable from 'immutable';
 import {Dataset} from '../datasets/store';
 
 export const dispatchToken = register(({action, data}) => {
@@ -11,9 +12,33 @@ export const dispatchToken = register(({action, data}) => {
         return searchForm.set('q', data);
       });
       break;
-    case actions.fetchSearchResultsStart:
+    case actions.onFilterCheckboxChange:
+      const {name, value, checked} = data;
       searchFormCursor(searchForm => {
-        return searchForm.set('q', data);
+        return searchForm.updateIn([name], immutable.List(), (list => {
+          return checked
+            ? list.push(value)
+            : list.delete(list.indexOf(value));
+        }));
+      });
+      break;
+    case datasetsActions.fetchDatasetStart:
+      clearSearchForm();
+      clearSearchResults();
+      break;
+    case datasetsActions.fetchDatasetsStart:
+      clearSearchForm();
+      clearSearchResults();
+      break;
+    case actions.fetchSearchResultsStart:
+      clearSearchForm();
+      clearSearchResults();
+      searchFormCursor(searchForm => {
+        return searchForm.withMutations(map => {
+          for (let key in data) {
+            map.set(key, immutable.fromJS(data[key]));
+          }
+        });
       });
       searchResultsCursor(searchResults => {
         return searchResults.set('query', data);
@@ -21,7 +46,7 @@ export const dispatchToken = register(({action, data}) => {
       break;
     case actions.fetchSearchResultsSuccess:
       searchResultsCursor(searchResults => {
-        return searchResults.updateIn(['datasets'], List(), (datasets => {
+        return searchResults.updateIn(['datasets'], immutable.List(), (datasets => {
           return datasets.withMutations(list => {
             list.clear();
             data.forEach((row, i) => {
@@ -54,4 +79,27 @@ export function getForm() {
 
 export function getSearchResults() {
   return searchResultsCursor();
+}
+
+function clearSearchForm() {
+  searchFormCursor(searchForm => {
+    return searchForm.withMutations(map => {
+      map.set('q', '');
+      map.set('databaseSize', immutable.List());
+      map.set('tableCount', immutable.List());
+      map.set('type', immutable.List());
+      map.set('domain', immutable.List());
+      map.set('missingValues', immutable.List());
+      map.set('dataType', immutable.List());
+    });
+  });
+}
+
+function clearSearchResults() {
+  searchResultsCursor(searchResults => {
+    return searchResults.withMutations(map => {
+      map.set('query', '');
+      map.setIn('datasets', immutable.List());
+    });
+  });
 }

@@ -9,25 +9,25 @@ import {getSearchResults} from '../search/store';
 class SearchPage extends React.Component {
 
   componentWillMount() {
-    const query = this.props.router.getCurrentQuery().q;
+    const query = this.props.router.getCurrentQuery();
     return fetchSearchResults(query);
   }
 
+  // Will transition to
   componentWillReceiveProps() {
-    const query = this.props.router.getCurrentQuery().q;
+    const query = this.props.router.getCurrentQuery();
     if (query !== getSearchResults().get('query')) {
       return fetchSearchResults(query);
     }
   }
 
   render() {
-    const query = getSearchResults().get('query');
     const datasets = getSearchResults().get('datasets');
     return (
       <DocumentTitle title="Search">
         <section className="content">
           <section className="primary">
-            Searching for {query}...
+            Searching...
             <DatasetList datasets={datasets} />
           </section>
           <Sidebar />

@@ -4,6 +4,7 @@ import {getDataset, getDatasets} from '../../services/dataset/fetcher';
 import resolver from '../../lib/resolver';
 
 export function fetchDatasets() {
+  fetchDatasetsStart();
   const promise = (resolve) => {
     getDatasets()
       .then((data) => {
@@ -14,11 +15,16 @@ export function fetchDatasets() {
   return dispatchAsync(fetchDatasets, resolver.resolve(promise));
 }
 
+export function fetchDatasetsStart() {
+  dispatch(fetchDatasetsStart);
+}
+
 export function fetchDatasetsSuccess(data) {
   dispatch(fetchDatasetsSuccess, data);
 }
 
 export function fetchDataset(datasetName: string) {
+  fetchDatasetStart();
   const promise = (resolve) => {
     getDataset(datasetName)
       .then((data) => {
@@ -29,10 +35,15 @@ export function fetchDataset(datasetName: string) {
   return dispatchAsync(fetchDataset, resolver.resolve(promise));
 }
 
+export function fetchDatasetStart() {
+  dispatch(fetchDatasetStart);
+}
+
 export function fetchDatasetSuccess(data) {
   dispatch(fetchDatasetSuccess, data);
 }
 
 setToString('datasets', {
-  fetchDatasets, fetchDatasetsSuccess, fetchDataset, fetchDatasetSuccess
+  fetchDatasets, fetchDatasetsStart, fetchDatasetsSuccess,
+  fetchDataset, fetchDatasetStart, fetchDatasetSuccess
 });

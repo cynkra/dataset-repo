@@ -11,9 +11,9 @@ export default class TagList extends PureComponent {
     return (
       <ul className="tagList">
         {this.props.tags.map((tag, i) => {
-          const value = tag.get('value');
-          if (value !== null) {
-            const key = tag.get('name') + '-' + value;
+          const text = tag.get('text');
+          if (text !== null) {
+            const key = tag.get('name') + '-' + text;
             return <Tag key={key} tag={tag} />;
           }
         })}

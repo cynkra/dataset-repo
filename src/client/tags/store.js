@@ -5,8 +5,9 @@ import {capitalize, round} from '../../lib/helpers';
 
 export const Tag = Record({
   type: null,
+  value: null,
   name: null,
-  value: null
+  text: null
 });
 
 const dataTypes = [
@@ -23,7 +24,7 @@ export const dispatchToken = register(({action, data}) => {
 
 export function getTagsFromDataset(dataset) {
   let tags = List();
-  tags = tags.push(getSizeTagFromDataset(dataset));
+  tags = tags.push(getDatabaseSizeTagFromDataset(dataset));
   tags = tags.push(getTableCountTagFromDataset(dataset));
   tags = tags.concat(getTypeTagFromDataset(dataset));
   tags = tags.push(getDomainTagFromDataset(dataset));
@@ -32,27 +33,39 @@ export function getTagsFromDataset(dataset) {
   return tags;
 }
 
-function getSizeTagFromDataset(dataset) {
-  const size = dataset.get('databaseSize');
+function getDatabaseSizeTagFromDataset(dataset) {
+  let size = dataset.get('databaseSize');
+  let unit = 'MB';
 
-  const sizeTag2 = size >= 1000
-    ? round(size / 1000, 1) + ' GB'
-    : size >= 1
-      ? round(size, 1) + ' MB'
-      : round(size * 1000, 1) + ' KB';
+  if (size >= 1000) {
+    size /= 1000;
+    unit = 'GB';
+  } else if (size < 1) {
+    size *= 1000;
+    unit = 'KB';
+  }
 
   return new Tag({
-    type: 'size',
+    type: 'databaseSize',
+    value: [unit],
     name: 'Size',
-    value: sizeTag2
+    text: round(size, 1) + ' ' + unit
   }).toMap();
 }
 
 function getTableCountTagFromDataset(dataset) {
+  const tableCount = dataset.get('tableCount');
+  const value = tableCount <= 10
+    ? ['0-10']
+    : tableCount <= 30
+      ? ['10-30']
+      : ['30+'];
+
   return new Tag({
     type: 'tableCount',
+    value: value,
     name: 'Table count',
-    value: dataset.get('tableCount') + ' Tables'
+    text: tableCount + ' Tables'
   }).toMap();
 }
 
@@ -63,8 +76,9 @@ function getDataTypeTagsFromDataset(dataset) {
     if (dataset.get(dataType + 'Count') > 0) {
       tags = tags.push(new Tag({
         type: 'dataType',
+        value: [capitalize(dataType)],
         name: 'Data type',
-        value: capitalize(dataType)
+        text: capitalize(dataType)
       }).toMap());
     }
   });
@@ -79,8 +93,9 @@ function getTypeTagFromDataset(dataset) {
   if (typeTag) {
     tags = tags.push(new Tag({
       type: 'type',
+      value: ['Artificial'],
       name: 'Type',
-      value: 'Artificial'
+      text: 'Artificial'
     }).toMap());
   }
 
@@ -92,8 +107,9 @@ function getDomainTagFromDataset(dataset) {
 
   return new Tag({
     type: 'domain',
+    value: [domain],
     name: 'Domain',
-    value: domain
+    text: domain
   }).toMap();
 }
 
@@ -104,8 +120,9 @@ function getMissingValuesTagFromDataset(dataset) {
   if (missingValues > 0) {
     tags = tags.push(new Tag({
       type: 'missingValues',
+      value: ['Missing values'],
       name: 'Missing values',
-      value: 'Missing values'
+      text: 'Missing values'
     }).toMap());
   }
 

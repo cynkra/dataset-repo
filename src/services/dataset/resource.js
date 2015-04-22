@@ -42,23 +42,25 @@ export default {
         .then((rows) => resolve(rows[0]));
     });
   },
-  getSearchResults: (query: string) => {
+  getSearchResults: (query: string, databaseSize: Array, tableCount: Array, type: Array, domain: Array, missingValues: Array, dataType: Array) => {
     return new Promise((resolve, reject) => {
       let datasets = [];
       db
         .select(getValues(columns))
         .from(table)
         .where('original_database_name', 'like', '%'+query+'%')
+        .where(filterDatabaseSize(databaseSize))
+        .where(filterTableCount(tableCount))
+        .where(filterType(type))
+        .where(filterDomain(domain))
+        .where(filterMissingValues(missingValues))
+        .where(filterDataType(dataType))
         .map(getUniqueDatasets(datasets))
         .catch((err) => { throw err; })
         .then(() => resolve(datasets));
     });
   }
 };
-
-function getValues(object: Object) {
-  return Object.keys(object).map(function(k) {return object[k]; });
-}
 
 function getUniqueDatasets(datasets) {
   let names = [];
@@ -68,4 +70,75 @@ function getUniqueDatasets(datasets) {
       datasets.push(row);
     }
   };
+}
+
+function filterDatabaseSize(databaseSize: Array) {
+  databaseSize = databaseSize.filter((n) => { return ['KB', 'MB', 'GB'].indexOf(n) !== -1; });
+  return function() {
+    if (databaseSize.indexOf('KB') !== -1) { this.orWhere('database_size', '<', 1); }
+    if (databaseSize.indexOf('MB') !== -1) { this.orWhereBetween('database_size', [1, 1000]); }
+    if (databaseSize.indexOf('GB') !== -1) { this.orWhere('database_size', '>=', 1000); }
+    if (databaseSize.length === 0) { return this.where(true); }
+  };
+}
+
+function filterTableCount(tableCount: Array) {
+  tableCount = tableCount.filter((n) => { return n.indexOf('-') !== -1 || n.indexOf('+') !== -1; });
+  return function() {
+    tableCount.forEach((item) => {
+      if (item.indexOf('-') !== -1) {
+        // 10-30
+        const bounds = item.split('-').map((n) => parseInt(n, 10));
+        this.orWhereBetween('table_count', [bounds[0], bounds[1]]);
+      } else {
+        // 30+
+        const bounds = item.split('+').map((n) => parseInt(n, 10));
+        this.orWhere('table_count', '>=', bounds[0]);
+      }
+    });
+    if (tableCount.length === 0) { this.where(true); }
+  };
+}
+
+function filterType(type: Array) {
+  type = type.filter((n) => { return ['Artificial'].indexOf(n) !== -1; });
+  return function() {
+    if (type.indexOf('Artificial') !== -1) { this.orWhere('is_artificial', 1); }
+    if (type.length === 0) { this.where(true); }
+  };
+}
+
+function filterDomain(domain: Array) {
+  domain = domain.filter((n) => { return n !== ''; });
+  return function() {
+    if (domain.length === 0) {
+      this.where(true);
+    } else {
+      this.whereIn('domain', domain);
+    }
+  };
+}
+
+function filterMissingValues(missingValues: Array) {
+  missingValues = missingValues.filter((n) => { return ['Missing values'].indexOf(n) !== -1; });
+  return function() {
+    if (missingValues.indexOf('Missing values') !== -1) { this.orWhere('null_count', '!=', 0); }
+    if (missingValues.length === 0) { this.where(true); }
+  };
+}
+
+function filterDataType(dataType: Array) {
+  dataType = dataType.filter((n) => { return ['Date', 'Geo', 'Lob', 'Numeric', 'String'].indexOf(n) !== -1; });
+  return function() {
+    if (dataType.indexOf('Date') !== -1) { this.where('date_count', '>', 0); }
+    if (dataType.indexOf('Geo') !== -1) { this.where('geo_count', '>', 0); }
+    if (dataType.indexOf('Lob') !== -1) { this.where('lob_count', '>', 0); }
+    if (dataType.indexOf('Numeric') !== -1) { this.where('numeric_count', '>', 0); }
+    if (dataType.indexOf('String') !== -1) { this.where('string_count', '>', 0); }
+    if (dataType.length === 0) { return this.where(true); }
+  };
+}
+
+function getValues(object: Object) {
+  return Object.keys(object).map(function(k) {return object[k]; });
 }

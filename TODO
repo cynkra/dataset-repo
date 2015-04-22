@@ -3,7 +3,7 @@ TODO (Feel free to add anything)
 [✓] Dev stack
 [✓] Připojení k db
 [✓] Vykreslení obsahu
-[ ] Podpora pro tagy
+[-] Podpora pro tagy
     [✓] Taglist component
     [✓] Tag component
         [✓] Size {KB, MB, GB}- green
@@ -20,13 +20,13 @@ TODO (Feel free to add anything)
     [✓] Search - API call
     [✓] Podle jména datasetu
     [?] Podle tagu
-[ ] Filtrování
-    [ ] Filter component
-    [ ] Filter - databáze
-    [ ] Filter - API call
-    [ ] Podle velikosti datasetu (range)
-    [ ] Podle počtu tabulek (range)
-    [ ] Podle tagů
+[✓] Filtrování
+    [✓] Filter component
+    [✓] Filter - databáze
+    [✓] Filter - API call
+    [?] Podle velikosti datasetu (range)
+    [?] Podle počtu tabulek (range)
+    [✓] Podle tagů
 [ ] Detail datasetu
     [ ] Detail component
     [✓] Detail - API call

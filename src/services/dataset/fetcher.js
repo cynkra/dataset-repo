@@ -18,7 +18,7 @@ export default {
   getDataset: (dataset: string) => {
     return datasetAPI.get('get_dataset', {dataset: dataset});
   },
-  getSearchResults: (query: string) => {
-    return datasetAPI.get('get_search_results', {query: query});
+  getSearchResults: (params: Object) => {
+    return datasetAPI.get('get_search_results', params);
   }
 };

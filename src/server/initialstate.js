@@ -3,7 +3,13 @@ export default {
   datasets: [],
   currentDataset: {},
   searchForm: {
-    q: ''
+    q: '',
+    databaseSize: [],
+    tableCount: [],
+    type: [],
+    domain: [],
+    missingValues: [],
+    dataType: []
   },
   searchResults: {
     query: '',
