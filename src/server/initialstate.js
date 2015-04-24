@@ -8,7 +8,7 @@ export default {
     tableCount: [],
     type: [],
     domain: [],
-    missingValues: [],
+    missingData: [],
     dataType: []
   },
   searchResults: {

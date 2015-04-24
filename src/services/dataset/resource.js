@@ -42,7 +42,7 @@ export default {
         .then((rows) => resolve(rows[0]));
     });
   },
-  getSearchResults: (query: string, databaseSize: Array, tableCount: Array, type: Array, domain: Array, missingValues: Array, dataType: Array) => {
+  getSearchResults: (query: string, databaseSize: Array, tableCount: Array, type: Array, domain: Array, missingData: Array, dataType: Array) => {
     return new Promise((resolve, reject) => {
       let datasets = [];
       db
@@ -53,7 +53,7 @@ export default {
         .where(filterTableCount(tableCount))
         .where(filterType(type))
         .where(filterDomain(domain))
-        .where(filterMissingValues(missingValues))
+        .where(filterMissingData(missingData))
         .where(filterDataType(dataType))
         .map(getUniqueDatasets(datasets))
         .catch((err) => { throw err; })
@@ -120,11 +120,12 @@ function filterDomain(domain: Array) {
   };
 }
 
-function filterMissingValues(missingValues: Array) {
-  missingValues = missingValues.filter((n) => { return ['Missing values'].indexOf(n) !== -1; });
+function filterMissingData(missingData: Array) {
+  missingData = missingData.filter((n) => { return ['Complete data', 'Missing data'].indexOf(n) !== -1; });
   return function() {
-    if (missingValues.indexOf('Missing values') !== -1) { this.orWhere('null_count', '!=', 0); }
-    if (missingValues.length === 0) { this.where(true); }
+    if (missingData.indexOf('Missing data') !== -1) { this.orWhere('null_count', '!=', 0); }
+    if (missingData.indexOf('Complete data') !== -1) { this.orWhere('null_count', 0); }
+    if (missingData.length === 0) { this.where(true); }
   };
 }
 

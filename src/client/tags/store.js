@@ -28,7 +28,7 @@ export function getTagsFromDataset(dataset) {
   tags = tags.push(getTableCountTagFromDataset(dataset));
   tags = tags.concat(getTypeTagFromDataset(dataset));
   tags = tags.push(getDomainTagFromDataset(dataset));
-  tags = tags.concat(getMissingValuesTagFromDataset(dataset));
+  tags = tags.concat(getMissingDataTagFromDataset(dataset));
   tags = tags.concat(getDataTypeTagsFromDataset(dataset));
   return tags;
 }
@@ -113,16 +113,16 @@ function getDomainTagFromDataset(dataset) {
   }).toMap();
 }
 
-function getMissingValuesTagFromDataset(dataset) {
-  const missingValues = dataset.get('nullCount');
+function getMissingDataTagFromDataset(dataset) {
+  const missingData = dataset.get('nullCount');
   let tags = List();
 
-  if (missingValues > 0) {
+  if (missingData > 0) {
     tags = tags.push(new Tag({
-      type: 'missingValues',
-      value: ['Missing values'],
-      name: 'Missing values',
-      text: 'Missing values'
+      type: 'missingData',
+      value: ['Missing data'],
+      name: 'Missing data',
+      text: 'Missing data'
     }).toMap());
   }
 
