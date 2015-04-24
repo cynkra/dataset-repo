@@ -1,4 +1,5 @@
 import {objectToArray} from '../lib/helpers';
+import Fetcher from '../lib/fetcher';
 
 export default (request, response) => {
   const path = request.path.split('\/');
@@ -6,7 +7,7 @@ export default (request, response) => {
   const methodName = path[2];
 
   try {
-    const fetcher = request.fetcher.get(fetcherName);
+    const fetcher = Fetcher.get(fetcherName);
     const method = fetcher.mapping[methodName];
     const params = objectToArray(request.query);
 
