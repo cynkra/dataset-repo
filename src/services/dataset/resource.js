@@ -101,9 +101,10 @@ function filterTableCount(tableCount: Array) {
 }
 
 function filterType(type: Array) {
-  type = type.filter((n) => { return ['Artificial'].indexOf(n) !== -1; });
+  type = type.filter((n) => { return ['Real', 'Synthetic'].indexOf(n) !== -1; });
   return function() {
-    if (type.indexOf('Artificial') !== -1) { this.orWhere('is_artificial', 1); }
+    if (type.indexOf('Real') !== -1) { this.orWhere('is_artificial', 0); }
+    if (type.indexOf('Synthetic') !== -1) { this.orWhere('is_artificial', 1); }
     if (type.length === 0) { this.where(true); }
   };
 }

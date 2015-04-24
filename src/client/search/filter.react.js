@@ -26,7 +26,7 @@ export default class Filter extends React.Component {
           checked={values.get('type')}
           displayName='Type'
           name='type'
-          values={['Artificial']}
+          values={['Real', 'Synthetic']}
         />
 
         <FilterGroup

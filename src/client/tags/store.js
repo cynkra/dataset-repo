@@ -93,9 +93,9 @@ function getTypeTagFromDataset(dataset) {
   if (typeTag) {
     tags = tags.push(new Tag({
       type: 'type',
-      value: ['Artificial'],
+      value: ['Synthetic'],
       name: 'Type',
-      text: 'Artificial'
+      text: 'Synthetic'
     }).toMap());
   }
 
