@@ -3,12 +3,11 @@ TODO (Feel free to add anything)
 [✓] Dev stack
 [✓] Připojení k db
 [✓] Vykreslení obsahu
-[-] Podpora pro tagy
+[✓] Podpora pro tagy
     [✓] Taglist component
     [✓] Tag component
         [✓] Size {KB, MB, GB}- green
         [✓] #Tables - green
-        [ ] Data Levels {nominal, ordinal, continuous} - blue
         [✓] Data Types {numerical, string, date, lob, geo} - red
         [✓] Missing values - yellow
         [✓] Real/Artificial - yellow
@@ -19,7 +18,13 @@ TODO (Feel free to add anything)
     [✓] Search - databáze
     [✓] Search - API call
     [✓] Podle jména datasetu
-    [?] Podle tagu
+    [ ] Real-time search
+        [ ] Odstranit searchPage
+        [ ] Vyřešit transitionTo/replaceWith
+    [ ] Hlavička vyhledávání
+        [ ] XY Results
+        [ ] Zobrazit tagy - filtr
+        [ ] Zobrazit query
 [✓] Filtrování
     [✓] Filter component
     [✓] Filter - databáze
@@ -27,6 +32,10 @@ TODO (Feel free to add anything)
     [?] Podle velikosti datasetu (range)
     [?] Podle počtu tabulek (range)
     [✓] Podle tagů
+    [ ] Rozbalování kategorií
+        [ ] Přidat hodnotu do state
+        [ ] onClick na nadpis kategoire
+        [ ] Class podle hodnoty ve state
 [ ] Detail datasetu
     [ ] Detail component
     [✓] Detail - API call
