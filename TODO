@@ -18,9 +18,9 @@ TODO (Feel free to add anything)
     [✓] Search - databáze
     [✓] Search - API call
     [✓] Podle jména datasetu
-    [ ] Real-time search
-        [ ] Odstranit searchPage
-        [ ] Vyřešit transitionTo/replaceWith
+    [✓] Real-time search
+        [✓] Odstranit searchPage
+        [✓] Vyřešit transitionTo/replaceWith
     [ ] Hlavička vyhledávání
         [ ] XY Results
         [ ] Zobrazit tagy - filtr

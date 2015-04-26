@@ -10,7 +10,7 @@ export default class NotFoundPage extends React.Component {
         <section className="content">
           <h1>{`This page isn't available`}</h1>
           <p>The link may be broken, or the page may have been removed.</p>
-          <Link to="home">Continue here please.</Link>
+          <Link to="search">Continue here please.</Link>
         </section>
       </DocumentTitle>
     );

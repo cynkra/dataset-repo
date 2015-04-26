@@ -15,7 +15,7 @@ export default class FilterGroup extends React.Component {
             const checked = (this.props.checked.indexOf(value) !== -1);
             return (
               <label className='filter-group-line' key={this.props.name + '-' + i}>
-                <input checked={checked} name={this.props.name} onChange={onFilterCheckboxChange} type='checkbox' value={value}/>
+                <input checked={checked} name={this.props.name + '[]'} onChange={onFilterCheckboxChange} type='checkbox' value={value}/>
                   {value}
               </label>
             );

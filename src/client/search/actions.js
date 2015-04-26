@@ -4,27 +4,23 @@ import {getForm} from './store';
 import {getSearchResults} from '../../services/dataset/fetcher';
 import resolver from '../../lib/resolver';
 
-export function onSearchInputChange({target: {name, value}}) {
+export function onSearchInputChange(value) {
   dispatch(onSearchInputChange, value);
 }
 
-export function onSearchFormSubmitted(e) {
-  e.preventDefault();
-  submitSearchForm();
-}
-
 export function onFilterCheckboxChange({target: {name, value, checked}}) {
+  name = name.substr(0, name.length - 2);
   dispatch(onFilterCheckboxChange, {name, value, checked});
   submitSearchForm();
 }
 
-function submitSearchForm() {
+export function submitSearchForm() {
   const router = require('../router');
-  const query = getForm().toJS();
+  let query = getForm().toJS();
 
-  return isQueryEmpty(query)
-    ? router.transitionTo('home')
-    : router.transitionTo('search', null, query);
+  if (isQueryEmpty(query)) { query = null; }
+
+  router.transitionTo('search', null, query);
 }
 
 export function fetchSearchResults(query: Object) {
@@ -57,6 +53,6 @@ function isQueryEmpty(query) {
 }
 
 setToString('search', {
-  onSearchInputChange, onSearchFormSubmitted, onFilterCheckboxChange,
+  onSearchInputChange, onFilterCheckboxChange, submitSearchForm,
   fetchSearchResults, fetchSearchResultsStart, fetchSearchResultsSuccess
 });

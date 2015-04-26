@@ -1,21 +1,37 @@
 import React from 'react';
 import exposeRouter from '../common/exposerouter.react';
 import Filter from './filter.react';
-import {onSearchInputChange, onSearchFormSubmitted} from './actions';
+import {onSearchInputChange, submitSearchForm} from './actions';
 import {getForm} from './store';
 
 require('./search.styl');
 
+let t;
+
 class Search extends React.Component {
+
+  onChange(e) {
+    onSearchInputChange(e.target.value);
+    if (t) {
+      clearTimeout(t);
+    }
+    t = setTimeout(submitSearchForm, 500);
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    submitSearchForm();
+  }
 
   render() {
     const values = getForm();
     return (
-      <form action='search' method='get' onSubmit={onSearchFormSubmitted}>
+      <form action='' method='get' onSubmit={this.onSubmit}>
         <input
+          autoComplete='off'
           className='search'
           name='q'
-          onChange={onSearchInputChange}
+          onChange={this.onChange}
           placeholder='Search for datasets'
           type='search'
           value={values.get('q')}
