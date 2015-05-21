@@ -6,6 +6,8 @@ import Sidebar from '../common/sidebar.react';
 import {fetchSearchResults} from '../search/actions';
 import {getSearchResults} from '../search/store';
 
+require('./searchPage.styl');
+
 class SearchPage extends React.Component {
 
   componentWillMount() {
@@ -27,7 +29,7 @@ class SearchPage extends React.Component {
       <DocumentTitle title="Search">
         <section className="content">
           <section className="primary">
-            Searching...
+            <div className="searchPage-header">Showing {datasets.count()} datasets:</div>
             <DatasetList datasets={datasets} />
           </section>
           <Sidebar />

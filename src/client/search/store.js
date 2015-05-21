@@ -62,7 +62,8 @@ export const dispatchToken = register(({action, data}) => {
                 stringCount: row.string_count,
                 lobCount: row.lob_count,
                 dateCount: row.date_count,
-                geoCount: row.geo_count
+                geoCount: row.geo_count,
+                task: row.task
               }).toMap();
               list.push(dataset);
             });
@@ -89,6 +90,7 @@ function clearSearchForm() {
       map.set('tableCount', immutable.List());
       map.set('type', immutable.List());
       map.set('domain', immutable.List());
+      map.set('task', immutable.List());
       map.set('missingValues', immutable.List());
       map.set('dataType', immutable.List());
     });

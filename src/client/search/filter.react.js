@@ -37,6 +37,13 @@ export default class Filter extends React.Component {
         />
 
         <FilterGroup
+          checked={values.get('task')}
+          displayName='Task'
+          name='task'
+          values={['Classification', 'Regression']}
+        />
+
+        <FilterGroup
           checked={values.get('missingData')}
           displayName='Missing data'
           name='missingData'

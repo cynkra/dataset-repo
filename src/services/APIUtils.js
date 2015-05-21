@@ -20,7 +20,7 @@ export const API = {
           });
       });
     } else {
-      return mapping[fn].apply(null, objectToArray(params));
+      return mapping[fn].call(null, params);
     }
   }
 };

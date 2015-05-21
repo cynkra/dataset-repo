@@ -8,6 +8,7 @@ export default {
     tableCount: [],
     type: [],
     domain: [],
+    task: [],
     missingData: [],
     dataType: []
   },

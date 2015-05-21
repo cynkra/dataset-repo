@@ -28,6 +28,7 @@ export function getTagsFromDataset(dataset) {
   tags = tags.push(getTableCountTagFromDataset(dataset));
   tags = tags.concat(getTypeTagFromDataset(dataset));
   tags = tags.push(getDomainTagFromDataset(dataset));
+  tags = tags.concat(getTaskTagFromDataset(dataset));
   tags = tags.concat(getMissingDataTagFromDataset(dataset));
   tags = tags.concat(getDataTypeTagsFromDataset(dataset));
   return tags;
@@ -123,6 +124,22 @@ function getMissingDataTagFromDataset(dataset) {
       value: ['Missing data'],
       name: 'Missing data',
       text: 'Missing data'
+    }).toMap());
+  }
+
+  return tags;
+}
+
+function getTaskTagFromDataset(dataset) {
+  const task = dataset.get('task');
+  let tags = List();
+
+  if(task !== null) {
+    tags = tags.push(new Tag({
+      type: 'task',
+      value: [capitalize(task)],
+      name: 'Task',
+      text: capitalize(task)
     }).toMap());
   }
 

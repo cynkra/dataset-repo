@@ -9,10 +9,10 @@ export default (request, response) => {
   try {
     const fetcher = Fetcher.get(fetcherName);
     const method = fetcher.mapping[methodName];
-    const params = objectToArray(request.query);
+    const params = request.query;
 
     if (typeof method === 'function') {
-      method.apply(null, params)
+      method.call(null, params)
         .then((data) => {
           response.json(data);
         });

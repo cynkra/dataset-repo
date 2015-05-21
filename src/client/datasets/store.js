@@ -1,10 +1,10 @@
 import * as actions from './actions';
 import {register} from '../dispatcher';
-import {Record} from 'immutable';
+import immutable from 'immutable';
 import {datasetsCursor, currentDatasetCursor} from '../state';
 import {getTagsFromDataset} from '../tags/store';
 
-export const Dataset = Record({
+export const Dataset = immutable.Record({
   originalDatabaseName: null,
   description: null,
   databaseSize: null,
@@ -16,7 +16,8 @@ export const Dataset = Record({
   stringCount: null,
   lobCount: null,
   dateCount: null,
-  geoCount: null
+  geoCount: null,
+  task: null
 });
 
 export const dispatchToken = register(({action, data}) => {
@@ -38,7 +39,8 @@ export const dispatchToken = register(({action, data}) => {
               stringCount: row.string_count,
               lobCount: row.lob_count,
               dateCount: row.date_count,
-              geoCount: row.geo_count
+              geoCount: row.geo_count,
+              task: row.task
             }).toMap();
             list.push(dataset);
           });
@@ -47,21 +49,7 @@ export const dispatchToken = register(({action, data}) => {
       break;
     case actions.fetchDatasetSuccess:
       currentDatasetCursor(currentDataset => {
-        const newDataset = new Dataset({
-          originalDatabaseName: data.original_database_name,
-          description: data.description,
-          databaseSize: data.database_size,
-          tableCount: data.table_count,
-          isArtificial: data.is_artificial,
-          domain: data.domain,
-          nullCount: data.null_count,
-          numericCount: data.numeric_count,
-          stringCount: data.string_count,
-          lobCount: data.lob_count,
-          dateCount: data.date_count,
-          geoCount: data.geo_count
-        }).toMap();
-        return newDataset;
+        return immutable.fromJS(data);
       });
       break;
   }

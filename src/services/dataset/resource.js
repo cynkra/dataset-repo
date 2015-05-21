@@ -15,7 +15,8 @@ const columns = {
   stringCount: 'string_count',
   lobCount: 'lob_count',
   dateCount: 'date_count',
-  geoCount: 'geo_count'
+  geoCount: 'geo_count',
+  task: 'task'
 };
 
 export default {
@@ -31,30 +32,31 @@ export default {
         .then(() => resolve(datasets));
     });
   },
-  getDataset: (dataset: string) => {
+  getDataset: (params: {}) => {
     return new Promise((resolve, reject) => {
       db
         .select()
         .from(table)
-        .where('original_database_name', dataset)
+        .where('original_database_name', params.dataset)
         .limit(1)
         .catch((err) => { throw err; })
         .then((rows) => resolve(rows[0]));
     });
   },
-  getSearchResults: (query: string, databaseSize: Array, tableCount: Array, type: Array, domain: Array, missingData: Array, dataType: Array) => {
+  getSearchResults: (params: {}) => {
     return new Promise((resolve, reject) => {
       let datasets = [];
       db
         .select(getValues(columns))
         .from(table)
-        .where('original_database_name', 'like', '%'+query+'%')
-        .where(filterDatabaseSize(databaseSize))
-        .where(filterTableCount(tableCount))
-        .where(filterType(type))
-        .where(filterDomain(domain))
-        .where(filterMissingData(missingData))
-        .where(filterDataType(dataType))
+        .where('original_database_name', 'like', '%'+params.q+'%')
+        .where(filterDatabaseSize(params.databaseSize))
+        .where(filterTableCount(params.tableCount))
+        .where(filterType(params.type))
+        .where(filterDomain(params.domain))
+        .where(filterTask(params.task))
+        .where(filterMissingData(params.missingData))
+        .where(filterDataType(params.dataType))
         .map(getUniqueDatasets(datasets))
         .catch((err) => { throw err; })
         .then(() => resolve(datasets));
@@ -116,6 +118,18 @@ function filterDomain(domain: Array) {
       this.where(true);
     } else {
       this.whereIn('domain', domain);
+    }
+  };
+}
+
+function filterTask(task: Array) {
+  task = task.filter((n) => { return n !== ''; });
+  task = task.map((n) => { return n.toLowerCase(); });
+  return function() {
+    if (task.length === 0) {
+      this.where(true);
+    } else {
+      this.whereIn('task', task);
     }
   };
 }
