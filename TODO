@@ -39,7 +39,7 @@ TODO (Feel free to add anything)
 [ ] Detail datasetu
     [ ] Detail component
     [✓] Detail - API call
-    [ ] Náhled schématu
+    [✓] Náhled schématu
 [ ] Leaderboard připsvěvovatelů
     [ ] Leaderboard component
     [ ] Leaderboard - Databáze

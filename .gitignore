@@ -3,3 +3,6 @@ build
 node_modules
 npm-debug.log
 *.sublime-workspace
+assets/img/datasets-generated/*
+!assets/img/datasets-generated/.gitkeep
+src/services/sqlviz/tpl/__sqlviz__.dot
