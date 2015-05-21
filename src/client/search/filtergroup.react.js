@@ -6,15 +6,26 @@ require('./filtergroup.styl');
 
 export default class FilterGroup extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = { expanded: true };
+  }
+
+  toggle(e) {
+    e.preventDefault();
+    this.setState({ expanded: !this.state.expanded });
+  }
+
   render() {
+    const className = 'filterGroup filterGroup--' + (this.state.expanded ? 'expanded' : 'shrinked');
     return (
-      <div className='filter-group'>
-        <h4 className='filter-group-heading'>{this.props.displayName}</h4>
-        <div className='filter-group-body'>
+      <div className={className}>
+        <h4 className='filterGroup-heading' onClick={this.toggle.bind(this)} onKeyDown={this.toggle.bind(this)} onKeyUp={this.toggle.bind(this)} role='button' tabIndex='0'>{this.props.displayName}</h4>
+        <div className='filterGroup-body'>
           {this.props.values.map((value, i) => {
             const checked = (this.props.checked.indexOf(value) !== -1);
             return (
-              <label className='filter-group-line' key={this.props.name + '-' + i}>
+              <label className='filterGroup-line' key={this.props.name + '-' + i}>
                 <input checked={checked} name={this.props.name + '[]'} onChange={onFilterCheckboxChange} type='checkbox' value={value}/>
                   {value}
               </label>
