@@ -13,8 +13,14 @@ export default function() {
 
   app.use(compression());
 
-  app.use('/build', express.static('build'));
-  app.use('/assets', express.static('assets'));
+  app.disable('x-powered-by');
+
+  if (process.env.NODE_ENV === 'production') {
+    app.use('/build', express.static('build'));
+    app.use('/assets', express.static('assets'), {
+      maxAge: 365 * 24 * 60 * 60
+    });
+  }
 
   Fetcher.register('dataset', require('../services/dataset/fetcher'));
 
