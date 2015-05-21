@@ -1,7 +1,8 @@
 // import * as actions from './actions';
 import {register} from '../dispatcher';
 import {Record, List} from 'immutable';
-import {capitalize, round} from '../../lib/helpers';
+import {capitalize, getSizeWithUnit} from '../../lib/helpers';
+import {dataTypes} from '../datasets/store';
 
 export const Tag = Record({
   type: null,
@@ -9,14 +10,6 @@ export const Tag = Record({
   name: null,
   text: null
 });
-
-const dataTypes = [
-  'numeric',
-  'string',
-  'lob',
-  'date',
-  'geo'
-];
 
 export const dispatchToken = register(({action, data}) => {
 
@@ -35,22 +28,14 @@ export function getTagsFromDataset(dataset) {
 }
 
 function getDatabaseSizeTagFromDataset(dataset) {
-  let size = dataset.get('databaseSize');
-  let unit = 'MB';
-
-  if (size >= 1000) {
-    size /= 1000;
-    unit = 'GB';
-  } else if (size < 1) {
-    size *= 1000;
-    unit = 'KB';
-  }
+  const size = getSizeWithUnit(dataset.get('databaseSize'));
+  const unit = size.slice(-2);
 
   return new Tag({
     type: 'databaseSize',
     value: [unit],
     name: 'Size',
-    text: round(size, 1) + ' ' + unit
+    text: size
   }).toMap();
 }
 

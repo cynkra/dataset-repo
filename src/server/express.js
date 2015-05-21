@@ -15,12 +15,8 @@ export default function() {
 
   app.disable('x-powered-by');
 
-  if (process.env.NODE_ENV === 'production') {
-    app.use('/build', express.static('build'));
-    app.use('/assets', express.static('assets'), {
-      maxAge: 365 * 24 * 60 * 60
-    });
-  }
+  app.use('/build', express.static('build'));
+  app.use('/assets', express.static('assets'));
 
   Fetcher.register('dataset', require('../services/dataset/fetcher'));
 

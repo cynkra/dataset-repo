@@ -38,9 +38,13 @@ export default {
         .select()
         .from(table)
         .where('original_database_name', params.dataset)
-        .limit(1)
+        .whereNotNull('original_database_name')
         .catch((err) => { throw err; })
-        .then((rows) => resolve(rows[0]));
+        .then((rows) => {
+          let dataset = JSON.parse(JSON.stringify(rows[0]));
+          dataset.versions = rows;
+          resolve(dataset);
+        });
     });
   },
   getSearchResults: (params: {}) => {

@@ -20,6 +20,14 @@ export const Dataset = immutable.Record({
   task: null
 });
 
+export const dataTypes = [
+  'numeric',
+  'string',
+  'lob',
+  'date',
+  'geo'
+];
+
 export const dispatchToken = register(({action, data}) => {
   switch (action) {
     case actions.fetchDatasetsSuccess:

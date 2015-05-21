@@ -21,10 +21,8 @@ TODO (Feel free to add anything)
     [✓] Real-time search
         [✓] Odstranit searchPage
         [✓] Vyřešit transitionTo/replaceWith
-    [ ] Hlavička vyhledávání
-        [ ] XY Results
-        [ ] Zobrazit tagy - filtr
-        [ ] Zobrazit query
+    [✓] Hlavička vyhledávání
+        [✓] XY Results
 [✓] Filtrování
     [✓] Filter component
     [✓] Filter - databáze
@@ -32,12 +30,12 @@ TODO (Feel free to add anything)
     [?] Podle velikosti datasetu (range)
     [?] Podle počtu tabulek (range)
     [✓] Podle tagů
-    [ ] Rozbalování kategorií
-        [ ] Přidat hodnotu do state
-        [ ] onClick na nadpis kategoire
-        [ ] Class podle hodnoty ve state
-[ ] Detail datasetu
-    [ ] Detail component
+    [✓] Rozbalování kategorií
+        [✓] Přidat hodnotu do state
+        [✓] onClick na nadpis kategoire
+        [✓] Class podle hodnoty ve state
+[✓] Detail datasetu
+    [✓] Detail component
     [✓] Detail - API call
     [✓] Náhled schématu
 [ ] Leaderboard připsvěvovatelů
