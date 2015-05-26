@@ -1,27 +1,42 @@
 import PureComponent from '../common/purecomponent.react';
 import React from 'react';
+import {checkImage} from '../../lib/helpers';
 
 export default class DatasetInfoImage extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    if (!props.image && props.schema) {
+      const image = '/assets/img/datasets-generated/' + props.schema + '.png';
+      if (checkImage(image)) {
+        this.state = {
+          image: image
+        };
+      } else {
+        if (!process.env.IS_BROWSER) {
+          const sqlViz = require('../../services/sqlviz/sqlviz.js');
+          sqlViz.getSchema(props.schema);
+        }
+        this.state = {
+          image: null
+        };
+      }
+    } else {
+      this.state = {
+        image: props.image || null
+      };
+    }
+  }
+
   render() {
     const title = this.props.title;
-    const schema = this.props.schema;
-    if(!process.env.IS_BROWSER && !this.props.image && schema) {
-      const fs = require('fs');
-      const path = require('path');
-      if(!fs.existsSync(path.join(__dirname, '..','..','..','assets','img','datasets-generated',schema+'.png'))) {
-        const sqlViz = require('../../services/sqlviz/sqlviz.js');
-        sqlViz.getSchema(schema);
-      }
-    }
-    const image = this.props.image
-      ? '/assets/img/datasets/' + this.props.image
-      : (schema
-          ? '/assets/img/datasets-generated/' + schema + '.png'
-          : null);
+    const image = this.state.image;
 
     return (
       <div className='DatasetInfo-image'>
-        {image ? <a href={image}><img src={image} alt={title} title={title} /></a> : null}
+        { image
+          ? <a href={image}><img alt={title} src={image} title={title} /></a>
+          : null}
       </div>
     );
   }

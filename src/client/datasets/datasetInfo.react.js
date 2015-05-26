@@ -11,20 +11,31 @@ require('./datasetInfo.styl');
 export default class DatasetInfo extends PureComponent {
   render() {
     const dataset = this.props.dataset;
-    const mwb = '/assets/mwb/' + this.props.mwb_path;
+    const mwbPath = dataset.get('mwb_path');
+    const mwb = mwbPath
+      ? '/assets/mwb/' + mwbPath
+      : null;
 
     return (
       <div className='DatasetInfo'>
         <div className='DatasetInfo-header'>
-          <DatasetInfoImage title={dataset.get('original_database_name')} image={dataset.get('img_path')} schema={dataset.get('TABLE_SCHEMA')} />
-          <DatasetInfoSummary dataset={dataset} />
+          <DatasetInfoImage
+            image={dataset.get('img_path')}
+            schema={dataset.get('TABLE_SCHEMA')}
+            title={dataset.get('original_database_name')}
+          />
+          <DatasetInfoSummary
+            dataset={dataset}
+          />
         </div>
 
-        <DatasetInfoDetails dataset={dataset} />
+        <DatasetInfoDetails
+          dataset={dataset}
+        />
 
         <DatasetInfoDownload />
 
-        { this.props.mwb_path ? (
+        { mwb ? (
           <div>
             <h2>MySQL Workbench Database Structure</h2>
             <a href={mwb}>Download</a>

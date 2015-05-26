@@ -1,4 +1,4 @@
-/*eslint-disable no-console */
+/* eslint-disable no-console */
 
 import compression from 'compression';
 import config from './config';
@@ -12,14 +12,12 @@ export default function() {
   const app = express();
 
   app.use(compression());
-
   app.disable('x-powered-by');
+
+  registerFetchers();
 
   app.use('/build', express.static('build'));
   app.use('/assets', express.static('assets'));
-
-  Fetcher.register('dataset', require('../services/dataset/fetcher'));
-
   app.use(config.api.url, api);
 
   app.get('*', (request, response) => {
@@ -35,4 +33,8 @@ export default function() {
 
   console.log(`App started on port ${config.port}`);
 
+}
+
+function registerFetchers() {
+  Fetcher.register('dataset', require('../services/dataset/fetcher'));
 }

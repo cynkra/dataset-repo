@@ -1,7 +1,7 @@
-import {objectToArray} from '../lib/helpers';
 import Fetcher from '../lib/fetcher';
 
 export default (request, response) => {
+
   const path = request.path.split('\/');
   const fetcherName = path[1];
   const methodName = path[2];

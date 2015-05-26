@@ -47,7 +47,7 @@ export default class Filter extends React.Component {
           checked={values.get('missingData')}
           displayName='Missing data'
           name='missingData'
-          values={['Complete data', 'Missing data']}
+          values={['Missing data', 'Complete data']}
         />
 
         <FilterGroup

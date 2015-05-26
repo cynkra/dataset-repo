@@ -1,6 +1,6 @@
 import config from './config';
 
-let db = require('knex')({
+const db = require('knex')({
   client: config.database.client,
   connection: {
     host:     config.database.host,

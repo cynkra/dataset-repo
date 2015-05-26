@@ -5,7 +5,7 @@ import fs from 'fs';
 import {exec} from 'child_process';
 
 export function getSchema(dbName: string) {
-  let db = require('knex')({
+  const db = require('knex')({
     client: config.database.client,
     connection: {
       host:     config.database.host,
@@ -18,7 +18,7 @@ export function getSchema(dbName: string) {
   let tables = [];
   let graph = {
     name: dbName,
-    disable_fields: false,
+    disableFields: false,
     models: []
   };
 
@@ -91,11 +91,11 @@ export function getSchema(dbName: string) {
 
           fs.writeFileSync(tmpDotFile, dotStr);
           exec(cmd);
-          process.exit(0);
         } else {
+          /* eslint-disable no-console */
           console.error(stderr + ' ' + err);
-          throw('Can\'t find dot to generate a png. Is graphviz installed?');
+          throw new 'Can\'t find dot to generate a png. Is graphviz installed?';
         }
-      })
+      });
     });
 }

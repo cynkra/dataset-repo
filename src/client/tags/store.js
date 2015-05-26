@@ -119,7 +119,7 @@ function getTaskTagFromDataset(dataset) {
   const task = dataset.get('task');
   let tags = List();
 
-  if(task !== null) {
+  if (task !== null) {
     tags = tags.push(new Tag({
       type: 'task',
       value: [capitalize(task)],

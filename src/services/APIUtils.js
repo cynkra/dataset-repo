@@ -1,6 +1,5 @@
 import request from 'superagent';
 import config from '../server/config';
-import {objectToArray} from '../lib/helpers';
 
 const isBrowser = process.env.IS_BROWSER;
 

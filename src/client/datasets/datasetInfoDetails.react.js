@@ -67,10 +67,17 @@ export default class DatasetInfoDetails extends PureComponent {
               : '?'}
           </dd>
 
-          <dt>Number of rows:</dt>
+          <dt>
+            <abbr title='Count of tuples in the whole dataset'>Number of rows:</abbr>
+          </dt>
           <dd>{dataset.get('row_count') ? getLocaleString(dataset.get('row_count')) : '?'}</dd>
 
-          <dt>Number of columns:</dt>
+          <dt>
+            <abbr
+              title='Count of all attributes (including IDs and target(s)) in the whole dataset'
+              >Number of columns:
+            </abbr>
+          </dt>
           <dd>{dataset.get('column_count') ? getLocaleString(dataset.get('column_count')) : '?'}</dd>
 
           <dt>Missing values:</dt>
@@ -107,12 +114,13 @@ export default class DatasetInfoDetails extends PureComponent {
   getDataTypes(dataset) {
     return dataTypes
       .filter((dataType) => { return dataset.get(dataType + '_count') > 0; })
-      .map((dataType) => { return (
-        <li>
-          <Link query={{dataType: [capitalize(dataType)]}} to='search'>
-            {capitalize(dataType)}
-          </Link>
-        </li>
+      .map((dataType) => {
+        return (
+          <li key={dataType}>
+            <Link query={{dataType: [capitalize(dataType)]}} to='search'>
+              {capitalize(dataType)}
+            </Link>
+          </li>
         );
       });
   }

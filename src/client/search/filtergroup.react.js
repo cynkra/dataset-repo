@@ -8,12 +8,16 @@ export default class FilterGroup extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { expanded: true };
+    this.state = {
+      expanded: true
+    };
   }
 
   toggle(e) {
     e.preventDefault();
-    this.setState({ expanded: !this.state.expanded });
+    this.setState({
+      expanded: !this.state.expanded
+    });
   }
 
   render() {

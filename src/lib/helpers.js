@@ -1,5 +1,6 @@
 /**
  * Returns a capitalized string
+ * @return string
  */
 export function capitalize(string: string) {
   return string
@@ -9,25 +10,18 @@ export function capitalize(string: string) {
 
 /**
  * Rounds a float to specified precision(number of digits after the decimal point).
+ * @return number
  */
 export function round(number: number, precision: number = 0) {
   return Math.round((number + Math.pow(10, -precision - 2)) * Math.pow(10, precision)) / Math.pow(10, precision);
 }
 
 /**
- * Converts javascript object (associative array) to a simple array
- */
-export function objectToArray(object: Object) {
-  return Object.keys(object).map((key) => {
-    return object[key];
-  });
-}
-
-/**
  * Returns formatted number
+ * @return string
  */
 export function getLocaleString(number: number, separator: string = ',') {
-  let parts = number.toString().split(".");
+  let parts = number.toString().split('.');
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, separator);
   return parts.join('.');
 }
@@ -48,4 +42,21 @@ export function getSizeWithUnit(size: number) {
   }
 
   return getLocaleString(round(size, 1)) + ' ' + unit;
+}
+
+/**
+ * Returns true if image with passed src exists (both client and server side).
+ * @return boolean
+ */
+export function checkImage(src: string) {
+  if (process.env.IS_BROWSER) {
+    var req = new XMLHttpRequest();
+    req.open('HEAD', src, false);
+    req.send(null);
+    return req.status === 200;
+  } else {
+    const fs = require('fs');
+    const path = require('path');
+    return fs.existsSync(path.join(__dirname, '..', '..', src));
+  }
 }

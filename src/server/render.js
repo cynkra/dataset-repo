@@ -23,6 +23,7 @@ export default function render(request, response) {
         reject(abortReason);
       }
     });
+
     router.run((Handler, routerState) => {
       getPageHtml(Handler)
         .then((html) => {

@@ -34,7 +34,7 @@ digraph name {
      ><FONT FACE="Helvetica-Bold"
      >{{ model.name }}</FONT></TD></TR>
 
-    {% if not disable_fields %}
+    {% if not disableFields %}
         {% for field in model.fields %}
         <TR><TD ALIGN="LEFT" BGCOLOR="White"
         ><FONT {% if field.blank %}COLOR="#7B7B7B" {% endif %}FACE="Helvetica-Bold">{{ field.name }}</FONT

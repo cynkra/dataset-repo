@@ -7,7 +7,7 @@ export default class DatasetInfoSource extends PureComponent {
     const bibtex = '/assets/bibtex/' + this.props.bibtex;
     return (
       <span> (<a href={bibtex}>BibTeX</a>)</span>
-    )
+    );
   }
 
   render() {

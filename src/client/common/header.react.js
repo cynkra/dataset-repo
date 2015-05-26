@@ -9,7 +9,7 @@ export default class Header extends React.Component {
     return (
       <header className="header">
         <div className="header-inner">
-          <Link to="search"><h1>Dataset repository</h1></Link>
+          <Link to="search"><h1>Relational dataset repository</h1></Link>
         </div>
       </header>
     );

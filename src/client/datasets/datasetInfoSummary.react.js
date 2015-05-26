@@ -14,7 +14,7 @@ export default class DatasetInfoSummary extends PureComponent {
           {dataset.get('description')}
         </p>
 
-        <DatasetInfoSource origin={dataset.get('origin')} bibtex={dataset.get('bibtex_path')} />
+        <DatasetInfoSource bibtex={dataset.get('bibtex_path')} origin={dataset.get('origin')} />
         <DatasetInfoVersions dataset={dataset} />
       </div>
     );
@@ -23,4 +23,4 @@ export default class DatasetInfoSummary extends PureComponent {
 
 DatasetInfoSummary.propTypes = {
   dataset: React.PropTypes.instanceOf(immutable.Map).isRequired
-}
+};
