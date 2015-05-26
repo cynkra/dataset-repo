@@ -141,11 +141,11 @@ function filterTask(task: Array) {
 }
 
 function filterDataType(dataType: Array) {
-  dataType = dataType.filter((n) => { return ['Date', 'Geo', 'Lob', 'Numeric', 'String'].indexOf(n) !== -1; });
+  dataType = dataType.filter((n) => { return ['Temporal', 'Spatial', 'LOB', 'Numeric', 'String'].indexOf(n) !== -1; });
   return function() {
-    if (dataType.indexOf('Date') !== -1) { this.where('date_count', '>', 0); }
-    if (dataType.indexOf('Geo') !== -1) { this.where('geo_count', '>', 0); }
-    if (dataType.indexOf('Lob') !== -1) { this.where('lob_count', '>', 0); }
+    if (dataType.indexOf('Temporal') !== -1) { this.where('date_count', '>', 0); }
+    if (dataType.indexOf('Spatial') !== -1) { this.where('geo_count', '>', 0); }
+    if (dataType.indexOf('LOB') !== -1) { this.where('lob_count', '>', 0); }
     if (dataType.indexOf('Numeric') !== -1) { this.where('numeric_count', '>', 0); }
     if (dataType.indexOf('String') !== -1) { this.where('string_count', '>', 0); }
     if (dataType.length === 0) { return this.where(true); }

@@ -16,9 +16,20 @@ export default class Tag extends PureComponent {
 
     return (
       <li>
-        <Link className={className} query={query} title={tag.get('name')} to="search">{tag.get('text')}</Link>
+        <Link className={className} query={query} title={tag.get('name')} to="search">
+          {this.getText(tag.get('text'))}
+        </Link>
       </li>
     );
+  }
+
+  getText(name) {
+    switch(name) {
+      case 'LOB':
+        return <abbr title='Data Type: Large Objects like images or long texts'>LOB</abbr>;
+      default:
+        return name;
+    }
   }
 }
 

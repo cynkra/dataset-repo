@@ -31,13 +31,22 @@ export default class FilterGroup extends React.Component {
             return (
               <label className='filterGroup-line' key={this.props.name + '-' + i}>
                 <input checked={checked} name={this.props.name + '[]'} onChange={onFilterCheckboxChange} type='checkbox' value={value}/>
-                  {value}
+                  {this.getText(value)}
               </label>
             );
           })}
         </div>
       </div>
     );
+  }
+
+  getText(name) {
+    switch(name) {
+      case 'LOB':
+        return <abbr title='Large Objects like images or long texts'>LOB</abbr>;
+      default:
+        return name;
+    }
   }
 }
 

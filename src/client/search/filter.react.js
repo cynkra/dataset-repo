@@ -47,7 +47,7 @@ export default class Filter extends React.Component {
           checked={values.get('dataType')}
           displayName='Data type'
           name='dataType'
-          values={['Date', 'Geo', 'Lob', 'Numeric', 'String']}
+          values={['Temporal', 'Spatial', 'LOB', 'Numeric', 'String']}
         />
 
         <FilterGroup

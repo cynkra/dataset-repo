@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import immutable from 'immutable';
 import {capitalize, getSizeWithUnit, getLocaleString} from '../../lib/helpers';
 import {dataTypes} from './store';
+import {getDataTypeText} from '../tags/store';
 
 export default class DatasetInfoDetails extends PureComponent {
   render() {
@@ -117,12 +118,22 @@ export default class DatasetInfoDetails extends PureComponent {
       .map((dataType) => {
         return (
           <li key={dataType}>
-            <Link query={{dataType: [capitalize(dataType)]}} to='search'>
-              {capitalize(dataType)}
+            <Link query={{dataType: [getDataTypeText(dataType)]}} to='search'>
+              {this.getDataTypeText(dataType)}
             </Link>
           </li>
         );
       });
+  }
+
+  getDataTypeText(name) {
+    name = getDataTypeText(name);
+    switch(name) {
+      case 'LOB':
+        return <abbr title='Large Objects like images or long texts'>LOB</abbr>;
+      default:
+        return name;
+    }
   }
 }
 

@@ -62,9 +62,9 @@ function getDataTypeTagsFromDataset(dataset) {
     if (dataset.get(dataType + 'Count') > 0) {
       tags = tags.push(new Tag({
         type: 'dataType',
-        value: [capitalize(dataType)],
+        value: [getDataTypeText(dataType)],
         name: 'Data type',
-        text: capitalize(dataType)
+        text: getDataTypeText(dataType)
       }).toMap());
     }
   });
@@ -129,4 +129,17 @@ function getTaskTagFromDataset(dataset) {
   }
 
   return tags;
+}
+
+export function getDataTypeText(dataType) {
+  switch (dataType) {
+    case 'date':
+      return 'Temporal';
+    case 'geo':
+      return 'Spatial';
+    case 'lob':
+      return 'LOB';
+    default:
+      return capitalize(dataType);
+  }
 }
