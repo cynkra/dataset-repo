@@ -59,8 +59,10 @@ export default {
         .where(filterType(params.type))
         .where(filterDomain(params.domain))
         .where(filterTask(params.task))
-        .where(filterMissingData(params.missingData))
         .where(filterDataType(params.dataType))
+        .where(filterMissingData(params.missingData))
+        .where(filterLoops(params.loops))
+        .where(filterCompoundKeys(params.compoundKeys))
         .map(getUniqueDatasets(datasets))
         .catch((err) => { throw err; })
         .then(() => resolve(datasets));
@@ -138,15 +140,6 @@ function filterTask(task: Array) {
   };
 }
 
-function filterMissingData(missingData: Array) {
-  missingData = missingData.filter((n) => { return ['Complete data', 'Missing data'].indexOf(n) !== -1; });
-  return function() {
-    if (missingData.indexOf('Missing data') !== -1) { this.orWhere('null_count', '!=', 0); }
-    if (missingData.indexOf('Complete data') !== -1) { this.orWhere('null_count', 0); }
-    if (missingData.length === 0) { this.where(true); }
-  };
-}
-
 function filterDataType(dataType: Array) {
   dataType = dataType.filter((n) => { return ['Date', 'Geo', 'Lob', 'Numeric', 'String'].indexOf(n) !== -1; });
   return function() {
@@ -156,6 +149,33 @@ function filterDataType(dataType: Array) {
     if (dataType.indexOf('Numeric') !== -1) { this.where('numeric_count', '>', 0); }
     if (dataType.indexOf('String') !== -1) { this.where('string_count', '>', 0); }
     if (dataType.length === 0) { return this.where(true); }
+  };
+}
+
+function filterMissingData(missingData: Array) {
+  missingData = missingData.filter((n) => { return ['Complete data', 'Missing data'].indexOf(n) !== -1; });
+  return function() {
+    if (missingData.indexOf('Missing data') !== -1) { this.orWhere('null_count', '!=', 0); }
+    if (missingData.indexOf('Complete data') !== -1) { this.orWhere('null_count', 0); }
+    if (missingData.length === 0) { this.where(true); }
+  };
+}
+
+function filterLoops(loops: Array) {
+  loops = loops.filter((n) => { return ['With loops', 'Without loops'].indexOf(n) !== -1; });
+  return function() {
+    if (loops.indexOf('With loops') !== -1) { this.orWhere('loop_count', '!=', 0); }
+    if (loops.indexOf('Without loops') !== -1) { this.orWhere('loop_count', 0); }
+    if (loops.length === 0) { this.where(true); }
+  };
+}
+
+function filterCompoundKeys(compoundKeys: Array) {
+  compoundKeys = compoundKeys.filter((n) => { return ['With compound keys', 'Without compound keys'].indexOf(n) !== -1; });
+  return function() {
+    if (compoundKeys.indexOf('With compound keys') !== -1) { this.orWhere('composite_key_count', '!=', 0); }
+    if (compoundKeys.indexOf('Without compound keys') !== -1) { this.orWhere('composite_key_count', 0); }
+    if (compoundKeys.length === 0) { this.where(true); }
   };
 }
 

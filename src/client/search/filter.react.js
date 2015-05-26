@@ -44,6 +44,13 @@ export default class Filter extends React.Component {
         />
 
         <FilterGroup
+          checked={values.get('dataType')}
+          displayName='Data type'
+          name='dataType'
+          values={['Date', 'Geo', 'Lob', 'Numeric', 'String']}
+        />
+
+        <FilterGroup
           checked={values.get('missingData')}
           displayName='Missing data'
           name='missingData'
@@ -51,10 +58,17 @@ export default class Filter extends React.Component {
         />
 
         <FilterGroup
-          checked={values.get('dataType')}
-          displayName='Data type'
-          name='dataType'
-          values={['Date', 'Geo', 'Lob', 'Numeric', 'String']}
+          checked={values.get('loops')}
+          displayName='Loops'
+          name='loops'
+          values={['With loops', 'Without loops']}
+        />
+
+        <FilterGroup
+          checked={values.get('compoundKeys')}
+          displayName='Compound keys'
+          name='compoundKeys'
+          values={['With compound keys', 'Without compound keys']}
         />
       </div>
     );

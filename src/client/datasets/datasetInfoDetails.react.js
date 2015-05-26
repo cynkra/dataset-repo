@@ -93,8 +93,8 @@ export default class DatasetInfoDetails extends PureComponent {
           <dd>
             {compositeKeyCount !== null
               ? (compositeKeyCount === 0
-                ? 'No'
-                : 'Yes')
+                  ? <Link query={{compoundKeys: ['Without compound keys']}} to='search'>No</Link>
+                  : <Link query={{compoundKeys: ['With compound keys']}} to='search'>Yes</Link>)
               : '?'}
           </dd>
 
@@ -102,8 +102,8 @@ export default class DatasetInfoDetails extends PureComponent {
           <dd>
             {loopCount !== null
               ? (loopCount === 0
-                ? 'No'
-                : 'Yes')
+                  ? <Link query={{loops: ['Without loops']}} to='search'>No</Link>
+                  : <Link query={{loops: ['With loops']}} to='search'>Yes</Link>)
               : '?'}
           </dd>
         </dl>

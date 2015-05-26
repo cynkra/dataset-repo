@@ -93,6 +93,8 @@ function clearSearchForm() {
       map.set('task', immutable.List());
       map.set('dataType', immutable.List());
       map.set('missingData', immutable.List());
+      map.set('loops', immutable.List());
+      map.set('compoundKeys', immutable.List());
     });
   });
 }

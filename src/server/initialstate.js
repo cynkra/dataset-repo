@@ -10,7 +10,9 @@ export default {
     domain: [],
     task: [],
     missingData: [],
-    dataType: []
+    dataType: [],
+    loops: [],
+    compoundKeys: []
   },
   searchResults: {
     query: '',
