@@ -50,7 +50,7 @@ TODO (Feel free to add anything)
 [✓] Počítání zobrazení a downloadů
     [✓] Založit Google Analytics
     [✓] Vložení GA kódu do aplikace
-    [ ] Trackování pageviews
+    [✓] Trackování pageviews
 
 Ukázky repositářů s komentářem:
 1) http://archive.ics.uci.edu/ml/
