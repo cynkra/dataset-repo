@@ -26,7 +26,8 @@ export default {
             const html = React.renderToString(<Handler />);
             this.cleanPromises();
             resolve(html);
-          });
+          })
+          .catch(error => reject(error));
       }
     });
   }

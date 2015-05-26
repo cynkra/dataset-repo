@@ -31,7 +31,8 @@ export default function render(request, response) {
           const status = notFound ? 404 : 200;
           response.status(status).send(html);
           resolve();
-        });
+        })
+        .catch(error => reject(error));
     });
   });
 }
@@ -48,6 +49,7 @@ function getPageHtml(Handler) {
             title={title}
           />
         ));
-      });
+      })
+      .catch(error => reject(error));
   });
 }
