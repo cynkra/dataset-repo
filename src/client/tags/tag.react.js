@@ -24,7 +24,7 @@ export default class Tag extends PureComponent {
   }
 
   getText(name) {
-    switch(name) {
+    switch (name) {
       case 'LOB':
         return <abbr title='Data Type: Large Objects like images or long texts'>LOB</abbr>;
       default:

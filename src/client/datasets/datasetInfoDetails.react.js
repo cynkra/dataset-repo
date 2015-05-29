@@ -128,7 +128,7 @@ export default class DatasetInfoDetails extends PureComponent {
 
   getDataTypeText(name) {
     name = getDataTypeText(name);
-    switch(name) {
+    switch (name) {
       case 'LOB':
         return <abbr title='Large Objects like images or long texts'>LOB</abbr>;
       default:

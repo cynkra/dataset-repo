@@ -8,13 +8,25 @@ export default class FilterGroup extends React.Component {
 
   constructor(props) {
     super(props);
+    this.onKeyPress = this.onKeyPress.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.state = {
       expanded: true
     };
   }
 
-  toggle(e) {
+  onKeyPress(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      this.toggle();
+    }
+  }
+
+  onClick(e) {
     e.preventDefault();
+    this.toggle();
+  }
+
+  toggle(e) {
     this.setState({
       expanded: !this.state.expanded
     });
@@ -24,7 +36,7 @@ export default class FilterGroup extends React.Component {
     const className = 'filterGroup filterGroup--' + (this.state.expanded ? 'expanded' : 'shrinked');
     return (
       <div className={className}>
-        <h4 className='filterGroup-heading' onClick={this.toggle.bind(this)} onKeyDown={this.toggle.bind(this)} onKeyUp={this.toggle.bind(this)} role='button' tabIndex='0'>{this.props.displayName}</h4>
+        <h4 className='filterGroup-heading' onClick={this.onClick} onKeyUp={this.onKeyPress} role='button' tabIndex='0'>{this.props.displayName}</h4>
         <div className='filterGroup-body'>
           {this.props.values.map((value, i) => {
             const checked = (this.props.checked.indexOf(value) !== -1);
@@ -41,7 +53,7 @@ export default class FilterGroup extends React.Component {
   }
 
   getText(name) {
-    switch(name) {
+    switch (name) {
       case 'LOB':
         return <abbr title='Large Objects like images or long texts'>LOB</abbr>;
       default:
