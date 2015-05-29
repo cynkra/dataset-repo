@@ -17,5 +17,6 @@ export default {
   searchResults: {
     query: '',
     datasets: []
-  }
+  },
+  contributors: []
 };

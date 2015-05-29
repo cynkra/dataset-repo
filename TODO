@@ -38,11 +38,11 @@ TODO (Feel free to add anything)
     [✓] Detail component
     [✓] Detail - API call
     [✓] Náhled schématu
-[ ] Leaderboard připsvěvovatelů
-    [ ] Leaderboard component
-    [ ] Leaderboard - Databáze
-    [ ] Leaderboard - API call
-    [ ] Bargraf z highcharts knihovny
+[✓] Leaderboard připsvěvovatelů
+    [✓] Leaderboard component
+    [✓] Leaderboard - Databáze
+    [✓] Leaderboard - API call
+    [✓] Bargraf z d3 knihovny
 [ ] Kontaktní formulář / kontaktní informace
     [ ] Contact component (on every page)
     [ ] "Typo, suggestion, complain?"

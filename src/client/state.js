@@ -10,3 +10,4 @@ export const datasetsCursor = state.cursor(['datasets']);
 export const currentDatasetCursor = state.cursor(['currentDataset']);
 export const searchFormCursor = state.cursor(['searchForm']);
 export const searchResultsCursor = state.cursor(['searchResults']);
+export const contributorsCursor = state.cursor(['contributors']);

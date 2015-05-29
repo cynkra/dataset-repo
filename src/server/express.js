@@ -37,4 +37,5 @@ export default function() {
 
 function registerFetchers() {
   Fetcher.register('dataset', require('../services/dataset/fetcher'));
+  Fetcher.register('contributor', require('../services/contributor/fetcher'));
 }
