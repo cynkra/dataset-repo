@@ -18,8 +18,6 @@ export default class ContributorsChartItem extends PureComponent {
           aria-label={this.props.label + ': ' + this.props.value}
           className='rd3-barchart-bar'
           height={barHeight}
-          role='button'
-          tabIndex='0'
           width={barWidth}
         />
         <text
