@@ -1,5 +1,3 @@
-/* @flow weak */
-
 'use strict';
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');

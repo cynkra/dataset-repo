@@ -1,9 +1,8 @@
 const config = require('./config');
 
 if (config.isProduction || require('piping')(config.piping)) {
-  if (!process.env.NODE_ENV) {
+  if (!process.env.NODE_ENV)
     throw new Error('Enviroment variable NODE_ENV must be set.');
-  }
 
   require('babel/register')({optional: ['es7']});
 

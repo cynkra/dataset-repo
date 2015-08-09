@@ -20,18 +20,15 @@ function getLocMessage(error, loc) {
 module.exports = function() {
   this.plugin('done', function(stats) {
     var error = stats.compilation.errors[0];
-    if (!error) {
-      return;
-    }
+    if (!error) return;
     var loc = error.error.loc;
     var msg;
-    if (loc) {
+
+    if (loc)
       msg = getLocMessage(error, loc);
-    } else if (error.message) {
+    else if (error.message)
       msg = error.message;
-    } else {
-      return;
-    }
+    else return;
 
     notifier.notify({
       title: 'Webpack Error',

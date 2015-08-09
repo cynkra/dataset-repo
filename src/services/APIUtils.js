@@ -4,7 +4,7 @@ import config from '../server/config';
 const isBrowser = process.env.IS_BROWSER;
 
 export const API = {
-  get: (fetcher: string, mapping: object, fn: string, params = {}) => {
+  get: (fetcher, mapping, fn, params = {}) => {
     if (isBrowser) {
       return new Promise(function(resolve, reject) {
         var URL = config.api.url + '/' + fetcher + '/' + fn;
@@ -24,7 +24,7 @@ export const API = {
   }
 };
 
-export function getAPI(fetcher: string, mapping: object) {
+export function getAPI(fetcher, mapping) {
   let localAPI = {};
 
   Object.keys(API).forEach((key) => {

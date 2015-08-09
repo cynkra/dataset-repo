@@ -67,14 +67,13 @@ export function getSchema(dbName: string) {
             type: col.type,
             blank: col.blank
           });
-          if (col.fk !== null) {
+          if (col.fk !== null)
             model.relations.push({
               target: col.fk.table,
               type: tables[col.fk.table][col.fk.column].type,
               name: col.fk.column,
               arrows: ''
             });
-          }
         });
         graph.models.push(model);
       });
@@ -92,8 +91,7 @@ export function getSchema(dbName: string) {
           fs.writeFileSync(tmpDotFile, dotStr);
           exec(cmd);
         } else {
-          /* eslint-disable no-console */
-          console.error(stderr + ' ' + err);
+          console.error(stderr + ' ' + err); // eslint-disable-line no-console
           throw new 'Can\'t find dot to generate a png. Is graphviz installed?';
         }
       });

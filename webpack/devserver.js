@@ -23,9 +23,9 @@ module.exports = function(webpackConfig) {
         chunkModules: false
       }
     }).listen(8888, '0.0.0.0', function(err) {
-      if (err) {
+      if (err)
         throw new gutil.PluginError('webpack-dev-server', err);
-      }
+
       gutil.log('[webpack-dev-server]', 'localhost:8888/build/client.js');
       callback();
     });
