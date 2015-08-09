@@ -39,9 +39,9 @@ module.exports = function(isDevelopment) {
         // Why only-dev-server instead of dev-server:
         // https://github.com/webpack/webpack/issues/418#issuecomment-54288041
         'webpack/hot/only-dev-server',
-        './src/client/main.js'
+        path.join(__dirname, '..', 'src', 'client', 'main.js')
       ] : [
-        './src/client/main.js'
+        path.join(__dirname, '..', 'src', 'client', 'main.js')
       ]
     },
     module: {
@@ -59,12 +59,14 @@ module.exports = function(isDevelopment) {
       }].concat(stylesLoaders())
     },
     output: isDevelopment ? {
-      path: path.join(__dirname, '/build/'),
+      path: path.join(__dirname, '..', 'build'),
       filename: '[name].js',
+      chunkFilename: '[name]-[chunkhash].js',
       publicPath: 'http://localhost:8888/build/'
     } : {
       path: 'build/',
-      filename: '[name].js'
+      filename: '[name].js',
+      chunkFilename: '[name]-[chunkhash].js'
     },
     plugins: (function() {
       var plugins = [
@@ -100,7 +102,12 @@ module.exports = function(isDevelopment) {
       return plugins;
     })(),
     resolve: {
-      extensions: ['', '.js', '.json']
+      extensions: ['', '.js', '.json'],
+      modulesDirectories: ['src', 'node_modules'],
+      root: path.normalize(path.join(__dirname, '..')),
+      alias: {
+        'react$': require.resolve(path.join(__dirname, '..', 'node_modules', 'react'))
+      }
     }
   };
 
