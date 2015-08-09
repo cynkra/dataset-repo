@@ -1,4 +1,4 @@
-import config from '../../server/config';
+import database from '../../config/config.database';
 import nunjucks from 'nunjucks';
 import path from 'path';
 import fs from 'fs';
@@ -6,11 +6,11 @@ import {exec} from 'child_process';
 
 export function getSchema(dbName: string) {
   const db = require('knex')({
-    client: config.database.client,
+    client: database.client,
     connection: {
-      host:     config.database.host,
-      user:     config.database.user,
-      password: config.database.password,
+      host:     database.host,
+      user:     database.user,
+      password: database.password,
       database: dbName
     }
   });
