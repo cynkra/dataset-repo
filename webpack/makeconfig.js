@@ -93,9 +93,15 @@ module.exports = function(isDevelopment) {
           new webpack.optimize.DedupePlugin(),
           new webpack.optimize.OccurenceOrderPlugin(),
           new webpack.optimize.UglifyJsPlugin({
+            /* eslint-disable camelcase */
             compress: {
+              keep_fnames: true,
               warnings: false
+            },
+            mangle: {
+              keep_fnames: true
             }
+            /* eslint-enable camelcase */
           })
         );
       }
