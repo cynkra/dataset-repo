@@ -1,4 +1,3 @@
-import setToString from '../../lib/settostring';
 import {getForm} from './store';
 import {dispatch, dispatchAsync} from '../lib/dispatcher';
 import {getSearchResults} from '../../services/dataset/fetcher';
@@ -51,8 +50,3 @@ function isQueryEmpty(query) {
   }
   return true;
 }
-
-setToString('search', {
-  onSearchInputChange, onFilterCheckboxChange, submitSearchForm,
-  fetchSearchResults, fetchSearchResultsStart, fetchSearchResultsSuccess
-});

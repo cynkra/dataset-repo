@@ -1,4 +1,3 @@
-import setToString from '../../lib/settostring';
 import {getDataset, getDatasets} from '../../services/dataset/fetcher';
 import {dispatch, dispatchAsync} from '../lib/dispatcher';
 import resolver from '../../lib/resolver';
@@ -42,8 +41,3 @@ export function fetchDatasetStart() {
 export function fetchDatasetSuccess(data) {
   dispatch(fetchDatasetSuccess, data);
 }
-
-setToString('datasets', {
-  fetchDatasets, fetchDatasetsStart, fetchDatasetsSuccess,
-  fetchDataset, fetchDatasetStart, fetchDatasetSuccess
-});
