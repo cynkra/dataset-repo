@@ -1,5 +1,4 @@
 import * as actions from './actions';
-import {register} from '../dispatcher';
 import immutable from 'immutable';
 import {datasetsCursor, currentDatasetCursor} from '../state';
 import {getTagsFromDataset} from '../tags/store';
@@ -19,6 +18,7 @@ export const Dataset = immutable.Record({
   geoCount: null,
   task: null
 });
+import {register} from '../lib/dispatcher';
 
 export const dataTypes = [
   'numeric',

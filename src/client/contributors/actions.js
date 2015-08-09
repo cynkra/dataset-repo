@@ -1,5 +1,5 @@
 import setToString from '../../lib/settostring';
-import {dispatch, dispatchAsync} from '../dispatcher';
+import {dispatch, dispatchAsync} from '../lib/dispatcher';
 import {getContributors} from '../../services/contributor/fetcher';
 import resolver from '../../lib/resolver';
 

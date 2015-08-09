@@ -1,6 +1,6 @@
 import * as actions from './actions';
-import {register} from '../dispatcher';
 import immutable from 'immutable';
+import {register} from '../lib/dispatcher';
 import {contributorsCursor} from '../state';
 
 export const Contributor = immutable.Record({

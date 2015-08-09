@@ -1,9 +1,9 @@
 import * as actions from './actions';
 import * as datasetsActions from '../datasets/actions';
-import {register} from '../dispatcher';
 import {searchFormCursor, searchResultsCursor} from '../state';
 import immutable from 'immutable';
 import {Dataset} from '../datasets/store';
+import {register} from '../lib/dispatcher';
 
 export const dispatchToken = register(({action, data}) => {
   switch (action) {

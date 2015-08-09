@@ -1,6 +1,6 @@
 import setToString from '../../lib/settostring';
-import {dispatch, dispatchAsync} from '../dispatcher';
 import {getDataset, getDatasets} from '../../services/dataset/fetcher';
+import {dispatch, dispatchAsync} from '../lib/dispatcher';
 import resolver from '../../lib/resolver';
 
 export function fetchDatasets() {

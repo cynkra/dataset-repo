@@ -1,6 +1,6 @@
 import setToString from '../../lib/settostring';
-import {dispatch, dispatchAsync} from '../dispatcher';
 import {getForm} from './store';
+import {dispatch, dispatchAsync} from '../lib/dispatcher';
 import {getSearchResults} from '../../services/dataset/fetcher';
 import resolver from '../../lib/resolver';
 
