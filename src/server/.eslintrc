@@ -4,6 +4,7 @@
   },
 
   "rules": {
-    "strict": [2, "never"]
+    "strict": [2, "never"],
+    "no-console": 0
   }
 }
