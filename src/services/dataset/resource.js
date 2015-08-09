@@ -22,14 +22,13 @@ const columns = {
 export default {
   getDatasets: () => {
     return new Promise((resolve, reject) => {
-      let datasets = [];
       db
         .select(getValues(columns))
         .from(table)
+        .where('is_primary_version', 1)
         .whereNotNull('original_database_name')
-        .map(getUniqueDatasets(datasets))
         .catch((err) => { throw err; })
-        .then(() => resolve(datasets));
+        .then((rows) => resolve(rows));
     });
   },
   getDataset: (params: {}) => {
@@ -38,7 +37,7 @@ export default {
         .select()
         .from(table)
         .where('original_database_name', params.dataset)
-        .whereNotNull('original_database_name')
+        .where('is_primary_version', 1)
         .catch((err) => { throw err; })
         .then((rows) => {
           let dataset = JSON.parse(JSON.stringify(rows[0]));
@@ -49,7 +48,6 @@ export default {
   },
   getSearchResults: (params: {}) => {
     return new Promise((resolve, reject) => {
-      let datasets = [];
       db
         .select(getValues(columns))
         .from(table)
@@ -63,22 +61,12 @@ export default {
         .where(filterMissingData(params.missingData))
         .where(filterLoops(params.loops))
         .where(filterCompoundKeys(params.compoundKeys))
-        .map(getUniqueDatasets(datasets))
+        .where('is_primary_version', 1)
         .catch((err) => { throw err; })
-        .then(() => resolve(datasets));
+        .then((rows) => resolve(rows));
     });
   }
 };
-
-function getUniqueDatasets(datasets) {
-  let names = [];
-  return (row) => {
-    if (names.indexOf(row.original_database_name) === -1) {
-      names.push(row.original_database_name);
-      datasets.push(row);
-    }
-  };
-}
 
 function filterDatabaseSize(databaseSize: Array) {
   databaseSize = databaseSize.filter((n) => { return ['KB', 'MB', 'GB'].indexOf(n) !== -1; });
