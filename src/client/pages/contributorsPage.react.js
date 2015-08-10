@@ -27,11 +27,12 @@ export default class ContributorsPage extends Component {
     return (
       <DocumentTitle title='Top Contributors'>
         <section className='content'>
+          <h1>Top Contributors</h1>
           <ContributorsChart
             data={contributors}
             height={contributors.count() * 100}
             margins={{top: 0, right: 20, bottom: 20, left: (leftMargin + 2) * 8}}
-            title='Top Contributors'
+            title=''
             width={992}
           />
         </section>
