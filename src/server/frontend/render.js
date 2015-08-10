@@ -2,9 +2,9 @@ import DocumentTitle from 'react-document-title';
 import Html from './html.react';
 import React from 'react';
 import Router from 'react-router';
-import routes from '../client/routes';
-import resolver from '../lib/resolver';
-import {state} from '../client/state.js';
+import routes from '../../client/routes';
+import resolver from '../../lib/resolver';
+import {state} from '../../client/state.js';
 
 export default function render(request, response) {
   return new Promise((resolve, reject) => {

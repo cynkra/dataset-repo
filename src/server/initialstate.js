@@ -5,7 +5,11 @@ export default {
     list: []
   },
   datasets: {
-    current: {}
+    current: {},
+    top: {
+      fetched: false,
+      list: []
+    }
   },
   search: {
     filter: {
