@@ -8,6 +8,9 @@ const app = express();
 app.disable('x-powered-by');
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use('/dataset', fetcher(require('../../services/dataset/fetcher')));
 app.use('/contributor', fetcher(require('../../services/contributor/fetcher')));

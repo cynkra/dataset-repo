@@ -3,7 +3,9 @@ export default function(fetcher) {
     const methodName = request.path.split('\/')[1];
 
     const method = fetcher.mapping[methodName];
-    const params = request.query;
+    const params = request.method === 'GET'
+      ? request.query
+      : request.body;
 
     if (typeof method === 'function') {
       method.call(null, params)

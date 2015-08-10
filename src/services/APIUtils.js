@@ -21,6 +21,24 @@ export const API = {
     } else {
       return mapping[fn].call(null, params);
     }
+  },
+  post: (fetcher, mapping, fn, params = {}) => {
+    if (isBrowser) {
+      return new Promise(function(resolve, reject) {
+        var URL = config.url + '/' + fetcher + '/' + fn;
+
+        request
+          .post(URL)
+          .send(getAsUriParameters(params))
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            if (err || !res.ok || !res.body) { return reject(); }
+            resolve(res.body);
+          });
+      });
+    } else {
+      return mapping[fn].call(null, params);
+    }
   }
 };
 
