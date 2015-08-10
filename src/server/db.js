@@ -1,12 +1,12 @@
-import database from '../config/config.database';
+import config from '../config/config.server';
 
 const db = require('knex')({
-  client: database.client,
+  client: config.database.client,
   connection: {
-    host:     database.host,
-    user:     database.user,
-    password: database.password,
-    database: database.database
+    host:     config.database.host,
+    user:     config.database.user,
+    password: config.database.password,
+    database: config.database.database
   },
   pool: {
     min: 0,
