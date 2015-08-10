@@ -1,4 +1,4 @@
-import {Map, Record} from 'immutable';
+import {Map, Record, List} from 'immutable';
 import Dataset from './dataset';
 
 const ResultCurrentRecord = Record({
@@ -13,6 +13,23 @@ export class ResultCurrent extends ResultCurrentRecord {
       props = props.set('dataset', Dataset.revive(props.get('dataset')));
     }
     return new ResultCurrent(props);
+  }
+
+}
+
+const ResultTopRecord = Record({
+  list: List(),
+  fetched: false
+});
+
+export class ResultTop extends ResultTopRecord {
+
+  static revive = (props) => {
+    if (props instanceof Map) {
+      props = props
+        .set('list', props.get('list').map(dataset => Dataset.revive(dataset)));
+    }
+    return new ResultTop(props);
   }
 
 }

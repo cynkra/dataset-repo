@@ -1,5 +1,5 @@
 import {dispatch, dispatchAsync} from '../lib/dispatcher';
-import {getDataset} from '../../services/dataset/fetcher';
+import {getDataset, getTopDatasets} from '../../services/dataset/fetcher';
 import resolver from '../../lib/resolver';
 
 export function fetchDataset(datasetTitle: string) {
@@ -20,4 +20,24 @@ export function fetchDatasetStart() {
 
 export function fetchDatasetSuccess(data) {
   dispatch(fetchDatasetSuccess, data);
+}
+
+export function fetchTopDatasets(count = 12) {
+  fetchTopDatasetsStart();
+  const promise = (resolve) => {
+    getTopDatasets(count)
+      .then((data) => {
+        fetchTopDatasetsSuccess(data);
+        resolve();
+      });
+  };
+  return dispatchAsync(fetchTopDatasets, resolver.resolve(promise));
+}
+
+export function fetchTopDatasetsStart() {
+  dispatch(fetchTopDatasetsStart);
+}
+
+export function fetchTopDatasetsSuccess(data) {
+  dispatch(fetchTopDatasetsSuccess, data);
 }

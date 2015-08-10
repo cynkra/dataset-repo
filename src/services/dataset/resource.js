@@ -46,6 +46,20 @@ export default {
         });
     });
   },
+  getTopDatasets: (params: {}) => {
+    const count = parseInt(params.count, 10);
+    return new Promise((resolve, reject) => {
+      db
+        .select()
+        .from(table)
+        .where('is_primary_version', 1)
+        .whereNotNull('original_database_name')
+        .orderBy('publication_count', 'DESC')
+        .limit(count)
+        .catch((err) => { throw err; })
+        .then((rows) => resolve(rows));
+    });
+  },
   getSearchResults: (params: {}) => {
     return new Promise((resolve, reject) => {
       db
