@@ -14,6 +14,7 @@ export default class Header extends Component {
           <ul className='Header-nav'>
             <li><Link to='search'>All Datasets</Link></li>
             <li><Link to='contributors'>Contributors</Link></li>
+            <li><Link to='contact'>Contact</Link></li>
           </ul>
         </div>
       </header>

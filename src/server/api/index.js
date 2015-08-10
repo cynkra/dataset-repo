@@ -12,8 +12,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use('/dataset', fetcher(require('../../services/dataset/fetcher')));
+app.use('/contact', fetcher(require('../../services/contact/fetcher')));
 app.use('/contributor', fetcher(require('../../services/contributor/fetcher')));
+app.use('/dataset', fetcher(require('../../services/dataset/fetcher')));
 
 app.on('mount', () => {
   console.log('Api started at path %s', app.mountpath);
