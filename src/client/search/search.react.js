@@ -1,49 +1,58 @@
 import React from 'react';
-import exposeRouter from '../common/exposerouter.react';
+import immutable from 'immutable';
+import Component from '../common/component.react';
 import Filter from './filter.react';
-import {onSearchInputChange, submitSearchForm} from './actions';
-import {getForm} from './store';
+import {onSearchInputChange, onFilterCheckboxChange, submitSearchForm} from './actions';
 
 require('./search.styl');
 
 let t;
 
-class Search extends React.Component {
+export default class Search extends Component {
 
-  onChange(e) {
-    onSearchInputChange(e.target.value);
-    if (t) {
-      clearTimeout(t);
-    }
-    t = setTimeout(submitSearchForm, 500);
+  static propTypes = {
+    search: React.PropTypes.instanceOf(immutable.Map).isRequired
   }
 
   onSubmit(e) {
     e.preventDefault();
-    submitSearchForm();
+    this.submit();
+  }
+
+  onSearchChange(e) {
+    onSearchInputChange(e.target.value);
+    if (t) clearTimeout(t);
+    t = setTimeout(::this.submit, 500);
+  }
+
+  onFilterChange(e) {
+    onFilterCheckboxChange(e.target.name, e.target.value, e.target.checked);
+    setTimeout(::this.submit, 0);
+  }
+
+  submit() {
+    const form = this.props.search.get('form');
+    submitSearchForm(form);
   }
 
   render() {
-    const values = getForm();
+    const values = this.props.search.get('form');
+    const filter = this.props.search.get('filter');
+
     return (
-      <form action='' method='get' onSubmit={this.onSubmit}>
+      <form action='' method='get' onSubmit={::this.onSubmit}>
         <input
           autoComplete='off'
-          className='search'
+          className='Search'
           name='q'
-          onChange={this.onChange}
+          onChange={::this.onSearchChange}
           placeholder='Search for datasets'
           type='search'
-          value={values.get('q')}
+          value={values.q}
         />
-        <Filter values={values} />
+        <Filter filter={filter} onFilterChange={::this.onFilterChange} values={values} />
       </form>
     );
   }
+
 }
-
-Search.propTypes = {
-  router: React.PropTypes.func
-};
-
-export default exposeRouter(Search);

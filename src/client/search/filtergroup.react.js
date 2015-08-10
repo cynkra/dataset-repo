@@ -1,18 +1,20 @@
 import React from 'react';
-import {onFilterCheckboxChange} from './actions';
 import {List} from 'immutable';
+import Component from '../common/component.react';
+import {toggleFilterGroup} from './actions';
+import {getTagName} from '../../lib/helpers';
 
 require('./filtergroup.styl');
 
-export default class FilterGroup extends React.Component {
+export default class FilterGroup extends Component {
 
-  constructor(props) {
-    super(props);
-    this.onKeyPress = this.onKeyPress.bind(this);
-    this.onClick = this.onClick.bind(this);
-    this.state = {
-      expanded: true
-    };
+  static propTypes = {
+    checked: React.PropTypes.instanceOf(List),
+    displayName: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
+    onChange: React.PropTypes.func.isRequired,
+    shrinked: React.PropTypes.bool.isRequired,
+    values: React.PropTypes.array.isRequired
   }
 
   onKeyPress(e) {
@@ -26,24 +28,36 @@ export default class FilterGroup extends React.Component {
     this.toggle();
   }
 
-  toggle(e) {
-    this.setState({
-      expanded: !this.state.expanded
-    });
+  toggle() {
+    toggleFilterGroup(this.props.name, this.props.shrinked);
   }
 
   render() {
-    const className = 'filterGroup filterGroup--' + (this.state.expanded ? 'expanded' : 'shrinked');
+    const className = 'FilterGroup FilterGroup--' + (this.props.shrinked ? 'shrinked' : 'expanded');
     return (
       <div className={className}>
-        <h4 className='filterGroup-heading' onClick={this.onClick} onKeyUp={this.onKeyPress} role='button' tabIndex='0'>{this.props.displayName}</h4>
-        <div className='filterGroup-body'>
+        <h4
+          className='FilterGroup-heading'
+          onClick={::this.onClick}
+          onKeyUp={::this.onKeyPress}
+          role='button'
+          tabIndex='0'
+          >{this.props.displayName}
+        </h4>
+
+        <div className='FilterGroup-body'>
           {this.props.values.map((value, i) => {
             const checked = (this.props.checked.indexOf(value) !== -1);
             return (
-              <label className='filterGroup-line' key={this.props.name + '-' + i}>
-                <input checked={checked} name={this.props.name + '[]'} onChange={onFilterCheckboxChange} type='checkbox' value={value}/>
-                  {this.getText(value)}
+              <label className='FilterGroup-line' key={this.props.name + '-' + i}>
+                <input
+                  checked={checked}
+                  name={this.props.name + '[]'}
+                  onChange={this.props.onChange}
+                  type='checkbox'
+                  value={value}
+                />
+                {getTagName(value)}
               </label>
             );
           })}
@@ -52,19 +66,4 @@ export default class FilterGroup extends React.Component {
     );
   }
 
-  getText(name) {
-    switch (name) {
-      case 'LOB':
-        return <abbr title='Large Objects like images or long texts'>LOB</abbr>;
-      default:
-        return name;
-    }
-  }
 }
-
-FilterGroup.propTypes = {
-  checked: React.PropTypes.instanceOf(List),
-  displayName: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  values: React.PropTypes.array.isRequired
-};

@@ -1,28 +1,32 @@
-import PureComponent from '../common/purecomponent.react';
 import React from 'react';
-import immutable from 'immutable';
+import Component from '../common/component.react';
+import DatasetType from './dataset';
 import DatasetInfoImage from './datasetInfoImage.react';
 import DatasetInfoSummary from './datasetInfoSummary.react';
-import DatasetInfoDownload from './datasetInfoDownload.react';
 import DatasetInfoDetails from './datasetInfoDetails.react';
+import DatasetInfoDownload from './datasetInfoDownload.react';
 
 require('./datasetInfo.styl');
 
-export default class DatasetInfo extends PureComponent {
+export default class DatasetInfo extends Component {
+
+  static propTypes = {
+    dataset: React.PropTypes.instanceOf(DatasetType).isRequired
+  }
+
   render() {
     const dataset = this.props.dataset;
-    const mwbPath = dataset.get('mwb_path');
-    const mwb = mwbPath
-      ? '/assets/mwb/' + mwbPath
+    const mwb = dataset.mwbPath
+      ? '/assets/mwb/' + dataset.mwbPath
       : null;
 
     return (
       <div className='DatasetInfo'>
         <div className='DatasetInfo-header'>
           <DatasetInfoImage
-            image={dataset.get('img_path')}
-            schema={dataset.get('TABLE_SCHEMA')}
-            title={dataset.get('original_database_name')}
+            image={dataset.imgPath}
+            schema={dataset.schema}
+            title={dataset.title}
           />
           <DatasetInfoSummary
             dataset={dataset}
@@ -43,9 +47,7 @@ export default class DatasetInfo extends PureComponent {
         ) : null }
       </div>
     );
-  }
-}
 
-DatasetInfo.propTypes = {
-  dataset: React.PropTypes.instanceOf(immutable.Map).isRequired
-};
+  }
+
+}

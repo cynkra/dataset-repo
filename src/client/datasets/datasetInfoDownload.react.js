@@ -1,10 +1,11 @@
-import PureComponent from '../common/purecomponent.react';
 import React from 'react';
+import Component from '../common/component.react';
 
-export default class DatasetInfoDownload extends PureComponent {
+export default class DatasetInfoDownload extends Component {
+
   render() {
     return (
-      <div className='DatasetInfo-download'>
+      <div className='DatasetInfoDownload'>
         <h2>How to download the dataset</h2>
         <p>
           The datasets are publicly available directly from MySQL database.
@@ -29,4 +30,5 @@ export default class DatasetInfoDownload extends PureComponent {
       </div>
     );
   }
+
 }

@@ -1,31 +1,33 @@
-import PureComponent from '../common/purecomponent.react';
 import React from 'react';
 import {Link} from 'react-router';
-import immutable from 'immutable';
-import TagList from '../tags/taglist.react';
-import {getTags} from './store';
+import DatasetType from './dataset';
+import Component from '../common/component.react';
+import TagList from './tags/taglist.react';
+import {getTagsFromDataset} from './tags/store';
 
 require('./dataset.styl');
 
-export default class Dataset extends PureComponent {
+export default class Dataset extends Component {
+
+  static propTypes = {
+    dataset: React.PropTypes.instanceOf(DatasetType)
+  }
 
   render() {
     const dataset = this.props.dataset;
-    const title = dataset.get('originalDatabaseName');
 
     return (
-      <li className="dataset">
-        <h3 className="dataset-title"><Link params={{name: title}} to="dataset">{title}</Link></h3>
-        {dataset.get('description') ?
-          <p>{dataset.get('description').slice(0, 300)}</p> :
-          ''
+      <li className='Dataset'>
+        <h3 className='Dataset-title'>
+          <Link params={{title: dataset.title}} to='dataset'>{dataset.title}</Link>
+        </h3>
+        {dataset.description
+          ? <p>{dataset.description.slice(0, 300)}</p>
+          : null
         }
-        <TagList tags={getTags(dataset)} />
+        <TagList tags={getTagsFromDataset(dataset)} />
       </li>
     );
   }
-}
 
-Dataset.propTypes = {
-  dataset: React.PropTypes.instanceOf(immutable.Map)
-};
+}

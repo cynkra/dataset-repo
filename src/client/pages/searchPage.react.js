@@ -1,46 +1,62 @@
-import DocumentTitle from 'react-document-title';
 import React from 'react';
-import exposeRouter from '../common/exposerouter.react';
+import immutable from 'immutable';
+import DocumentTitle from 'react-document-title';
+import FormType from '../search/form';
+import Component from '../common/component.react';
 import DatasetList from '../datasets/datasetlist.react';
 import Sidebar from '../common/sidebar.react';
+import exposeRouter from '../common/exposerouter.react';
 import {fetchSearchResults} from '../search/actions';
-import {getSearchResults} from '../search/store';
 
 require('./searchPage.styl');
 
-class SearchPage extends React.Component {
+@exposeRouter
+export default class SearchPage extends Component {
 
-  componentWillMount() {
-    const query = this.props.router.getCurrentQuery();
-    return fetchSearchResults(query);
+  static propTypes = {
+    router: React.PropTypes.func.isRequired,
+    search: React.PropTypes.instanceOf(immutable.Map).isRequired
   }
 
-  // Will transition to
-  componentWillReceiveProps() {
-    const query = this.props.router.getCurrentQuery();
-    if (query !== getSearchResults().get('query')) {
+  componentWillMount() {
+    const query = FormType.fromJS(this.props.router.getCurrentQuery());
+    const result = this.props.search.get('result');
+
+    if (!fetchSearchResults.pending && (!result.fetched || !query.equals(result.query))) {
       return fetchSearchResults(query);
     }
   }
 
+  componentWillReceiveProps(props) {
+    const query = FormType.fromJS(this.props.router.getCurrentQuery());
+    const result = this.props.search.get('result');
+
+    if (!fetchSearchResults.pending && (!result.fetched || !query.equals(result.query))) {
+      return fetchSearchResults(query);
+    }
+  }
+
+  renderContent() {
+    const result = this.props.search.get('result');
+
+    if (!result.fetched)
+      return <div className='SearchPage-header'>Loading...</div>;
+    if (result.list.count() === 0)
+      return <div className='SearchPage-header'>No results</div>;
+    return <DatasetList datasets={result.list} />;
+  }
+
   render() {
-    const datasets = getSearchResults().get('datasets');
     return (
-      <DocumentTitle title="Search">
-        <section className="content">
-          <section className="primary">
-            <div className="searchPage-header">Showing {datasets.count()} datasets:</div>
-            <DatasetList datasets={datasets} />
+      <DocumentTitle title='Search'>
+        <section className='content'>
+          <section className='primary'>
+            {this.renderContent()}
           </section>
-          <Sidebar />
+          <Sidebar {...this.props} />
         </section>
       </DocumentTitle>
     );
   }
+
 }
-
-SearchPage.propTypes = {
-  router: React.PropTypes.func
-};
-
-export default exposeRouter(SearchPage);

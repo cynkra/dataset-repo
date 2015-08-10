@@ -1,30 +1,52 @@
-import DocumentTitle from 'react-document-title';
 import React from 'react';
 import {RouteHandler} from 'react-router';
+import Component from '../common/component.react';
+import exposeRouter from '../common/exposerouter.react';
 import Header from '../common/header.react';
-import {state} from '../state';
+import * as appState from '../state';
+
+import '../contributors/store';
+import '../datasets/store';
+import '../search/store';
 
 require('./app.styl');
 
-export default class App extends React.Component {
+@exposeRouter
+export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = this.getState();
+  }
+
+  static propTypes = {
+    router: React.PropTypes.func
+  }
+
+  getState() {
+    return {
+      app: appState.appCursor(),
+      pendingActions: appState.pendingActionsCursor(),
+      contributors: appState.contributorsCursor(),
+      datasets: appState.datasetsCursor(),
+      search: appState.searchCursor(),
+      tags: appState.tagsCursor()
+    };
+  }
 
   componentDidMount() {
-    require('fastclick').attach(document.body);
-
-    state.on('change', () => {
-      this.forceUpdate();
-      // track page view (if route changed)
+    appState.state.on('change', () => {
+      this.setState(this.getState());
     });
   }
 
   render() {
     return (
-      <DocumentTitle title='Dataset repo'>
-        <div className="page">
-          <Header />
-          <RouteHandler />
-        </div>
-      </DocumentTitle>
+      <div className='page'>
+        <Header />
+        <RouteHandler {...this.state} />
+      </div>
     );
   }
+
 }

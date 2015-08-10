@@ -1,31 +1,11 @@
-import {getDataset, getDatasets} from '../../services/dataset/fetcher';
 import {dispatch, dispatchAsync} from '../lib/dispatcher';
+import {getDataset} from '../../services/dataset/fetcher';
 import resolver from '../../lib/resolver';
 
-export function fetchDatasets() {
-  fetchDatasetsStart();
-  const promise = (resolve) => {
-    getDatasets()
-      .then((data) => {
-        fetchDatasetsSuccess(data);
-        resolve();
-      });
-  };
-  return dispatchAsync(fetchDatasets, resolver.resolve(promise));
-}
-
-export function fetchDatasetsStart() {
-  dispatch(fetchDatasetsStart);
-}
-
-export function fetchDatasetsSuccess(data) {
-  dispatch(fetchDatasetsSuccess, data);
-}
-
-export function fetchDataset(datasetName: string) {
+export function fetchDataset(datasetTitle: string) {
   fetchDatasetStart();
   const promise = (resolve) => {
-    getDataset(datasetName)
+    getDataset(datasetTitle)
       .then((data) => {
         fetchDatasetSuccess(data);
         resolve();

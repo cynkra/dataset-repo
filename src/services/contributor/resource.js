@@ -9,16 +9,15 @@ export default {
     return new Promise((resolve, reject) => {
       db
         .column('uploader')
+        .column('uploader_url')
         .count('* as count')
         .from(table)
         .whereNotNull('original_database_name')
         .whereNotNull('uploader')
-        .groupBy('uploader')
+        .groupBy('uploader', 'uploader_url')
         .orderBy('count', 'DESC')
         .catch((err) => { throw err; })
-        .then((rows) => {
-          resolve(rows);
-        });
+        .then((rows) => resolve(rows));
     });
   }
 };

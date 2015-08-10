@@ -1,31 +1,27 @@
-import PureComponent from '../common/purecomponent.react';
 import React from 'react';
-import {checkImage} from '../../lib/helpers';
+import Component from '../common/component.react';
+import {getImagePath} from '../../lib/helpers';
 
-export default class DatasetInfoImage extends PureComponent {
+require('./datasetInfoImage.styl');
+
+export default class DatasetInfoImage extends Component {
+
+  static propTypes = {
+    image: React.PropTypes.string,
+    schema: React.PropTypes.string,
+    title: React.PropTypes.string
+  }
+
   constructor(props) {
     super(props);
 
-    if (!props.image && props.schema) {
-      const image = '/assets/img/datasets-generated/' + props.schema + '.png';
-      if (checkImage(image)) {
-        this.state = {
-          image: image
-        };
-      } else {
-        if (!process.env.IS_BROWSER) {
-          const sqlViz = require('../../services/sqlviz/sqlviz.js');
-          sqlViz.getSchema(props.schema);
-        }
-        this.state = {
-          image: null
-        };
-      }
-    } else {
-      this.state = {
-        image: props.image || null
-      };
-    }
+    this.state = {image: props ? getImagePath(props.image, props.schema) : null};
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      image: props ? getImagePath(props.image, props.schema) : null
+    });
   }
 
   render() {
@@ -33,7 +29,7 @@ export default class DatasetInfoImage extends PureComponent {
     const image = this.state.image;
 
     return (
-      <div className='DatasetInfo-image'>
+      <div className='DatasetInfoImage'>
         { image
           ? <a href={image}><img alt={title} src={image} title={title} /></a>
           : null}
@@ -41,9 +37,3 @@ export default class DatasetInfoImage extends PureComponent {
     );
   }
 }
-
-DatasetInfoImage.propTypes = {
-  title: React.PropTypes.string,
-  image: React.PropTypes.string,
-  schema: React.PropTypes.string
-};

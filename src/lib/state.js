@@ -1,5 +1,5 @@
 import EventEmitter from 'eventemitter3';
-import Immutable from 'immutable';
+import immutable from 'immutable';
 
 export default class State extends EventEmitter {
 
@@ -11,18 +11,36 @@ export default class State extends EventEmitter {
   }
 
   load(state: Object) {
-    this.set(Immutable.Map.isMap(state)
+    const revivedState = immutable.Map.isMap(state)
       ? state
-      : Immutable.fromJS(state, this._reviver)
-    );
+      : this._reviver
+        ? immutable.fromJS(state, this.revive_(state, this._reviver))
+        : immutable.fromJS(state);
+    this.set(revivedState);
   }
 
-  set(state) {
+  revive_(state, reviver) {
+    return function(key, value) {
+      if (this === state) {
+        const revived = reviver(key, value);
+        if (revived) {
+          return revived;
+        }
+      }
+
+      return immutable.Iterable.isIndexed(value)
+        ? value.toList()
+        : value.toMap();
+    };
+  }
+
+  set(state, path?) {
     if (this._state === state) {
       return;
     }
+    const previousState = this._state;
     this._state = state;
-    this.emit('change', this._state);
+    this.emit('change', this._state, previousState, path);
   }
 
   get() {
@@ -37,13 +55,15 @@ export default class State extends EventEmitter {
     console.log(JSON.stringify(this.save())); // eslint-disable-line no-console
   }
 
-  cursor(path) {
-    return (update) => {
-      if (update) {
-        this.set(this._state.updateIn(path, update));
-      } else {
+  cursor(path: Array<string>) {
+    return (arg) => {
+      if (!arg) {
         return this._state.getIn(path);
       }
+      if (Array.isArray(arg)) {
+        return this._state.getIn(path.concat(arg));
+      }
+      this.set(this._state.updateIn(path, arg), path);
     };
   }
 

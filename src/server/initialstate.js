@@ -1,22 +1,22 @@
 export default {
-  $pendingActions: {},
-  datasets: [],
-  currentDataset: {},
-  searchForm: {
-    q: '',
-    databaseSize: [],
-    tableCount: [],
-    type: [],
-    domain: [],
-    task: [],
-    missingData: [],
-    dataType: [],
-    loops: [],
-    compoundKeys: []
+  app: {},
+  pendingActions: {},
+  contributors: {
+    list: []
   },
-  searchResults: {
-    query: '',
-    datasets: []
+  datasets: {
+    current: {}
   },
-  contributors: []
+  search: {
+    filter: {
+      shrinked: []
+    },
+    form: {},
+    result: {
+      query: {},
+      fetched: false,
+      list: []
+    }
+  },
+  tags: {}
 };

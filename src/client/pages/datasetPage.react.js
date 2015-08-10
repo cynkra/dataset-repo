@@ -1,32 +1,41 @@
-import DocumentTitle from 'react-document-title';
-import exposeRouter from '../common/exposerouter.react';
 import React from 'react';
+import immutable from 'immutable';
+import DocumentTitle from 'react-document-title';
+import Component from '../common/component.react';
 import DatasetInfo from '../datasets/datasetInfo.react';
-import {getDataset} from '../datasets/store';
+import exposeRouter from '../common/exposerouter.react';
 import {fetchDataset} from '../datasets/actions';
 
-class DatasetPage extends React.Component {
+@exposeRouter
+export default class DatasetPage extends Component {
+
+  static propTypes = {
+    datasets: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    router: React.PropTypes.func.isRequired
+  }
 
   componentWillMount() {
-    const datasetName = this.props.router.getCurrentParams().name;
-    return fetchDataset(datasetName);
+    const datasetTitle = this.props.router.getCurrentParams().title;
+    const result = this.props.datasets.get('current');
+
+    if (!fetchDataset.pending && (!result.fetched || datasetTitle !== result.dataset.title)) {
+      return fetchDataset(datasetTitle);
+    }
   }
 
   render() {
-    const dataset = getDataset();
+    const result = this.props.datasets.get('current');
 
     return (
-      <DocumentTitle title="Dataset">
-        <section className="content">
-          <DatasetInfo dataset={dataset} />
+      <DocumentTitle title='Dataset'>
+        <section className='content'>
+          {result.fetched
+            ? <DatasetInfo dataset={result.dataset} />
+            : null
+          }
         </section>
       </DocumentTitle>
     );
   }
 }
 
-DatasetPage.propTypes = {
-  router: React.PropTypes.func
-};
-
-export default exposeRouter(DatasetPage);

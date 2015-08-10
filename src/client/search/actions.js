@@ -1,31 +1,32 @@
-import {getForm} from './store';
 import {dispatch, dispatchAsync} from '../lib/dispatcher';
 import {getSearchResults} from '../../services/dataset/fetcher';
 import resolver from '../../lib/resolver';
+import Form from './form';
 
-export function onSearchInputChange(value) {
+export function onSearchInputChange(value: string) {
   dispatch(onSearchInputChange, value);
 }
 
-export function onFilterCheckboxChange({target: {name, value, checked}}) {
-  name = name.substr(0, name.length - 2);
+export function onFilterCheckboxChange(name, value, checked) {
+  name = name.substr(0, name.length - 2); // remove []
   dispatch(onFilterCheckboxChange, {name, value, checked});
-  submitSearchForm();
 }
 
-export function submitSearchForm() {
+export function submitSearchForm(form: Form) {
   const router = require('../router');
-  let query = getForm().toJS();
-
-  if (isQueryEmpty(query)) { query = null; }
+  const query = form.toJS(true);
 
   router.transitionTo('search', null, query);
 }
 
-export function fetchSearchResults(query: Object) {
-  fetchSearchResultsStart(query);
+export function toggleFilterGroup(name: string, shrinked: bool) {
+  dispatch(toggleFilterGroup, {name, shrinked});
+}
+
+export function fetchSearchResults(form: Form) {
+  fetchSearchResultsStart(form);
   const promise = (resolve) => {
-    getSearchResults(getForm().toJS())
+    getSearchResults(form.toJS())
       .then((data) => {
         fetchSearchResultsSuccess(data);
         resolve();
@@ -34,19 +35,10 @@ export function fetchSearchResults(query: Object) {
   return dispatchAsync(fetchSearchResults, resolver.resolve(promise));
 }
 
-export function fetchSearchResultsStart(query) {
-  dispatch(fetchSearchResultsStart, query);
+export function fetchSearchResultsStart(form: Form) {
+  dispatch(fetchSearchResultsStart, form);
 }
 
 export function fetchSearchResultsSuccess(data) {
   dispatch(fetchSearchResultsSuccess, data);
-}
-
-function isQueryEmpty(query) {
-  for (let item in query) {
-    if (query[item] !== '' && query[item].length !== 0) {
-      return false;
-    }
-  }
-  return true;
 }

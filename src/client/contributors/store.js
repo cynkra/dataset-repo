@@ -1,32 +1,29 @@
 import * as actions from './actions';
-import immutable from 'immutable';
 import {register} from '../lib/dispatcher';
 import {contributorsCursor} from '../state';
-
-export const Contributor = immutable.Record({
-  name: null,
-  count: 0
-});
+import Contributor from './contributor';
 
 export const dispatchToken = register(({action, data}) => {
+
   switch (action) {
+
     case actions.fetchContributorsSuccess:
       contributorsCursor(contributors => {
-        return contributors.withMutations(list => {
-          list.clear();
-          data.forEach((row, i) => {
-            const contributor = new Contributor({
-              name: row.uploader,
-              count: row.count
-            }).toMap();
-            list.push(contributor);
+        return contributors.update('list', list => {
+          return list.withMutations(list => {
+            list.clear();
+            data.forEach((row, i) => {
+              list.push(new Contributor({
+                name: row.uploader,
+                url: row.uploader_url,
+                count: row.count
+              }));
+            });
           });
         });
       });
       break;
-  }
-});
 
-export function getContributors() {
-  return contributorsCursor();
-}
+  }
+
+});

@@ -1,41 +1,42 @@
-import DocumentTitle from 'react-document-title';
 import React from 'react';
+import immutable from 'immutable';
+import DocumentTitle from 'react-document-title';
+import Component from '../common/component.react';
 import ContributorsChart from '../contributors/contributorsChart.react';
-import {getContributors} from '../contributors/store';
 import {fetchContributors} from '../contributors/actions';
 
-export default class ContributorsPage extends React.Component {
+export default class ContributorsPage extends Component {
+
+  static propTypes = {
+    contributors: React.PropTypes.instanceOf(immutable.Map).isRequired
+  }
 
   componentWillMount() {
     return fetchContributors();
   }
 
   render() {
-    const contributors = getContributors();
-    const data = contributors.map((contributor) => {
-      return {
-        label: contributor.get('name'),
-        value: contributor.get('count')
-      };
-    });
-    const leftMargin = data.reduce((prev, next) => {
-      const x = prev.label ? prev.label.toString().length : prev;
-      const y = next.label ? next.label.toString().length : next;
+    const contributors = this.props.contributors.get('list');
+
+    const leftMargin = contributors.reduce((prev, next) => {
+      const x = prev.name ? prev.name.toString().length : prev;
+      const y = next.name ? next.name.toString().length : next;
       return x > y ? x : y;
     }) || 100;
 
     return (
-      <DocumentTitle title="Contributors">
-        <section className="content">
+      <DocumentTitle title='Top Contributors'>
+        <section className='content'>
           <ContributorsChart
-            data={data.toArray()}
-            height={data.count() * 100}
+            data={contributors}
+            height={contributors.count() * 100}
             margins={{top: 0, right: 20, bottom: 20, left: (leftMargin + 2) * 8}}
-            title='Contributors'
+            title='Top Contributors'
             width={992}
           />
         </section>
       </DocumentTitle>
     );
   }
+
 }

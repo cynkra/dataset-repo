@@ -1,3 +1,7 @@
+import React from 'react';
+import config from '../config/config.client';
+import {getDataTypeText} from '../client/datasets/tags/store';
+
 /**
  * Returns a capitalized string
  * @return string
@@ -45,18 +49,55 @@ export function getSizeWithUnit(size: number) {
 }
 
 /**
+ * Returns path to the image.
+ * @return string|null
+ */
+export function getImagePath(image, schema) {
+  if (!image && schema) {
+    const imagePath = config.images.datasetsGeneratedPath + schema + '.png';
+    return checkImage(imagePath, schema) ? imagePath : null;
+  }
+  return image ? config.images.datasetsPath + image + '.png' : null;
+}
+
+/**
  * Returns true if image with passed src exists (both client and server side).
  * @return boolean
  */
-export function checkImage(src: string) {
+export function checkImage(src: string, schema: string) {
   if (process.env.IS_BROWSER) {
     var req = new XMLHttpRequest();
     req.open('HEAD', src, false);
-    req.send(null);
-    return req.status === 200;
+    try {
+      req.send(null);
+      return req.status === 200;
+    } catch (e) {
+      return false;
+    }
   } else {
     const fs = require('fs');
     const path = require('path');
-    return fs.existsSync(path.join(__dirname, '..', '..', src));
+
+    if (fs.existsSync(path.join(__dirname, '..', '..', src))) {
+      return true;
+    } else {
+      const sqlViz = require('../services/sqlviz/sqlviz.js');
+      sqlViz.getSchema(schema);
+      return false;
+    }
+  }
+}
+
+export function getTagName(name) {
+  name = getDataTypeText(name);
+  switch (name) {
+    case 'LOB':
+      return <abbr title='Large Objects like images or long texts'>{name}</abbr>;
+    case 'Temporal':
+      return <abbr title='Date, time or timestamp'>{name}</abbr>;
+    case 'Spatial':
+      return <abbr title='Geometric types like point, line or polygon'>{name}</abbr>;
+    default:
+      return name;
   }
 }

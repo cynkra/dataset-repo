@@ -1,29 +1,29 @@
-import PureComponent from '../common/purecomponent.react';
 import React from 'react';
+import Component from '../common/component.react';
 
-export default class DatasetInfoSource extends PureComponent {
+export default class DatasetInfoSource extends Component {
 
-  renderBibtex() {
-    const bibtex = '/assets/bibtex/' + this.props.bibtex;
-    return (
-      <span> (<a href={bibtex}>BibTeX</a>)</span>
-    );
+  static propTypes = {
+    bibtex: React.PropTypes.string,
+    origin: React.PropTypes.string
   }
 
   render() {
     const origin = this.props.origin;
     const originText = (origin && origin.split('/').length >= 2 ? origin.split('/')[2] : origin);
-    const bibtex = this.props.bibtex;
-    return origin ? (
-      <p>
-        Original source: <a href={origin}>{originText}</a>
-        {bibtex ? this.renderBibtex() : null}
-      </p>
-    ) : null;
-  }
-}
 
-DatasetInfoSource.propTypes = {
-  origin: React.PropTypes.string,
-  bibtex: React.PropTypes.string
-};
+    const bibtex = this.props.bibtex
+      ? (
+        <span> (<a href={'/assets/bibtex/' + this.props.bibtex}>BibTeX</a>)</span>
+      ) : null;
+
+    return origin
+      ? (
+        <p>
+          Original source: <a href={origin}>{originText}</a>
+          {bibtex}
+        </p>
+      ) : null;
+  }
+
+}

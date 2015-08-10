@@ -1,12 +1,18 @@
-import PureComponent from '../client/common/purecomponent.react';
+import Component from '../../client/common/component.react';
 import React from 'react';
-import config from './config';
+import config from '../../config/config.server';
 
-export default class Html extends PureComponent {
+export default class Html extends Component {
+
+  static propTypes = {
+    appHtml: React.PropTypes.string.isRequired,
+    appState: React.PropTypes.object.isRequired,
+    title: React.PropTypes.string.isRequired
+  }
 
   render() {
-    const version = require('../../package').version;
-    // Only for production. For dev, it's handled by webpack with livereload.
+    const version = require('../../../package').version;
+
     const linkStyles = config.isProduction &&
       <link
         href={`/build/app.css?v=${version}`}
@@ -16,23 +22,17 @@ export default class Html extends PureComponent {
     const appHtml = `<div id="app">${this.props.appHtml}</div>`;
 
     const appScriptSrc = config.isProduction
-    ? '/build/app.js?v=' + version
-    : '//localhost:8888/build/app.js';
+      ? '/build/app.js?v=' + version
+      : '//localhost:8888/build/app.js';
 
     let scriptHtml = `
-    <script>
-      (function() {
-        window._appState = ${JSON.stringify(this.props.appState)};
-        var app = document.createElement('script');
-          app.type = 'text/javascript';
-          app.async = true;
-          app.src = '${appScriptSrc}';
-        var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(app, s);
-      })();
-    </script>`;
+      <script>
+        window._initialState = ${JSON.stringify(this.props.appState)};
+      </script>
+      <script src="${appScriptSrc}"></script>
+    `;
 
-    if (config.isProduction && config.googleAnalyticsId !== 'UA-XXXXXXX-X') {
+    if (config.isProduction && config.googleAnalyticsId !== 'UA-XXXXXXX-X')
       scriptHtml += `
         <script>
           (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -42,7 +42,6 @@ export default class Html extends PureComponent {
           r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
           ga('create','${config.googleAnalyticsId}');ga('send','pageview');
         </script>`;
-    }
 
     return (
       <html lang="en">
@@ -59,8 +58,3 @@ export default class Html extends PureComponent {
 
 }
 
-Html.propTypes = {
-  appHtml: React.PropTypes.string.isRequired,
-  appState: React.PropTypes.object.isRequired,
-  title: React.PropTypes.string.isRequired
-};
