@@ -22,5 +22,11 @@ export default {
       list: []
     }
   },
+  contact: {
+    message: {
+      text: null,
+      error: false
+    }
+  },
   tags: {}
 };
