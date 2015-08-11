@@ -12,6 +12,7 @@ export default {
         .column('uploader_url')
         .count('* as count')
         .from(table)
+        .where('is_hidden', 0)
         .whereNotNull('original_database_name')
         .whereNotNull('uploader')
         .groupBy('uploader', 'uploader_url')

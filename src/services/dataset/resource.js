@@ -25,8 +25,9 @@ export default {
       db
         .select(getValues(columns))
         .from(table)
-        .where('is_primary_version', 1)
+        .where('is_hidden', 0)
         .whereNotNull('original_database_name')
+        .where('is_primary_version', 1)
         .catch((err) => { throw err; })
         .then((rows) => resolve(rows));
     });
@@ -36,6 +37,8 @@ export default {
       db
         .select()
         .from(table)
+        .where('is_hidden', 0)
+        .whereNotNull('original_database_name')
         .where('original_database_name', params.dataset)
         .catch((err) => { throw err; })
         .then((rows) => {
@@ -51,8 +54,9 @@ export default {
       db
         .select()
         .from(table)
-        .where('is_primary_version', 1)
+        .where('is_hidden', 0)
         .whereNotNull('original_database_name')
+        .where('is_primary_version', 1)
         .orderBy('publication_count', 'DESC')
         .limit(count)
         .catch((err) => { throw err; })
@@ -64,6 +68,9 @@ export default {
       db
         .select(getValues(columns))
         .from(table)
+        .where('is_hidden', 0)
+        .whereNotNull('original_database_name')
+        .where('is_primary_version', 1)
         .where('original_database_name', 'like', '%' + params.q + '%')
         .where(filterDatabaseSize(params.databaseSize))
         .where(filterTableCount(params.tableCount))
@@ -74,7 +81,6 @@ export default {
         .where(filterMissingData(params.missingData))
         .where(filterLoops(params.loops))
         .where(filterCompoundKeys(params.compoundKeys))
-        .where('is_primary_version', 1)
         .catch((err) => { throw err; })
         .then((rows) => resolve(rows));
     });
