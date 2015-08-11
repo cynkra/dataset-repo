@@ -3,6 +3,7 @@ import {dataTypes} from '../datasets/store';
 
 const DatasetRecord = Record({
   title: null,
+  alternativeNames: null,
   description: null,
   databaseSize: null,
   tableCount: null,
@@ -35,6 +36,7 @@ export default class Dataset extends DatasetRecord {
   static fromDB = (props) => {
     return new Dataset({
       title: props.get('original_database_name'),
+      alternativeNames: props.get('alternative_names'),
       description: props.get('description'),
       databaseSize: props.get('database_size'),
       tableCount: props.get('table_count'),

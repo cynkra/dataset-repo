@@ -18,6 +18,16 @@ export default class DatasetInfoSummary extends Component {
     return (
       <div className='DatasetInfoSummary'>
         <h1 className='DatasetInfoSummary-heading'>{dataset.title}</h1>
+
+        {dataset.alternativeNames
+          ? (
+            <p className='DatasetInfoSummary-alternativeNames'>
+              <span>Alternative names: </span>
+              <span>{dataset.alternativeNames}</span>
+            </p>
+          )
+          : null}
+
         <p>
           {dataset.description}
         </p>
