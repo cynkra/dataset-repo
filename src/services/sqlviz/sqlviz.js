@@ -1,19 +1,26 @@
-import database from '../../config/config.database';
+if (!process.env.IS_BROWSER) {
+  var knex = require('knex');
+}
+import config from '../../config/config.server';
 import nunjucks from 'nunjucks';
 import path from 'path';
 import fs from 'fs';
 import {exec} from 'child_process';
 
 export function getSchema(dbName: string) {
-  const db = require('knex')({
-    client: database.client,
-    connection: {
-      host:     database.host,
-      user:     database.user,
-      password: database.password,
-      database: dbName
-    }
-  });
+  let db;
+  try {
+    knex.on('disconnect', function(e) { throw e; });
+    db = knex({
+      client: config.database.client,
+      connection: {
+        host:     config.database.host,
+        user:     config.database.user,
+        password: config.database.password,
+        database: dbName
+      }
+    });
+  } catch (e) { return; }
 
   let tables = [];
   let graph = {
