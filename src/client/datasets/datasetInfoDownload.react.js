@@ -1,7 +1,12 @@
 import React from 'react';
 import Component from '../common/component.react';
+import DatasetType from './dataset';
 
 export default class DatasetInfoDownload extends Component {
+
+  static propTypes = {
+    dataset: React.PropTypes.instanceOf(DatasetType).isRequired
+  }
 
   render() {
     return (
@@ -24,7 +29,7 @@ export default class DatasetInfoDownload extends Component {
             </ul>
           </li>
           <li>
-            Export the database in your favourite format.
+            Export "{this.props.dataset.title}" database (or other version of the dataset, if available) in your favourite format (e.g. CSV or SQL dump).
           </li>
         </ol>
       </div>

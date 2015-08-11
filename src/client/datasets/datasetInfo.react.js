@@ -37,7 +37,9 @@ export default class DatasetInfo extends Component {
           dataset={dataset}
         />
 
-        <DatasetInfoDownload />
+        <DatasetInfoDownload
+          dataset={dataset}
+        />
 
         { mwb ? (
           <div>
