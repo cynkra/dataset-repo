@@ -1,5 +1,6 @@
 TODO (Feel free to add anything)
 ================================
+[ ] Různé verze datasetu
 [✓] Dev stack
 [✓] Připojení k db
 [✓] Vykreslení obsahu
@@ -43,9 +44,9 @@ TODO (Feel free to add anything)
     [✓] Leaderboard - Databáze
     [✓] Leaderboard - API call
     [✓] Bargraf z d3 knihovny
-[ ] Kontaktní formulář / kontaktní informace
-    [ ] Contact component (on every page)
-    [ ] "Typo, suggestion, complain?"
+[✓] Kontaktní formulář / kontaktní informace
+    [✓] Contact component (on every page)
+    [✓] "Typo, suggestion, complain?"
 [ ] Vložení datasetu
 [✓] Počítání zobrazení a downloadů
     [✓] Založit Google Analytics
