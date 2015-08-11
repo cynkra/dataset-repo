@@ -7,7 +7,6 @@ export default {
   datasets: {
     current: {},
     top: {
-      fetched: false,
       list: []
     }
   },
@@ -18,15 +17,11 @@ export default {
     form: {},
     result: {
       query: {},
-      fetched: false,
       list: []
     }
   },
   contact: {
-    message: {
-      text: null,
-      error: false
-    }
+    message: {}
   },
   tags: {}
 };
