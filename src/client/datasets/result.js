@@ -3,7 +3,8 @@ import Dataset from './dataset';
 
 const ResultCurrentRecord = Record({
   dataset: new Dataset(),
-  fetched: false
+  fetched: false,
+  error: false
 });
 
 export class ResultCurrent extends ResultCurrentRecord {

@@ -19,9 +19,7 @@ export const dispatchToken = register(({action, data}) => {
 
     case actions.fetchDatasetStart:
       datasetsCursor(datasets => {
-        return datasets.updateIn(['current'], new ResultCurrent, result => {
-          return result.set('fetched', false);
-        });
+        return datasets.set('current', new ResultCurrent);
       });
       break;
 
@@ -29,6 +27,7 @@ export const dispatchToken = register(({action, data}) => {
       datasetsCursor(datasets => {
         return datasets.updateIn(['current'], new ResultCurrent, result => {
           return result
+            .set('error', false)
             .set('fetched', true)
             .set('dataset', Dataset.fromDB(immutable.fromJS(data)));
         });
@@ -37,7 +36,9 @@ export const dispatchToken = register(({action, data}) => {
 
     case actions.fetchDatasetError:
       datasetsCursor(datasets => {
-        return datasets.update(['current'], new ResultCurrent);
+        return datasets.updateIn(['current'], new ResultCurrent, result => {
+          return result.set('error', true);
+        });
       });
       break;
 

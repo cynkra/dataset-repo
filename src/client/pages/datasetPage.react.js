@@ -26,6 +26,16 @@ export default class DatasetPage extends Component {
   render() {
     const result = this.props.datasets.get('current');
 
+    if (result.error) {
+      return (
+        <DocumentTitle title='Dataset'>
+          <section className='content'>
+            Dataset not found.
+          </section>
+        </DocumentTitle>
+      );
+    }
+
     return (
       <DocumentTitle title='Dataset'>
         <section className='content'>
