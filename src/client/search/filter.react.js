@@ -73,12 +73,12 @@ export default class Filter extends Component {
         />
 
         <FilterGroup
-          checked={values.missingData}
-          displayName='Missing data'
-          name='missingData'
+          checked={values.missingValues}
+          displayName='Missing values'
+          name='missingValues'
           onChange={this.props.onFilterChange}
-          shrinked={shrinked.includes('missingData')}
-          values={['Missing data', 'Complete data']}
+          shrinked={shrinked.includes('missingValues')}
+          values={['With missing values', 'Without missing values']}
         />
 
         <FilterGroup

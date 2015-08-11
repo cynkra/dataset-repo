@@ -81,10 +81,10 @@ export default class DatasetInfoDetails extends Component {
 
           <dt>Missing values:</dt>
           <dd>
-            {dataset.missingData !== null
+            {dataset.missingValues !== null
               ? (dataset.missingValues
-                  ? <Link query={{missingData: ['Missing data']}} to='search'>Yes</Link>
-                  : <Link query={{missingData: ['Complete data']}} to='search'>No</Link>)
+                  ? <Link query={{missingValues: ['With missing values']}} to='search'>Yes</Link>
+                  : <Link query={{missingValues: ['Without missing values']}} to='search'>No</Link>)
               : '?'}
           </dd>
 

@@ -79,7 +79,7 @@ export default {
         .where(filterDomain(params.domain))
         .where(filterTask(params.task))
         .where(filterDataType(params.dataType))
-        .where(filterMissingData(params.missingData))
+        .where(filterMissingValues(params.missingValues))
         .where(filterLoops(params.loops))
         .where(filterCompoundKeys(params.compoundKeys))
         .catch((err) => reject(err))
@@ -154,12 +154,12 @@ function filterDataType(dataType: Array) {
   };
 }
 
-function filterMissingData(missingData: Array) {
-  missingData = missingData.filter((n) => { return ['Complete data', 'Missing data'].indexOf(n) !== -1; });
+function filterMissingValues(missingValues: Array) {
+  missingValues = missingValues.filter((n) => { return ['With missing values', 'Without missing values'].indexOf(n) !== -1; });
   return function() {
-    if (missingData.indexOf('Missing data') !== -1) this.orWhere('null_count', '!=', 0);
-    if (missingData.indexOf('Complete data') !== -1) this.orWhere('null_count', 0);
-    if (missingData.length === 0) this.where(true);
+    if (missingValues.indexOf('With missing values') !== -1) this.orWhere('null_count', '!=', 0);
+    if (missingValues.indexOf('Without missing values') !== -1) this.orWhere('null_count', 0);
+    if (missingValues.length === 0) this.where(true);
   };
 }
 

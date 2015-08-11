@@ -15,8 +15,8 @@ export function getTagsFromDataset(dataset) {
     tags = tags.push(getDomainTag(dataset.domain));
   if (dataset.task)
     tags = tags.push(getTaskTag(dataset.task));
-  if (dataset.missingData)
-    tags = tags.push(getMissingDataTag());
+  if (dataset.missingValues)
+    tags = tags.push(getMissingValuesTag());
   tags = tags.concat(getDataTypeTags(dataset.dataTypes));
 
   return tags;
@@ -88,12 +88,12 @@ function getTaskTag(task) {
   });
 }
 
-function getMissingDataTag() {
+function getMissingValuesTag() {
   return new Tag({
-    type: 'missingData',
-    value: ['Missing data'],
-    name: 'Missing data',
-    text: 'Missing data'
+    type: 'missingValues',
+    value: ['Missing values'],
+    name: 'Missing values',
+    text: 'Missing values'
   });
 }
 

@@ -7,7 +7,7 @@ const FormRecord = Record({
   type: List(),
   domain: List(),
   task: List(),
-  missingData: List(),
+  missingValues: List(),
   dataType: List(),
   loops: List(),
   compoundKeys: List()

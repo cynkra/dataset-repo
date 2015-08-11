@@ -11,7 +11,7 @@ const DatasetRecord = Record({
   isArtificial: null,
   domain: null,
   task: null,
-  missingData: null,
+  missingValues: null,
   dataTypes: List(),
   bibtexPath: null,
   imgPath: null,
@@ -43,7 +43,7 @@ export default class Dataset extends DatasetRecord {
       isArtificial: props.get('is_artificial'),
       domain: props.get('domain'),
       task: props.get('task'),
-      missingData: props.get('null_count') > 0,
+      missingValues: props.get('null_count') > 0,
       dataTypes: dataTypes.filter((dataType) => {
         return props.get(dataType + '_count') > 0;
       }),
