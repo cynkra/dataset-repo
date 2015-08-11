@@ -35,6 +35,12 @@ export const dispatchToken = register(({action, data}) => {
       });
       break;
 
+    case actions.fetchDatasetError:
+      datasetsCursor(datasets => {
+        return datasets.update(['current'], new ResultCurrent);
+      });
+      break;
+
     case actions.fetchTopDatasetsStart:
       datasetsCursor(datasets => {
         return datasets.updateIn(['top'], new ResultTop, result => {

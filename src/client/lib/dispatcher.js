@@ -30,6 +30,7 @@ export function dispatchAsync(action: Function, promise: Object, options: ?Objec
       return data;
     },
     (reason) => {
+      console.log('Error');
       setPending(actionName, false);
       throw reason;
     }

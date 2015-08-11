@@ -28,7 +28,7 @@ export default {
         .where('is_hidden', 0)
         .whereNotNull('original_database_name')
         .where('is_primary_version', 1)
-        .catch((err) => { throw err; })
+        .catch((err) => reject(err))
         .then((rows) => resolve(rows));
     });
   },
@@ -40,11 +40,12 @@ export default {
         .where('is_hidden', 0)
         .whereNotNull('original_database_name')
         .where('original_database_name', params.dataset)
-        .catch((err) => { throw err; })
+        .catch((err) => reject(err))
         .then((rows) => {
+          if (rows.length < 1) return reject();
           let dataset = JSON.parse(JSON.stringify(rows[0]));
           dataset.versions = rows;
-          resolve(dataset);
+          return resolve(dataset);
         });
     });
   },
@@ -59,7 +60,7 @@ export default {
         .where('is_primary_version', 1)
         .orderBy('publication_count', 'DESC')
         .limit(count)
-        .catch((err) => { throw err; })
+        .catch((err) => reject(err))
         .then((rows) => resolve(rows));
     });
   },
@@ -81,7 +82,7 @@ export default {
         .where(filterMissingData(params.missingData))
         .where(filterLoops(params.loops))
         .where(filterCompoundKeys(params.compoundKeys))
-        .catch((err) => { throw err; })
+        .catch((err) => reject(err))
         .then((rows) => resolve(rows));
     });
   }

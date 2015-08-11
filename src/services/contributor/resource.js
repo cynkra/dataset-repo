@@ -17,7 +17,7 @@ export default {
         .whereNotNull('uploader')
         .groupBy('uploader', 'uploader_url')
         .orderBy('count', 'DESC')
-        .catch((err) => { throw err; })
+        .catch((err) => reject(err))
         .then((rows) => resolve(rows));
     });
   }

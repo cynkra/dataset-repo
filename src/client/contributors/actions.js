@@ -9,15 +9,14 @@ export function fetchContributors() {
       .then((data) => {
         fetchContributorsSuccess(data);
         resolve();
+      })
+      .catch((error) => {
+        fetchContributorsError(error);
+        resolve(error);
       });
   };
   return dispatchAsync(fetchContributors, resolver.resolve(promise));
 }
-
-export function fetchContributorsStart() {
-  dispatch(fetchContributorsStart);
-}
-
-export function fetchContributorsSuccess(data) {
-  dispatch(fetchContributorsSuccess, data);
-}
+export function fetchContributorsStart() { dispatch(fetchContributorsStart); }
+export function fetchContributorsSuccess(data) { dispatch(fetchContributorsSuccess, data); }
+export function fetchContributorsError(error) { dispatch(fetchContributorsError, error); }

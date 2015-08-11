@@ -11,7 +11,7 @@ function validateContactForm(values: Object) {
 }
 
 export function submitContactForm(values: Object) {
-  const promise = (resolve, reject) => {
+  const promise = (resolve) => {
     validateContactForm(values)
       .then(() => sendContact(values))
       .then((data) => {
@@ -20,16 +20,10 @@ export function submitContactForm(values: Object) {
       })
       .catch((error) => {
         submitContactFormError(error);
-        reject(error);
+        resolve(error);
       });
   };
   return dispatchAsync(submitContactForm, resolver.resolve(promise));
 }
-
-export function submitContactFormSuccess() {
-  dispatch(submitContactFormSuccess);
-}
-
-export function submitContactFormError(error) {
-  dispatch(submitContactFormError, error);
-}
+export function submitContactFormSuccess() { dispatch(submitContactFormSuccess); }
+export function submitContactFormError(error) { dispatch(submitContactFormError, error); }

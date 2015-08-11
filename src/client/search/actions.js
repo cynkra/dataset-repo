@@ -30,15 +30,14 @@ export function fetchSearchResults(form: Form) {
       .then((data) => {
         fetchSearchResultsSuccess(data);
         resolve();
+      })
+      .catch((error) => {
+        fetchSearchResultsError(error);
+        resolve(error);
       });
   };
   return dispatchAsync(fetchSearchResults, resolver.resolve(promise));
 }
-
-export function fetchSearchResultsStart(form: Form) {
-  dispatch(fetchSearchResultsStart, form);
-}
-
-export function fetchSearchResultsSuccess(data) {
-  dispatch(fetchSearchResultsSuccess, data);
-}
+export function fetchSearchResultsStart(form: Form) { dispatch(fetchSearchResultsStart, form); }
+export function fetchSearchResultsSuccess(data) { dispatch(fetchSearchResultsSuccess, data); }
+export function fetchSearchResultsError(error) { dispatch(fetchSearchResultsError, error); }
