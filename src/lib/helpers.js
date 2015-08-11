@@ -90,14 +90,35 @@ export function checkImage(src: string, schema: string) {
 
 export function getTagName(name) {
   name = getDataTypeText(name);
-  switch (name) {
-    case 'LOB':
-      return <abbr title='Large Objects like images or long texts'>{name}</abbr>;
-    case 'Temporal':
-      return <abbr title='Date, time or timestamp'>{name}</abbr>;
-    case 'Spatial':
-      return <abbr title='Geometric types like point, line or polygon'>{name}</abbr>;
-    default:
-      return name;
-  }
+  return getNameWithTooltip(name);
+}
+
+export const tooltips = {
+  'LOB': 'Large Objects like images or long texts',
+  'Temporal': 'Date, time or timestamp',
+  'Spatial': 'Geometric types like point, line or polygon',
+  'Size': 'Size of all the tables and indexes in the database',
+  'Count of rows': 'Count of tuples in the whole dataset',
+  'Count of columns': 'Count of all attributes (including IDs and target(s)) in the whole dataset',
+  'Loops': 'Does the relational diagram contain cycles?',
+  'Instance count': 'Count of rows in the target table',
+  'Target table': 'The single table, where target column, target ID and target timestamp resides',
+  'Target column': 'The \'label\' column to predict',
+  'Target ID': 'The unit for which to make the predictions (e.g. customer)',
+  'Target timestamp': 'To which time to make the prediction',
+  'With loops': 'The relational diagram contains cycles',
+  'Without loops': 'Like in star or snowflake schema',
+  'Compound keys': 'Compound key consists of two or more attributes that uniquely identify an entity occurrence',
+  'With compound keys': 'With a key that consists of two or more attributes that uniquely identify an entity occurrence',
+  'Without compound keys': 'All keys are simple keys',
+  'Real': 'Data consist of real world measurements',
+  'Synthetic': 'Data are a product of a simulation',
+  'Associated task': 'Task associated with the target column'
+};
+
+export function getNameWithTooltip(name, capitalizeName = true) {
+  if (capitalizeName) name = capitalize(name);
+  if (tooltips[name])
+    return <abbr title={tooltips[name]}>{name}</abbr>;
+  return name;
 }

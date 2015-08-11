@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import Component from '../common/component.react';
 import DatasetType from './dataset';
-import {capitalize, getSizeWithUnit, getLocaleString, getTagName} from '../../lib/helpers';
+import {capitalize, getSizeWithUnit, getLocaleString, getTagName, getNameWithTooltip, tooltips} from '../../lib/helpers';
 import {getTableCountValue, getDataTypeText} from './tags/store';
 
 require('./datasetInfoDetails.styl');
@@ -21,34 +21,32 @@ export default class DatasetInfoDetails extends Component {
       <div className='DatasetInfoDetails'>
         <h2>Dataset details</h2>
         <dl>
-          <dt>Associated task:</dt>
+          <dt>{getNameWithTooltip('Associated task')}:</dt>
           <dd>
             {dataset.task
               ? <Link query={{task: [capitalize(dataset.task)]}} to='search'>
-                  {capitalize(dataset.task)}
+                  {getNameWithTooltip(dataset.task)}
                 </Link>
               : '?'}
           </dd>
 
-          <dt>Domain:</dt>
+          <dt>{getNameWithTooltip('Domain')}:</dt>
           <dd>
             {dataset.domain
               ? <Link query={{domain: [dataset.domain]}} to='search'>
-                  {dataset.domain}
+                  {getNameWithTooltip(dataset.domain)}
                 </Link>
               : '?'}
           </dd>
 
-          <dt>Data types:</dt>
+          <dt>{getNameWithTooltip('Data types')}:</dt>
           <dd>
             <ul className='DatasetInfoDetails-dataTypes'>
               {this.getDataTypes(dataset)}
             </ul>
           </dd>
 
-          <dt>
-            <abbr title='Size of all the tables and indexes in the database'>Size:</abbr>
-          </dt>
+          <dt>{getNameWithTooltip('Size')}:</dt>
           <dd>
             {dataset.databaseSize
               ? <Link query={{databaseSize: [size.slice(-2)]}} to='search'>
@@ -57,7 +55,7 @@ export default class DatasetInfoDetails extends Component {
               : '?'}
           </dd>
 
-          <dt>Count of tables:</dt>
+          <dt>{getNameWithTooltip('Count of tables')}:</dt>
           <dd>
             {dataset.tableCount
               ? <Link query={{tableCount: [getTableCountValue(dataset.tableCount)]}} to='search'>
@@ -66,20 +64,13 @@ export default class DatasetInfoDetails extends Component {
               : '?'}
           </dd>
 
-          <dt>
-            <abbr title='Count of tuples in the whole dataset'>Count of rows:</abbr>
-          </dt>
+          <dt>{getNameWithTooltip('Count of rows')}:</dt>
           <dd>{dataset.rowCount ? getLocaleString(dataset.rowCount) : '?'}</dd>
 
-          <dt>
-            <abbr
-              title='Count of all attributes (including IDs and target(s)) in the whole dataset'
-              >Count of columns:
-            </abbr>
-          </dt>
+          <dt>{getNameWithTooltip('Count of columns')}:</dt>
           <dd>{dataset.columnCount ? getLocaleString(dataset.columnCount) : '?'}</dd>
 
-          <dt>Missing values:</dt>
+          <dt>{getNameWithTooltip('Missing values')}:</dt>
           <dd>
             {dataset.missingValues !== null
               ? (dataset.missingValues
@@ -88,48 +79,55 @@ export default class DatasetInfoDetails extends Component {
               : '?'}
           </dd>
 
-          <dt>Compound keys:</dt>
+          <dt>{getNameWithTooltip('Compound keys')}:</dt>
           <dd>
             {dataset.compositeKeys !== null
               ? (dataset.compositeKeys
-                  ? <Link query={{compoundKeys: ['With compound keys']}} to='search'>Yes</Link>
-                  : <Link query={{compoundKeys: ['Without compound keys']}} to='search'>No</Link>)
+                  ? <Link query={{compoundKeys: ['With compound keys']}} to='search'>
+                      <abbr title={tooltips['With compound keys']}>Yes</abbr>
+                    </Link>
+                  : <Link query={{compoundKeys: ['Without compound keys']}} to='search'>
+                      <abbr title={tooltips['Without compound keys']}>No</abbr>
+                    </Link>)
               : '?'}
           </dd>
 
-          <dt>Loops:</dt>
+          <dt>{getNameWithTooltip('Loops')}:</dt>
           <dd>
             {dataset.loops !== null
               ? (dataset.loops
-                  ? <Link query={{loops: ['With loops']}} to='search'>Yes</Link>
-                  : <Link query={{loops: ['Without loops']}} to='search'>No</Link>)
+                  ? <Link query={{loops: ['With loops']}} to='search'>
+                      <abbr title={tooltips['With loops']}>Yes</abbr>
+                    </Link>
+                  : <Link query={{loops: ['Without loops']}} to='search'>
+                      <abbr title={tooltips['Without loops']}>No</abbr>
+                    </Link>)
               : '?'}
           </dd>
         </dl>
         <dl>
-          <dt>
-            <abbr title='Count of rows in target table'>Instance count:</abbr>
-          </dt>
+          <dt>{getNameWithTooltip('Type')}:</dt>
+          <dd>
+            {dataset.isArtificial !== null
+              ? (dataset.isArtificial
+                ? <Link query={{type: ['Synthetic']}} to='search'>{getNameWithTooltip('Synthetic')}</Link>
+                : <Link query={{type: ['Real']}} to='search'>{getNameWithTooltip('Real')}</Link>)
+              : '?'}
+          </dd>
+
+          <dt>{getNameWithTooltip('Instance count')}:</dt>
           <dd>{dataset.instanceCount ? getLocaleString(dataset.instanceCount) : '?'}</dd>
 
-          <dt>Target table:</dt>
+          <dt>{getNameWithTooltip('Target table')}:</dt>
           <dd>{dataset.targetTable ? dataset.targetTable : '?'}</dd>
 
-          <dt>
-            <abbr title={'The \'label\' column to predict'}>Target column:</abbr>
-          </dt>
+          <dt>{getNameWithTooltip('Target column')}:</dt>
           <dd>{dataset.targetColumn ? dataset.targetColumn : '?'}</dd>
 
-          <dt>
-            <abbr
-              title='The unit for which to make the predictions (e.g. customer)'>Target ID:
-            </abbr>
-          </dt>
+          <dt>{getNameWithTooltip('Target ID')}:</dt>
           <dd>{dataset.targetId ? dataset.targetId : '?'}</dd>
 
-          <dt>
-            <abbr title='To which time to make the prediction'>Target timestamp:</abbr>
-          </dt>
+          <dt>{getNameWithTooltip('Target timestamp')}:</dt>
           <dd>{dataset.targetTimestamp ? dataset.targetTimestamp : '?'}</dd>
         </dl>
       </div>
