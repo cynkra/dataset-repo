@@ -37,7 +37,6 @@ export default {
         .select()
         .from(table)
         .where('original_database_name', params.dataset)
-        .where('is_primary_version', 1)
         .catch((err) => { throw err; })
         .then((rows) => {
           let dataset = JSON.parse(JSON.stringify(rows[0]));
