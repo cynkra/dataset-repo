@@ -1,5 +1,5 @@
 import request from 'superagent';
-import config from '../config/config.api';
+import config from '../config/config.server';
 
 const isBrowser = process.env.IS_BROWSER;
 
@@ -7,7 +7,7 @@ export const API = {
   get: (fetcher, mapping, fn, params = {}) => {
     if (isBrowser) {
       return new Promise(function(resolve, reject) {
-        var URL = config.url + '/' + fetcher + '/' + fn;
+        var URL = config.api.url + '/' + fetcher + '/' + fn;
 
         request
           .get(URL)
@@ -25,7 +25,7 @@ export const API = {
   post: (fetcher, mapping, fn, params = {}) => {
     if (isBrowser) {
       return new Promise(function(resolve, reject) {
-        var URL = config.url + '/' + fetcher + '/' + fn;
+        var URL = config.api.url + '/' + fetcher + '/' + fn;
 
         request
           .post(URL)

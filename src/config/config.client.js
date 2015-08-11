@@ -1,9 +1,13 @@
-const basePath = '/assets/img/';
+var _ = require('underscore');
+var localConfig = require('./config.client.local');
+var basePath = '/assets/img/';
 
-module.exports = {
+var config = {
   images: {
     basePath: basePath,
     datasetsPath: basePath + 'datasets/',
     datasetsGeneratedPath: basePath + 'datasets-generated/'
   }
 };
+
+module.exports = _.extend(config, localConfig);

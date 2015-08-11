@@ -1,16 +1,29 @@
-var nconf = require('nconf');
-var api = require('./config.api');
-var database = require('./config.database');
-var email = require('./config.email');
-
-// Specifying an env delimiter allows you to override below config when shipping to production server
-// by e.g. defining piping__ignore or version variables.
-nconf.env('__');
+var _ = require('underscore');
+var localConfig = require('./config.server.local');
 
 var config = {
-  api: api,
-  database: database,
-  email: email,
+  api: {
+    url: '/api/v1'
+  },
+  database: {
+    client:   'mysql',
+    host:     'relational.fit.cvut.cz',
+    user:     'guest',
+    password: '******',
+    database: 'meta'
+  },
+  email: {
+    auth: {
+      host: '',
+      port: 465,
+      secure: true,
+      auth: {
+        user: '',
+        pass: ''
+      }
+    },
+    recipient: ''
+  },
   googleAnalyticsId: 'UA-61229872-1',
   isProduction: process.env.NODE_ENV === 'production',
   piping: {
@@ -21,6 +34,4 @@ var config = {
   webpackStylesExtensions: ['css', 'less', 'sass', 'scss', 'styl']
 };
 
-nconf.defaults(config);
-
-module.exports = nconf.get();
+module.exports = _.extend(config, localConfig);
