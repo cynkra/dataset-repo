@@ -97,7 +97,7 @@ export default class ContributeForm extends Component {
 
           <label htmlFor='ContributeForm-comment'>
             <span className='ContributeForm-required'>Comment:</span>
-            <small>(with the description ho and where to obtain the dataset - csv/dump on web/Dropbox/FTP, live database, ...)</small>
+            <small>(with the description how and where to obtain the dataset - csv/dump on web/Dropbox/FTP, live database, ...)</small>
           </label>
           <textarea
             className='ContributeForm-input'
