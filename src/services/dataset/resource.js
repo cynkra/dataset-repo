@@ -72,8 +72,10 @@ export default {
         .where('is_hidden', 0)
         .whereNotNull('original_database_name')
         .where('is_primary_version', 1)
-        .where('original_database_name', 'like', '%' + params.q + '%')
-        .orWhere('alternative_names', 'like', '%' + params.q + '%')
+        .where(function() {
+          this.where('original_database_name', 'like', '%' + params.q + '%')
+          .orWhere('alternative_names', 'like', '%' + params.q + '%');
+        })
         .where(filterDatabaseSize(params.databaseSize))
         .where(filterTableCount(params.tableCount))
         .where(filterType(params.type))

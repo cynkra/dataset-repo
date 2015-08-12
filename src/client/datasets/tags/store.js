@@ -91,7 +91,7 @@ function getTaskTag(task) {
 function getMissingValuesTag() {
   return new Tag({
     type: 'missingValues',
-    value: ['Missing values'],
+    value: ['With missing values'],
     name: 'Missing values',
     text: 'Missing values'
   });
