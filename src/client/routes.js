@@ -3,6 +3,7 @@ import HomePage from './pages/homePage.react';
 import NotFoundPage from './pages/notFoundPage.react';
 import SearchPage from './pages/searchPage.react';
 import DatasetPage from './pages/datasetPage.react';
+import ContributePage from './pages/contributePage.react';
 import ContributorsPage from './pages/contributorsPage.react';
 import ContactPage from './pages/contactPage.react';
 import React from 'react';
@@ -15,6 +16,7 @@ export default (
     <Route handler={SearchPage} name='search' path='search' />
     <Route handler={DatasetPage} name='dataset' path='dataset/:title' />
     <Route handler={ContributorsPage} name="contributors" path='contributors' />
+    <Route handler={ContributePage} name="contribute" path='contribute' />
     <Route handler={ContactPage} name="contact" path='contact' />
   </Route>
 );

@@ -2,7 +2,7 @@ import React from 'react';
 import Component from '../common/component.react';
 import {focusInvalidField} from '../lib/validation';
 import {submitContactForm} from './actions';
-import Message from './message';
+import Message from '../app/message';
 
 require('./contactForm.styl');
 

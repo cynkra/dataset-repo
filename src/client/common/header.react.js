@@ -15,6 +15,7 @@ export default class Header extends Component {
             <li><Link to='search'>All Datasets</Link></li>
             <li><Link to='contributors'>Contributors</Link></li>
             <li><Link to='contact'>Contact</Link></li>
+            <li><Link to='contribute'>Contribute</Link></li>
           </ul>
         </div>
       </header>

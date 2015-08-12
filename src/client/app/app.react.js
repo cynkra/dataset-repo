@@ -5,10 +5,10 @@ import exposeRouter from '../common/exposerouter.react';
 import Header from '../common/header.react';
 import * as appState from '../state';
 
+import '../app/store';
 import '../contributors/store';
 import '../datasets/store';
 import '../search/store';
-import '../contact/store';
 
 require('./app.styl');
 
@@ -28,7 +28,6 @@ export default class App extends Component {
     return {
       app: appState.appCursor(),
       pendingActions: appState.pendingActionsCursor(),
-      contact: appState.contactCursor(),
       contributors: appState.contributorsCursor(),
       datasets: appState.datasetsCursor(),
       search: appState.searchCursor(),

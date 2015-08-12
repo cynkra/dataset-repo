@@ -2,9 +2,9 @@ import React from 'react';
 import immutable from 'immutable';
 import DocumentTitle from 'react-document-title';
 import Component from '../common/component.react';
-import ContactForm from '../contact/contactForm.react';
+import ContributeForm from '../contribute/contributeForm.react';
 
-export default class ContactPage extends Component {
+export default class ContributePage extends Component {
 
   static propTypes = {
     app: React.PropTypes.instanceOf(immutable.Map).isRequired
@@ -12,10 +12,10 @@ export default class ContactPage extends Component {
 
   render() {
     return (
-      <DocumentTitle title='Contact'>
+      <DocumentTitle title='Contribute'>
         <section className='content'>
-          <h1>Contact</h1>
-          <ContactForm message={this.props.app.get('message')}/>
+          <h1>Contribute</h1>
+          <ContributeForm message={this.props.app.get('message')}/>
         </section>
       </DocumentTitle>
     );

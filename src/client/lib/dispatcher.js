@@ -26,11 +26,9 @@ export function dispatchAsync(action: Function, promise: Object, options: ?Objec
   return promise.then(
     (data) => {
       setPending(actionName, false);
-      dispatch(action, data);
       return data;
     },
     (reason) => {
-      console.log('Error');
       setPending(actionName, false);
       throw reason;
     }

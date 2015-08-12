@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/contact', fetcher(require('../../services/contact/fetcher')));
+app.use('/contribute', fetcher(require('../../services/contribute/fetcher')));
 app.use('/contributor', fetcher(require('../../services/contributor/fetcher')));
 app.use('/dataset', fetcher(require('../../services/dataset/fetcher')));
 

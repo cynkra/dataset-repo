@@ -1,5 +1,5 @@
 import State from '../lib/state';
-import reviveContact from './contact/revive';
+import reviveApp from './app/revive';
 import reviveContributors from './contributors/revive';
 import reviveDatasets from './datasets/revive';
 import reviveSearch from './search/revive';
@@ -10,7 +10,7 @@ const initialState = process.env.IS_BROWSER
 
 export const state = new State(initialState, function(key, value) {
   switch (key) {
-    case 'contact': return reviveContact(value);
+    case 'app': return reviveApp(value);
     case 'contributors': return reviveContributors(value);
     case 'datasets': return reviveDatasets(value);
     case 'search': return reviveSearch(value);

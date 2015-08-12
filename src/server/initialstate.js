@@ -1,5 +1,7 @@
 export default {
-  app: {},
+  app: {
+    message: {}
+  },
   pendingActions: {},
   contributors: {
     list: []
@@ -19,9 +21,6 @@ export default {
       query: {},
       list: []
     }
-  },
-  contact: {
-    message: {}
   },
   tags: {}
 };
