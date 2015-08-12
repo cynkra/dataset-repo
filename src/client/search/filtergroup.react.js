@@ -2,7 +2,7 @@ import React from 'react';
 import {List} from 'immutable';
 import Component from '../common/component.react';
 import {toggleFilterGroup} from './actions';
-import {getTagName, getNameWithTooltip} from '../../lib/helpers';
+import {getTagName} from '../../lib/helpers';
 
 require('./filtergroup.styl');
 
@@ -42,7 +42,7 @@ export default class FilterGroup extends Component {
           onKeyUp={::this.onKeyPress}
           role='button'
           tabIndex='0'
-          >{getNameWithTooltip(this.props.displayName)}
+          >{this.props.displayName}
         </h4>
 
         <div className='FilterGroup-body'>
