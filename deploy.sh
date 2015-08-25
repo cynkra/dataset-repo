@@ -1,3 +1,6 @@
 #!/bin/bash
 
-sudo git pull && sudo npm install --python=python2 && sudo gulp build --production && pm2 reload server
+set -e
+
+sudo -u web -- sh -c 'git pull && npm install --python=python2 && gulp build --production'
+sudo -u root /etc/init.d/dataset-repo restart
