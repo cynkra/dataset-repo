@@ -1,6 +1,10 @@
+.node_gyp/
+.npm/
+build/
+log/
+node_modules/
+.babel.json
 .DS_Store
-build
-node_modules
 npm-debug.log
 *.sublime-workspace
 src/config/*.local.js
