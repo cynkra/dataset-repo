@@ -29,11 +29,11 @@ For generating dataset schema images, there should be [graphviz](http://www.grap
 - `gulp build -p` build in production mode
 
 ## Upload datasets
-- Create a new database.
+- Create a new database on the server.
 - Upload the data into the database. Make sure the tables are stored with InnoDB engine (not MyISAM, which doesn't support foreign key constrains). And if possible, prefer UTF-8 character set before latin1_swedish (the default value in old versions of MySQL).
-- Add description of the data into meta.database (the unique property of the version of the dataset) and possibly into meta.dataset (the shared properties of the dataset versions).
-- Execute the SQL script that updates meta.information.
-- Validate the content of the webpage.
+- Add description of the data into meta.database and possibly into meta.dataset.
+- Execute /assets/sql/meta_information.sql script to update meta.information.
+- Validate the change on the webpage.
 
 ## Useful links for developers
 - [React.js](http://facebook.github.io/react/). 
