@@ -14,7 +14,7 @@ export const dispatchToken = register(({action, data}) => {
             list.clear();
             data.forEach((row, i) => {
               list.push(new Contributor({
-                name: row.uploader,
+                name: row.uploader_name,
                 url: row.uploader_url,
                 count: row.count
               }));

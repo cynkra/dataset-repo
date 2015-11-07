@@ -4,7 +4,7 @@ if (!process.env.IS_BROWSER) {
 
 const table = 'information';
 const columns = {
-  originalDatabaseName: 'original_database_name',
+  originalDatabaseName: 'dataset_name',
   description: 'description',
   databaseSize: 'database_size',
   tableCount: 'table_count',
@@ -26,7 +26,7 @@ export default {
         .select(getValues(columns))
         .from(table)
         .where('is_hidden', 0)
-        .whereNotNull('original_database_name')
+        .whereNotNull('dataset_name')
         .where('is_primary_version', 1)
         .catch((err) => reject(err))
         .then((rows) => resolve(rows));
@@ -38,8 +38,8 @@ export default {
         .select()
         .from(table)
         .where('is_hidden', 0)
-        .whereNotNull('original_database_name')
-        .where('original_database_name', params.dataset)
+        .whereNotNull('dataset_name')
+        .where('dataset_name', params.dataset)
         .catch((err) => reject(err))
         .then((rows) => {
           if (rows.length < 1) return reject();
@@ -56,7 +56,7 @@ export default {
         .select()
         .from(table)
         .where('is_hidden', 0)
-        .whereNotNull('original_database_name')
+        .whereNotNull('dataset_name')
         .where('is_primary_version', 1)
         .orderBy('publication_count', 'DESC')
         .limit(count)
@@ -70,10 +70,10 @@ export default {
         .select(getValues(columns))
         .from(table)
         .where('is_hidden', 0)
-        .whereNotNull('original_database_name')
+        .whereNotNull('dataset_name')
         .where('is_primary_version', 1)
         .where(function() {
-          this.where('original_database_name', 'like', '%' + params.q + '%')
+          this.where('dataset_name', 'like', '%' + params.q + '%')
           .orWhere('alternative_names', 'like', '%' + params.q + '%');
         })
         .where(filterDatabaseSize(params.databaseSize))
@@ -169,8 +169,8 @@ function filterMissingValues(missingValues: Array) {
 function filterLoops(loops: Array) {
   loops = loops.filter((n) => { return ['With loops', 'Without loops'].indexOf(n) !== -1; });
   return function() {
-    if (loops.indexOf('With loops') !== -1) this.orWhere('loop_count', '!=', 0);
-    if (loops.indexOf('Without loops') !== -1) this.orWhere('loop_count', 0);
+    if (loops.indexOf('With loops') !== -1) this.orWhere('has_loop', '!=', 0);
+    if (loops.indexOf('Without loops') !== -1) this.orWhere('has_loop', 0);
     if (loops.length === 0) this.where(true);
   };
 }

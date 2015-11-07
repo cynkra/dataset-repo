@@ -8,14 +8,14 @@ export default {
   getContributors: () => {
     return new Promise((resolve, reject) => {
       db
-        .column('uploader')
+        .column('uploader_name')
         .column('uploader_url')
         .count('* as count')
         .from(table)
         .where('is_hidden', 0)
-        .whereNotNull('original_database_name')
-        .whereNotNull('uploader')
-        .groupBy('uploader', 'uploader_url')
+        .whereNotNull('dataset_name')
+        .whereNotNull('uploader_name')
+        .groupBy('uploader_name', 'uploader_url')
         .orderBy('count', 'DESC')
         .catch((err) => reject(err))
         .then((rows) => resolve(rows));

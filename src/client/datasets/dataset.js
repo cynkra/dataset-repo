@@ -35,7 +35,7 @@ export default class Dataset extends DatasetRecord {
 
   static fromDB = (props) => {
     return new Dataset({
-      title: props.get('original_database_name'),
+      title: props.get('dataset_name'),
       alternativeNames: props.get('alternative_names'),
       description: props.get('description'),
       databaseSize: props.get('database_size'),
@@ -49,18 +49,18 @@ export default class Dataset extends DatasetRecord {
       dataTypes: dataTypes.filter((dataType) => {
         return props.get(dataType + '_count') > 0;
       }),
-      bibtexPath: props.get('bibtex_path'),
-      imgPath: props.get('img_path'),
-      mwbPath: props.get('mwb_path'),
-      origin: props.get('origin'),
-      schema: props.get('TABLE_SCHEMA'),
+      bibtexPath: props.get('bibtex_filename'),
+      imgPath: props.get('img_filename'),
+      mwbPath: props.get('mwb_filename'),
+      origin: props.get('download_url'),
+      schema: props.get('database_name'),
       versions: props.get('versions')
         ? props.get('versions').map(version => Dataset.fromDB(version))
         : List(),
       modifications: props.get('modifications'),
-      uploader: props.get('uploader'),
+      uploader: props.get('uploader_name'),
       compositeKeys: props.get('composite_key_count') > 0,
-      loops: props.get('loop_count') > 0,
+      loops: props.get('has_loop') > 0,
       instanceCount: props.get('instance_count'),
       targetTable: props.get('target_table'),
       targetColumn: props.get('target_column'),

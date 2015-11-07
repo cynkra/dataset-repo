@@ -9,7 +9,7 @@ var config = {
     client:   'mysql',
     host:     'relational.fit.cvut.cz',
     user:     'guest',
-    password: '******',
+    password: 'relational',
     database: 'meta'
   },
   email: {

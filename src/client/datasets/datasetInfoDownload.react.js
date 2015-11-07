@@ -25,7 +25,7 @@ export default class DatasetInfoDownload extends Component {
               <li>hostname: relational.fit.cvut.cz</li>
               <li>port: 3306</li>
               <li>username: guest</li>
-              <li>password (six stars): ******</li>
+              <li>password: relational</li>
             </ul>
           </li>
           <li>
