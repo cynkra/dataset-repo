@@ -28,6 +28,13 @@ For generating dataset schema images, there should be [graphviz](http://www.grap
 - `gulp -p` run app in production mode
 - `gulp build -p` build in production mode
 
+## Upload datasets
+- Create a new database.
+- Upload the data into the database. Make sure the tables are stored with InnoDB engine (not MyISAM, which doesn't support foreign key constrains). And if possible, prefer UTF-8 character set before latin1_swedish (the default value in old versions of MySQL).
+- Add description of the data into meta.database (the unique property of the version of the dataset) and possibly into meta.dataset (the shared properties of the dataset versions).
+- Execute the SQL script that updates meta.information.
+- Validate the content of the webpage.
+
 ## Useful links for developers
 - [React.js](http://facebook.github.io/react/). 
 - [What is the Flux application architecture](https://medium.com/brigade-engineering/what-is-the-flux-application-architecture-b57ebca85b9e). 
