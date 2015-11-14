@@ -14,5 +14,4 @@ assets/img/datasets-generated/*
 assets/img/datasets/*
 assets/mwb/*
 assets/bibtex/*
-!assets/sql/
 !.gitkeep
