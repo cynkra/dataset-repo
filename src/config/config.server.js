@@ -14,15 +14,15 @@ var config = {
   },
   email: {
     auth: {
-      host: '',
-      port: 465,
+      host: 'relay.vpn',
+      port: 25,
       secure: true,
       auth: {
         user: '',
         pass: ''
       }
     },
-    recipient: ''
+    recipient: 'jan.motl@fit.cvut.cz'
   },
   googleAnalyticsId: 'UA-61229872-1',
   isProduction: process.env.NODE_ENV === 'production',

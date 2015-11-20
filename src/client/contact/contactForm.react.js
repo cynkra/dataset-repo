@@ -82,7 +82,7 @@ export default class ContactForm extends Component {
           <strong>Jan Motl</strong><br />
           Faculty of Information Technology<br />
           Czech Technical University in Prague<br />
-          Zikova 1903/4, 166 36<br />
+          Thákurova 9, 160 00<br />
           Czech Republic<br />
           Phone: +420 603 885 753
 
