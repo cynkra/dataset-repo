@@ -50,6 +50,8 @@ export function getSizeWithUnit(size: number) {
 
 /**
  * Returns path to the image.
+ * @param image_filename as given in information.schema|null
+ * @param database_name as given in information.schema|null
  * @return string|null
  */
 export function getImagePath(image, schema) {
@@ -57,7 +59,7 @@ export function getImagePath(image, schema) {
     const imagePath = config.images.datasetsGeneratedPath + schema + '.png';
     return checkImage(imagePath, schema) ? imagePath : null;
   }
-  return image ? config.images.datasetsPath + image + '.png' : null;
+  return image ? config.images.datasetsPath + image : null;
 }
 
 /**
