@@ -8,19 +8,21 @@ import fs from 'fs';
 import {exec} from 'child_process';
 
 export function getSchema(dbName: string) {
-  let db;
-  try {
-    knex.on('disconnect', function(e) { throw e; });
-    db = knex({
-      client: config.database.client,
-      connection: {
-        host:     config.database.host,
-        user:     config.database.user,
-        password: config.database.password,
-        database: dbName
-      }
-    });
-  } catch (e) { return; }
+  
+  // create a new connection to dbName. The connection is going to close itself after a few minutes of inactivity.
+  let db = knex({
+    client: config.database.client,
+    connection: {
+      host:     config.database.host,
+      user:     config.database.user,
+      password: config.database.password,
+      database: dbName
+    },
+    pool: {
+      min: 0,
+      max: 10
+    }
+  });
 
   let tables = [];
   let graph = {
@@ -48,9 +50,10 @@ export function getSchema(dbName: string) {
     })
     .then((res) => {
       return db
-        .select('TABLE_NAME', 'COLUMN_NAME', 'CONSTRAINT_NAME', 'REFERENCED_TABLE_NAME', 'REFERENCED_COLUMN_NAME')
+        .select(knex.raw('TABLE_NAME, min(COLUMN_NAME) as COLUMN_NAME, CONSTRAINT_NAME, REFERENCED_TABLE_NAME, min(REFERENCED_COLUMN_NAME) as REFERENCED_COLUMN_NAME'))
         .from('INFORMATION_SCHEMA.KEY_COLUMN_USAGE')
         .whereRaw('REFERENCED_TABLE_SCHEMA = database()')
+        .groupByRaw('TABLE_NAME, CONSTRAINT_NAME, REFERENCED_TABLE_NAME')
         .map((fk) => {
           tables[fk.TABLE_NAME][fk.COLUMN_NAME].fk = {
             table: fk.REFERENCED_TABLE_NAME,
@@ -91,15 +94,15 @@ export function getSchema(dbName: string) {
       exec('which dot', (err, stdout, stderr) => {
         if (!err && !stderr) {
           const tmpDotFile = path.join(__dirname, 'tpl', '__sqlviz__.dot');
-          const outFilename = path.join(__dirname, '..', '..', '..', 'assets', 'img', 'datasets-generated', dbName + '.png');
+          const outFilename = path.join(__dirname, '..', '..', '..', 'assets', 'img', 'datasets-generated', dbName + '.svg');
           const dot = stdout.trim();
-          const cmd = dot + ' -Tpng -o ' + outFilename + ' ' + tmpDotFile;
+          const cmd = dot + ' -Tsvg -o ' + outFilename + ' ' + tmpDotFile;
 
           fs.writeFileSync(tmpDotFile, dotStr);
           exec(cmd);
         } else {
           console.error(stderr + ' ' + err); // eslint-disable-line no-console
-          throw new 'Can\'t find dot to generate a png. Is graphviz installed?';
+          throw new 'Can\'t find dot to generate a svg. Is graphviz installed?';
         }
       });
     });

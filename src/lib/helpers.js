@@ -56,7 +56,7 @@ export function getSizeWithUnit(size: number) {
  */
 export function getImagePath(image, schema) {
   if (!image && schema) {
-    const imagePath = config.images.datasetsGeneratedPath + schema + '.png';
+    const imagePath = config.images.datasetsGeneratedPath + schema + '.svg';
     return checkImage(imagePath, schema) ? imagePath : null;
   }
   return image ? config.images.datasetsPath + image : null;
@@ -79,7 +79,6 @@ export function checkImage(src: string, schema: string) {
   } else {
     const fs = require('fs');
     const path = require('path');
-
     if (fs.existsSync(path.join(__dirname, '..', '..', src))) {
       return true;
     } else {
