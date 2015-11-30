@@ -23,12 +23,12 @@ digraph name {
         >{{ relation.target }}</FONT></TD></TR>
         </TABLE>
         >]
-    {{ model.name }} -> {{ relation.target }};
+    {{ model.id }} -> {{ relation.target }};
     {% endfor %}
   {% endfor %}
 
   {% for model in models %}
-    {{ model.name }} [label=<
+    {{ model.id }} [label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" ALIGN="left">
      <TR><TD BGCOLOR="Lavender" COLSPAN="2" CELLPADDING="4" ALIGN="CENTER"
      ><FONT FACE="Helvetica-Bold"

@@ -8,7 +8,6 @@ import fs from 'fs';
 import {exec} from 'child_process';
 
 export function getSchema(dbName: string) {
-  
   // create a new connection to dbName. The connection is going to close itself after a few minutes of inactivity.
   let db = knex({
     client: config.database.client,
@@ -33,17 +32,17 @@ export function getSchema(dbName: string) {
 
   // fetch all tables in database
   db
-    .select('table_name', 'column_name', 'data_type')
+    .select('columns.table_name', 'columns.column_name', 'columns.data_type')
     .from('information_schema.columns')
-    .whereRaw('table_schema = database()')
-    .orderByRaw('table_name, ordinal_position')
+    .join('information_schema.tables')
+    .whereRaw('columns.table_schema = database() and columns.table_schema = tables.table_schema and columns.table_name = tables.table_name and tables.table_type =  "BASE TABLE"')
+    .orderByRaw('columns.table_name, columns.ordinal_position')
     .map((el) => {
       const name = el.table_name;
       tables[name] = tables[name] || {};
       tables[name][el.column_name] = {
         name: el.column_name,
         type: el.data_type,
-        blank: false,
         fk: null
       };
       return tables;
@@ -65,6 +64,7 @@ export function getSchema(dbName: string) {
     .then((res) => {
       Object.keys(tables).forEach((name) => {
         let model = {
+          id: name2id(name),
           name: name,
           fields: [],
           relations: []
@@ -74,17 +74,17 @@ export function getSchema(dbName: string) {
           const col = tables[name][c];
           model.fields.push({
             name: col.name,
-            type: col.type,
-            blank: col.blank
+            type: col.type
           });
           if (col.fk !== null)
             model.relations.push({
-              target: col.fk.table,
+              target: name2id(col.fk.table),
               type: tables[col.fk.table][col.fk.column].type,
               name: col.fk.column,
               arrows: ''
             });
         });
+
         graph.models.push(model);
       });
 
@@ -93,17 +93,21 @@ export function getSchema(dbName: string) {
 
       exec('which dot', (err, stdout, stderr) => {
         if (!err && !stderr) {
-          const tmpDotFile = path.join(__dirname, 'tpl', '__sqlviz__.dot');
+          const tmpDotFile = path.join(__dirname, 'tpl', dbName + '.dot');  // hope dbName doesn't contain any ridiculous character
           const outFilename = path.join(__dirname, '..', '..', '..', 'assets', 'img', 'datasets-generated', dbName + '.svg');
           const dot = stdout.trim();
           const cmd = dot + ' -Tsvg -o ' + outFilename + ' ' + tmpDotFile;
-
-          fs.writeFileSync(tmpDotFile, dotStr);
-          exec(cmd);
+          fs.writeFileSync(tmpDotFile, dotStr); 
+          exec(cmd);          
         } else {
           console.error(stderr + ' ' + err); // eslint-disable-line no-console
           throw new 'Can\'t find dot to generate a svg. Is graphviz installed?';
         }
       });
     });
+
+  // subroutine: remove all whitespaces and slashes for graphviz and hope the result will be unique
+  function name2id(name: string){
+    return name.replace(/\s/g, "").replace(/-/g, "");
+  }
 }
