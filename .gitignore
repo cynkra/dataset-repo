@@ -9,7 +9,8 @@ npm-debug.log
 *.sublime-workspace
 src/config/*.local.js
 src/config/*.local.js
-src/services/sqlviz/tpl/__sqlviz__.dot
+src/services/sqlviz/tpl
+!src/services/sqlviz/tpl/sqlviz.tpl
 assets/img/datasets-generated/*
 assets/img/datasets/*
 assets/mwb/*
