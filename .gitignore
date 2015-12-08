@@ -1,5 +1,6 @@
 .node_gyp/
 .npm/
+.idea
 build/
 log/
 node_modules/
