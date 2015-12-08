@@ -28,7 +28,8 @@ const DatasetRecord = Record({
   targetTable: null,
   targetColumn: null,
   targetId: null,
-  targetTimestamp: null
+  targetTimestamp: null,
+  references: List()
 });
 
 export default class Dataset extends DatasetRecord {
@@ -65,7 +66,10 @@ export default class Dataset extends DatasetRecord {
       targetTable: props.get('target_table'),
       targetColumn: props.get('target_column'),
       targetId: props.get('target_id'),
-      targetTimestamp: props.get('target_timestamp')
+      targetTimestamp: props.get('target_timestamp'),
+      references: props.get('references')
+        ? props.get('references').map(reference => new Reference(reference))
+        : List()
     });
   }
 
@@ -74,9 +78,26 @@ export default class Dataset extends DatasetRecord {
       props = props
         .set('versions', props.get('versions')
           ? props.get('versions').map(version => Dataset.revive(version))
+          : List())
+        .set('references', props.get('references')
+          ? props.get('references').map(reference => Reference.revive(reference))
           : List());
     }
     return new Dataset(props);
   }
 
+}
+
+const ReferenceRecord = Record({
+  text: null,
+  url: null
+});
+
+class Reference extends ReferenceRecord {
+
+  static revive = (props) => {
+
+    return new Reference(props);
+
+  }
 }

@@ -5,6 +5,7 @@ import DatasetInfoImage from './datasetInfoImage.react';
 import DatasetInfoSummary from './datasetInfoSummary.react';
 import DatasetInfoDetails from './datasetInfoDetails.react';
 import DatasetInfoDownload from './datasetInfoDownload.react';
+import DatasetInfoReferences from './datasetInfoReferences.react';
 
 require('./datasetInfo.styl');
 
@@ -35,6 +36,10 @@ export default class DatasetInfo extends Component {
 
         <DatasetInfoDetails
           dataset={dataset}
+        />
+
+        <DatasetInfoReferences
+          references={dataset.references}
         />
 
         <DatasetInfoDownload

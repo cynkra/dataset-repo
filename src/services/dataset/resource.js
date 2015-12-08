@@ -45,7 +45,16 @@ export default {
           if (rows.length < 1) return reject();
           let dataset = JSON.parse(JSON.stringify(rows[0]));
           dataset.versions = rows;
-          return resolve(dataset);
+          const databaseNames = rows.map((row) => row.database_name);
+          db
+            .select()
+            .from('reference')
+            .whereIn('database_name', databaseNames)
+            .catch((err) => reject(err))
+            .then((rows) => {
+              dataset.references = rows;
+              return resolve(dataset);
+            });
         });
     });
   },
