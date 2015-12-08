@@ -1,7 +1,7 @@
 import React from 'react';
 import immutable from 'immutable';
-import Component from '../common/component.react';
-import {capitalize} from '../../lib/helpers';
+import Component from '../../common/component.react.js';
+import {capitalize} from '../../../lib/helpers';
 
 require('./datasetInfoVersions.styl');
 

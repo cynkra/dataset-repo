@@ -1,6 +1,6 @@
 import React from 'react';
-import Component from '../common/component.react';
-import {getImagePath} from '../../lib/helpers';
+import Component from '../../common/component.react.js';
+import {getImagePath} from '../../../lib/helpers';
 
 require('./datasetInfoImage.styl');
 

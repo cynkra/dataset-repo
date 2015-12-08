@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Component from '../common/component.react';
-import DatasetType from './dataset';
-import {capitalize, getSizeWithUnit, getLocaleString, getTagName, getNameWithTooltip, tooltips} from '../../lib/helpers';
-import {getTableCountValue, getDataTypeText} from './tags/store';
+import Component from '../../common/component.react.js';
+import DatasetType from '../dataset';
+import {capitalize, getSizeWithUnit, getLocaleString, getTagName, getNameWithTooltip, tooltips} from '../../../lib/helpers';
+import {getTableCountValue, getDataTypeText} from '../tags/store';
 
 require('./datasetInfoDetails.styl');
 

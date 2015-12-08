@@ -1,6 +1,6 @@
 import React from 'react';
-import Component from '../common/component.react';
 import immutable from 'immutable';
+import Component from '../../common/component.react.js';
 
 require('./datasetInfoReferences.styl');
 

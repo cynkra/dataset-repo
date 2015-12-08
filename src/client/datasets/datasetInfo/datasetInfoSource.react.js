@@ -1,5 +1,5 @@
 import React from 'react';
-import Component from '../common/component.react';
+import Component from '../../common/component.react.js';
 
 export default class DatasetInfoSource extends Component {
 

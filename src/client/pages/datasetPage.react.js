@@ -2,7 +2,7 @@ import React from 'react';
 import immutable from 'immutable';
 import DocumentTitle from 'react-document-title';
 import Component from '../common/component.react';
-import DatasetInfo from '../datasets/datasetInfo.react';
+import DatasetInfo from '../datasets/datasetInfo/datasetInfo.react.js';
 import exposeRouter from '../common/exposerouter.react';
 import {fetchDataset} from '../datasets/actions';
 

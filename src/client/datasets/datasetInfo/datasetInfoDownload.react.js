@@ -1,6 +1,6 @@
 import React from 'react';
-import Component from '../common/component.react';
-import DatasetType from './dataset';
+import Component from '../../common/component.react.js';
+import DatasetType from '../dataset';
 
 export default class DatasetInfoDownload extends Component {
 

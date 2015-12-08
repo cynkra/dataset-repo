@@ -1,11 +1,11 @@
 import React from 'react';
-import Component from '../common/component.react';
-import DatasetType from './dataset';
-import DatasetInfoImage from './datasetInfoImage.react';
-import DatasetInfoSummary from './datasetInfoSummary.react';
-import DatasetInfoDetails from './datasetInfoDetails.react';
-import DatasetInfoDownload from './datasetInfoDownload.react';
-import DatasetInfoReferences from './datasetInfoReferences.react';
+import Component from '../../common/component.react.js';
+import DatasetType from '../dataset';
+import DatasetInfoImage from './datasetInfoImage.react.js';
+import DatasetInfoSummary from './datasetInfoSummary.react.js';
+import DatasetInfoDetails from './datasetInfoDetails.react.js';
+import DatasetInfoDownload from './datasetInfoDownload.react.js';
+import DatasetInfoReferences from './datasetInfoReferences.react.js';
 
 require('./datasetInfo.styl');
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import DatasetType from './dataset';
-import Component from '../common/component.react';
-import DatasetInfoSource from './datasetInfoSource.react';
-import DatasetInfoVersions from './datasetInfoVersions.react';
+import DatasetType from '../dataset';
+import Component from '../../common/component.react.js';
+import DatasetInfoSource from './datasetInfoSource.react.js';
+import DatasetInfoVersions from './datasetInfoVersions.react.js';
 
 require('./datasetInfoSummary.styl');
 
