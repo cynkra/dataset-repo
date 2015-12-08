@@ -28,7 +28,7 @@ export default class DatasetInfoSummary extends Component {
           )
           : null}
 
-        <p>
+        <p className='DatasetInfoSummary-description'>
           {dataset.description}
         </p>
 

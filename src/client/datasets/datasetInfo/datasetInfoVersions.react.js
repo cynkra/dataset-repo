@@ -22,12 +22,13 @@ export default class DatasetInfoVersions extends Component {
             const modifications = (version.modifications ? version.modifications.split(/,\s|\.\s/) : null);
             return (
               <li key={'version-' + i}>
-                <h4>{capitalize(version.schema)}</h4>
-
-                {version.uploader
-                  ? <small>by {version.uploader}</small>
-                  : null
-                }
+                <h4>
+                  {capitalize(version.schema)}
+                  {version.uploader
+                    ? <small> (by {version.uploader})</small>
+                    : null
+                  }
+                </h4>
 
                 {modifications
                   ? (
