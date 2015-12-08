@@ -23,7 +23,7 @@ export default class DatasetInfoSource extends Component {
           Original source: <a href={origin}>{originText}</a>
           {bibtex}
         </p>
-      ) : null;
+      ) : bibtex;
   }
 
 }
