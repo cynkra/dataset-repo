@@ -114,7 +114,11 @@ export const tooltips = {
   'Without compound keys': 'All keys are simple keys',
   'Real': 'Data consist of real world measurements',
   'Synthetic': 'Data are a product of a simulation',
-  'Associated task': 'Task associated with the target column'
+  'Associated task': 'Task associated with the target column',
+  '#Relations': 'Count of tables in the dataset',
+  '#Attributes': 'Count of all columns in the dataset',
+  '#Tuples': 'Count of all rows in the dataset',
+  '#Instances': 'Count of rows in the target table'
 };
 
 export function getNameWithTooltip(name, capitalizeName = true) {
