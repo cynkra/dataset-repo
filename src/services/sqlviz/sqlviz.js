@@ -97,8 +97,8 @@ export function getSchema(dbName: string) {
           const outFilename = path.join(__dirname, '..', '..', '..', 'assets', 'img', 'datasets-generated', dbName + '.svg');
           const dot = stdout.trim();
           const cmd = dot + ' -Tsvg -o ' + outFilename + ' ' + tmpDotFile;
-          fs.writeFileSync(tmpDotFile, dotStr); 
-          exec(cmd);          
+          fs.writeFileSync(tmpDotFile, dotStr);
+          exec(cmd);
         } else {
           console.error(stderr + ' ' + err); // eslint-disable-line no-console
           throw new 'Can\'t find dot to generate a svg. Is graphviz installed?';
@@ -107,7 +107,7 @@ export function getSchema(dbName: string) {
     });
 
   // subroutine: remove all whitespaces and slashes for graphviz and hope the result will be unique
-  function name2id(name: string){
-    return name.replace(/\s/g, "").replace(/-/g, "");
+  function name2id(name: string) {
+    return name.replace(/\s/g, '').replace(/-/g, '');
   }
 }
