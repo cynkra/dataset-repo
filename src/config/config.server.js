@@ -15,14 +15,9 @@ var config = {
   email: {
     auth: {
       host: 'relay.vpn',
-      port: 25,
-      secure: true,
-      auth: {
-        user: '',
-        pass: ''
-      }
+      port: 25
     },
-    recipient: 'jan.motl@fit.cvut.cz'
+    recipient: 'Jan Motl <jan.motl@fit.cvut.cz>, Oliver Schulte <oschulte@cs.sfu.ca>'
   },
   googleAnalyticsId: 'UA-61229872-1',
   isProduction: process.env.NODE_ENV === 'production',
