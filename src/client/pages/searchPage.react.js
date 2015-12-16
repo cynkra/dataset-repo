@@ -43,7 +43,10 @@ export default class SearchPage extends Component {
       return <div className='SearchPage-header'>Loading...</div>;
     if (result.list.count() === 0)
       return <div className='SearchPage-header'>No results</div>;
-    return <DatasetList datasets={result.list} />;
+    return [
+      <div className='SearchPage-header' key='header'>{result.list.count()} datasets found...</div>,
+      <DatasetList datasets={result.list} key='list' />
+    ];
   }
 
   render() {
