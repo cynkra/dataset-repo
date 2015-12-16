@@ -1,6 +1,20 @@
 import {List, Map, Record} from 'immutable';
 import {dataTypes} from '../datasets/store';
 
+const ReferenceRecord = Record({
+  text: null,
+  url: null
+});
+
+class Reference extends ReferenceRecord {
+
+  static revive = (props) => {
+
+    return new Reference(props);
+
+  }
+}
+
 const DatasetRecord = Record({
   title: null,
   alternativeNames: null,
@@ -86,18 +100,4 @@ export default class Dataset extends DatasetRecord {
     return new Dataset(props);
   }
 
-}
-
-const ReferenceRecord = Record({
-  text: null,
-  url: null
-});
-
-class Reference extends ReferenceRecord {
-
-  static revive = (props) => {
-
-    return new Reference(props);
-
-  }
 }
