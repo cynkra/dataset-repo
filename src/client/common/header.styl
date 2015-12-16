@@ -19,11 +19,15 @@
     display inline-block
     font-size 20px
     margin 0
-    color #dadada
     font-weight 300
     text-transform uppercase
 
-    &:hover
+  a
+    text-decoration none
+    color #dadada
+
+    &:hover,
+    &.active
       color #fff
 
   &-nav
@@ -44,11 +48,3 @@
 
       &:last-child:after
         content: ''
-
-      a
-        text-decoration none
-        color #dadada
-
-        &:hover,
-        &.active
-          color #fff
