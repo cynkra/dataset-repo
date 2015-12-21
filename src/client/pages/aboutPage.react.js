@@ -31,12 +31,9 @@ export default class AboutPage extends Component {
       <DocumentTitle title='About'>
         <section className='content'>
           <section className='About-section'>
-            <h1>Purpose of the repository</h1>
+            <h1>Mission</h1>
             <p>
-              There are nice repositories of propositional (e.g. <a href="http://archive.ics.uci.edu/ml/">UCI</a>) and graph datasets (e.g. <a href="http://snap.stanford.edu/data/">SNAP</a>) on the web. However, until now, there wasn't any bigger repository of relational datasets in a common format. And the lack of such repository in past had unpleasant consequences. Empirical evaluations of algorithms were limited to a few datasets, since it was difficult to obtain more datasets. Results from different authors were hard to compare, because different versions of the same dataset were in the world. And the progress in the relational machine learning stalled, because scientists were unaware of problems absent in their datasets.
-            </p>
-            <p>
-              The purpose of the relational repository is to rectify the situation and provide a diverse set of publicly available relational datasets.
+              To support growth of relational machine learning.
             </p>
           </section>
 
@@ -50,8 +47,13 @@ export default class AboutPage extends Component {
 
               <dt>Why MySQL database?</dt>
               <dd>
-                Because in combination with <a href="http://clowdflows.org">ClowdFlows</a> you can process the datasets online! <br />
+                Because in combination with <a href="http://clowdflows.org">ClowdFlows</a> you can process the datasets online. <br />
                 Just open one of the public workflows (like <a href="http://clowdflows.org/workflows/copy-workflow/2222">Wordification</a> or <a href="http://clowdflows.com/workflow/4018">Cross-validation</a>), change the credentials in "MySQL Connect" operator to the credentials from the repository and you are ready to go!
+              </dd>
+
+              <dt>What to do if I want an ILP format?</dt>
+              <dd>
+                See a collection of datasets at <a href="http://www-ai.ijs.si/~ilpnet2/apps/index.html">ILPnet2</a>.
               </dd>
 
               <dt>Why do the datasets contain missing values/composite keys/strange data types/any other ugly thing you may think of?</dt>
