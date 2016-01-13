@@ -19,7 +19,7 @@ export default class DatasetInfoVersions extends Component {
         <h3 className='DatasetInfoVersions-heading'>Versions</h3>
         <ul className='DatasetInfoVersions-list'>
           {versions.map((version, i) => {
-            const modifications = (version.modifications ? version.modifications.split(/,\s|\.\s/) : null);
+            const modifications = (version.modifications ? version.modifications.split(/\n/) : null);
             return (
               <li key={'version-' + i}>
                 <h4>
