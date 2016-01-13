@@ -12,7 +12,7 @@ function validateContributeForm(values: Object) {
 }
 
 export function submitContributeForm(values: Object) {
-  const promise = (resolve) => {
+  const promise = (resolve, reject) => {
     validateContributeForm(values)
       .then(() => sendContribution(values))
       .then((data) => {
@@ -21,7 +21,7 @@ export function submitContributeForm(values: Object) {
       })
       .catch((error) => {
         submitContributeFormError(error);
-        resolve(error);
+        reject(error);
       });
   };
   return dispatchAsync(submitContributeForm, resolver.resolve(promise));

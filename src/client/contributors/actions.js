@@ -3,7 +3,6 @@ import {getContributors} from '../../services/contributor/fetcher';
 import resolver from '../../lib/resolver';
 
 export function fetchContributors() {
-  fetchContributorsStart();
   const promise = (resolve) => {
     getContributors()
       .then((data) => {
@@ -17,6 +16,5 @@ export function fetchContributors() {
   };
   return dispatchAsync(fetchContributors, resolver.resolve(promise));
 }
-export function fetchContributorsStart() { dispatch(fetchContributorsStart); }
 export function fetchContributorsSuccess(data) { dispatch(fetchContributorsSuccess, data); }
 export function fetchContributorsError(error) { dispatch(fetchContributorsError, error); }

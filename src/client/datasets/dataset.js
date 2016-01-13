@@ -7,11 +7,8 @@ const ReferenceRecord = Record({
 });
 
 class Reference extends ReferenceRecord {
-
   static revive = (props) => {
-
     return new Reference(props);
-
   }
 }
 

@@ -1,4 +1,5 @@
 import * as actions from './actions';
+import immutable from 'immutable';
 import {register} from '../lib/dispatcher';
 import {contributorsCursor} from '../state';
 import Contributor from './contributor';
@@ -9,18 +10,14 @@ export const dispatchToken = register(({action, data}) => {
 
     case actions.fetchContributorsSuccess:
       contributorsCursor(contributors => {
-        return contributors.update('list', list => {
-          return list.withMutations(list => {
-            list.clear();
-            data.forEach((row, i) => {
-              list.push(new Contributor({
-                name: row.uploader_name,
-                url: row.uploader_url,
-                count: row.count
-              }));
+        return contributors
+          .set('list', immutable.fromJS(data).map(contributor => {
+            return new Contributor({
+              name: contributor.get('uploader_name'),
+              url: contributor.get('uploader_url'),
+              count: contributor.get('count')
             });
-          });
-        });
+          }));
       });
       break;
 
