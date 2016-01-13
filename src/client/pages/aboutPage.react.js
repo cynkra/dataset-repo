@@ -1,36 +1,12 @@
 import React from 'react';
-import immutable from 'immutable';
 import DocumentTitle from 'react-document-title';
 import Component from '../common/component.react';
-import ContributorsChart from '../contributors/contributorsChart.react';
-import StatisticsSummary from '../statistics/statisticsSummary.react';
-import {fetchContributors} from '../contributors/actions';
-import {fetchSummary} from '../statistics/actions';
 
 require('./aboutPage.styl');
 
 export default class AboutPage extends Component {
 
-  static propTypes = {
-    contributors: React.PropTypes.instanceOf(immutable.Map).isRequired,
-    statistics: React.PropTypes.instanceOf(immutable.Map).isRequired
-  }
-
-  componentWillMount() {
-    fetchSummary();
-    fetchContributors();
-  }
-
   render() {
-    const contributors = this.props.contributors.get('list');
-    const summary = this.props.statistics.get('summary');
-
-    const leftMargin = contributors.reduce((prev, next) => {
-      const x = prev.name ? prev.name.toString().length : prev;
-      const y = next.name ? next.name.toString().length : next;
-      return x > y ? x : y;
-    }) || 100;
-
     return (
       <DocumentTitle title='About'>
         <section className='content'>
@@ -71,27 +47,6 @@ export default class AboutPage extends Component {
                 If your algorithm can process all the tables present in Adventure Works, it may be able to process real world datasets.
               </dd>
             </dl>
-          </section>
-
-          <section className='About-section'>
-            <h2>Summary Statistics</h2>
-            <StatisticsSummary summary={summary} />
-          </section>
-
-          <section className='About-section'>
-            <h2>Classifier's Ranking</h2>
-            <p>Bigger value is better.</p>
-          </section>
-
-          <section className='About-section'>
-            <h2>Top Contributors</h2>
-            <ContributorsChart
-              data={contributors}
-              height={contributors.count() * 75}
-              margins={{top: 0, right: 20, bottom: 20, left: (leftMargin + 2) * 8}}
-              title=''
-              width={992}
-            />
           </section>
         </section>
       </DocumentTitle>
