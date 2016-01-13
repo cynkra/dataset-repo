@@ -12,6 +12,22 @@ class Reference extends ReferenceRecord {
   }
 }
 
+const AlgorithmRecord = Record({
+  datasetVersion: null,
+  target: null,
+  algorithm: null,
+  authorText: null,
+  authorUrl: null,
+  measure: null,
+  value: null
+});
+
+class Algorithm extends AlgorithmRecord {
+  static revive = (props) => {
+    return new Algorithm(props);
+  }
+}
+
 const DatasetRecord = Record({
   title: null,
   alternativeNames: null,
@@ -40,7 +56,8 @@ const DatasetRecord = Record({
   targetColumn: null,
   targetId: null,
   targetTimestamp: null,
-  references: List()
+  references: List(),
+  algorithms: List()
 });
 
 export default class Dataset extends DatasetRecord {
@@ -80,7 +97,17 @@ export default class Dataset extends DatasetRecord {
       targetTimestamp: props.get('target_timestamp'),
       references: props.get('references')
         ? props.get('references').map(reference => new Reference(reference))
-        : List()
+        : List(),
+      algorithms: props.get('algorithms')
+        ? props.get('algorithms').map(algorithm => new Algorithm({
+          datasetVersion: algorithm.get('dataset_version'),
+          target: algorithm.get('target'),
+          algorithm: algorithm.get('algorithm'),
+          authorText: algorithm.get('author_text'),
+          authorUrl: algorithm.get('author_url'),
+          measure: algorithm.get('measure'),
+          value: algorithm.get('value'),
+        })) : List()
     });
   }
 
@@ -92,6 +119,9 @@ export default class Dataset extends DatasetRecord {
           : List())
         .set('references', props.get('references')
           ? props.get('references').map(reference => Reference.revive(reference))
+          : List())
+        .set('algorithms', props.get('algorithms')
+          ? props.get('algorithms').map(algorithm => Algorithm.revive(algorithm))
           : List());
     }
     return new Dataset(props);

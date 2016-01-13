@@ -1,11 +1,12 @@
 import React from 'react';
-import Component from '../../common/component.react.js';
+import Component from '../../common/component.react';
 import DatasetType from '../dataset';
-import DatasetInfoImage from './datasetInfoImage.react.js';
-import DatasetInfoSummary from './datasetInfoSummary.react.js';
-import DatasetInfoDetails from './datasetInfoDetails.react.js';
-import DatasetInfoDownload from './datasetInfoDownload.react.js';
-import DatasetInfoReferences from './datasetInfoReferences.react.js';
+import DatasetInfoImage from './datasetInfoImage.react';
+import DatasetInfoSummary from './datasetInfoSummary.react';
+import DatasetInfoDetails from './datasetInfoDetails.react';
+import DatasetInfoDownload from './datasetInfoDownload.react';
+import DatasetInfoAlgorithms from './datasetInfoAlgorithms.react';
+import DatasetInfoReferences from './datasetInfoReferences.react';
 
 require('./datasetInfo.styl');
 
@@ -40,6 +41,10 @@ export default class DatasetInfo extends Component {
 
         <DatasetInfoReferences
           references={dataset.references}
+        />
+
+        <DatasetInfoAlgorithms
+          algorithms={dataset.algorithms}
         />
 
         <DatasetInfoDownload

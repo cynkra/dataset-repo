@@ -53,7 +53,16 @@ export default {
             .catch((err) => reject(err))
             .then((rows) => {
               dataset.references = rows;
-              return resolve(dataset);
+              db
+                .select()
+                .from('measure')
+                .leftJoin('author', function() { this.on('measure.author_text', '=', 'author.author_text'); })
+                .whereIn('dataset_version', databaseNames)
+                .catch((err) => reject(err))
+                .then((rows) => {
+                  dataset.algorithms = rows;
+                  return resolve(dataset);
+                });
             });
         });
     });
