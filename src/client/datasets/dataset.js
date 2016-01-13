@@ -71,7 +71,7 @@ export default class Dataset extends DatasetRecord {
         : List(),
       modifications: props.get('modifications'),
       uploader: props.get('uploader_name'),
-      compositeKeys: props.get('composite_key_count') > 0,
+      compositeKeys: props.get('composite_foreign_key_count') > 0,
       loops: props.get('has_loop') > 0,
       instanceCount: props.get('instance_count'),
       targetTable: props.get('target_table'),
