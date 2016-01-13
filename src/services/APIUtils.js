@@ -29,6 +29,7 @@ export const API = {
 
         request
           .post(URL)
+          .timeout(5 * 60 * 1000)
           .send(getAsUriParameters(params))
           .set('Accept', 'application/json')
           .end((err, res) => {

@@ -16,6 +16,8 @@ app.use(frontend);
 
 app.use(errorHandler);
 
+server.timeout = 5 * 60 * 1000;
+
 server.listen(config.port, () => {
   console.log('Server started at port %s', config.port);
 });
