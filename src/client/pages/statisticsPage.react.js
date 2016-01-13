@@ -3,9 +3,10 @@ import immutable from 'immutable';
 import DocumentTitle from 'react-document-title';
 import Component from '../common/component.react';
 import ContributorsChart from '../contributors/contributorsChart.react';
+import ClassifiersChart from '../statistics/classifiersChart.react';
 import StatisticsSummary from '../statistics/statisticsSummary.react';
 import {fetchContributors} from '../contributors/actions';
-import {fetchSummary} from '../statistics/actions';
+import {fetchClassifiers, fetchSummary} from '../statistics/actions';
 
 require('./statisticsPage.styl');
 
@@ -18,11 +19,13 @@ export default class StatisticsPage extends Component {
 
   componentWillMount() {
     fetchSummary();
+    fetchClassifiers();
     fetchContributors();
   }
 
   render() {
     const contributors = this.props.contributors.get('list');
+    const classifiers = this.props.statistics.get('classifiers');
     const summary = this.props.statistics.get('summary');
 
     const leftMargin = contributors.reduce((prev, next) => {
@@ -43,6 +46,12 @@ export default class StatisticsPage extends Component {
           <section className='Statistics-section'>
             <h2>Classifier's Ranking</h2>
             <p>Bigger value is better.</p>
+            <ClassifiersChart
+              classifiers={classifiers}
+              height={450}
+              title = ''
+              width={892}
+            />
           </section>
 
           <section className='Statistics-section'>

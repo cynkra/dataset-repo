@@ -14,5 +14,17 @@ export default {
         .catch((err) => reject(err))
         .then((rows) => resolve(rows));
     });
+  },
+  getClassifiers: () => {
+    return new Promise((resolve, reject) => {
+      db
+        .select('algorithm', 'type', 'released', 'ranking', 'reference_count')
+        .from('algorithm')
+        .whereNotNull('algorithm')
+        .whereNotNull('released')
+        .whereNotNull('ranking')
+        .catch((err) => reject(err))
+        .then((rows) => resolve(rows));
+    });
   }
 };

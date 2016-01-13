@@ -23,6 +23,7 @@ export default {
     }
   },
   statistics: {
+    classifiers: [],
     summary: []
   },
   tags: {}
