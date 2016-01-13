@@ -3,23 +3,27 @@ import immutable from 'immutable';
 import DocumentTitle from 'react-document-title';
 import Component from '../common/component.react';
 import ContributorsChart from '../contributors/contributorsChart.react';
+import StatisticsSummary from '../statistics/statisticsSummary.react';
 import {fetchContributors} from '../contributors/actions';
-import {getNameWithTooltip} from '../../lib/helpers';
+import {fetchSummary} from '../statistics/actions';
 
 require('./aboutPage.styl');
 
 export default class AboutPage extends Component {
 
   static propTypes = {
-    contributors: React.PropTypes.instanceOf(immutable.Map).isRequired
+    contributors: React.PropTypes.instanceOf(immutable.Map).isRequired,
+    statistics: React.PropTypes.instanceOf(immutable.Map).isRequired
   }
 
   componentWillMount() {
-    return fetchContributors();
+    fetchSummary();
+    fetchContributors();
   }
 
   render() {
     const contributors = this.props.contributors.get('list');
+    const summary = this.props.statistics.get('summary');
 
     const leftMargin = contributors.reduce((prev, next) => {
       const x = prev.name ? prev.name.toString().length : prev;
@@ -71,58 +75,7 @@ export default class AboutPage extends Component {
 
           <section className='About-section'>
             <h2>Summary Statistics</h2>
-            <table className='About-statistics'>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>{getNameWithTooltip('#Relations')}</th>
-                  <th>{getNameWithTooltip('#Attributes')}</th>
-                  <th>{getNameWithTooltip('#Tuples')}</th>
-                  <th>{getNameWithTooltip('#Instances')}</th>
-                  <th>{getNameWithTooltip('Size')}</th>
-                  <th>{getNameWithTooltip('Type')}</th>
-                  <th>{getNameWithTooltip('Domain')}</th>
-                  <th>{getNameWithTooltip('Task')}</th>
-                  <th>{getNameWithTooltip('Missing values')}</th>
-                  <th>{getNameWithTooltip('Loops')}</th>
-                  <th>{getNameWithTooltip('Compound keys')}</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                </tr>
-              </tbody>
-
-              <tfoot>
-                <tr>
-                  <td>Total</td>
-                  <td>sum OR mean</td>
-                  <td>percentage</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                </tr>
-              </tfoot>
-            </table>
+            <StatisticsSummary summary={summary} />
           </section>
 
           <section className='About-section'>

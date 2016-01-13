@@ -3,6 +3,7 @@ import reviveApp from './app/revive';
 import reviveContributors from './contributors/revive';
 import reviveDatasets from './datasets/revive';
 import reviveSearch from './search/revive';
+import reviveStatistics from './statistics/revive';
 
 const initialState = process.env.IS_BROWSER
   ? window._initialState
@@ -14,6 +15,7 @@ export const state = new State(initialState, function(key, value) {
     case 'contributors': return reviveContributors(value);
     case 'datasets': return reviveDatasets(value);
     case 'search': return reviveSearch(value);
+    case 'statistics': return reviveStatistics(value);
   }
 });
 
@@ -23,4 +25,5 @@ export const contactCursor = state.cursor(['contact']);
 export const contributorsCursor = state.cursor(['contributors']);
 export const datasetsCursor = state.cursor(['datasets']);
 export const searchCursor = state.cursor(['search']);
+export const statisticsCursor = state.cursor(['statistics']);
 export const tagsCursor = state.cursor(['tags']);

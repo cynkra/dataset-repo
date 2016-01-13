@@ -9,6 +9,7 @@ import '../app/store';
 import '../contributors/store';
 import '../datasets/store';
 import '../search/store';
+import '../statistics/store';
 
 require('./app.styl');
 
@@ -31,6 +32,7 @@ export default class App extends Component {
       contributors: appState.contributorsCursor(),
       datasets: appState.datasetsCursor(),
       search: appState.searchCursor(),
+      statistics: appState.statisticsCursor(),
       tags: appState.tagsCursor()
     };
   }
