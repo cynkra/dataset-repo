@@ -29,7 +29,7 @@ export default class DatasetInfoDownload extends Component {
             </ul>
           </li>
           <li>
-            Export "{this.props.dataset.title}" database (or other version of the dataset, if available) in your favourite format (e.g. CSV or SQL dump).
+            Export "{this.props.dataset.schema}" database (or other version of the dataset, if available) in your favourite format (e.g. CSV or SQL dump).
           </li>
         </ol>
       </div>
