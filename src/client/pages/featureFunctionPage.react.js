@@ -3,8 +3,8 @@ import immutable from 'immutable';
 import DocumentTitle from 'react-document-title';
 import Component from '../common/component.react';
 import {fetchPastResults} from '../featureFunction/actions';
-import FeatureFunctionForm from '../featureFunction/FeatureFunctionForm.react';
-import FeatureFunctionPastResults from '../featureFunction/FeatureFunctionPastResults.react';
+import FeatureFunctionForm from '../featureFunction/featureFunctionForm.react';
+import FeatureFunctionPastResults from '../featureFunction/featureFunctionPastResults.react';
 
 require('./featureFunctionPage.styl');
 
