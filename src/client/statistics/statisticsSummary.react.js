@@ -98,6 +98,13 @@ export default class StatisticsSummary extends Component {
               );
             })}
         </tbody>
+
+        <tfoot>
+          <tr>
+            <th>{summary.count()} datasets</th>
+            <th colSpan='11'>&nbsp;</th>
+          </tr>
+        </tfoot>
       </table>
     );
   }
