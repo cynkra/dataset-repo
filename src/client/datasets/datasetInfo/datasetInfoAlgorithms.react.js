@@ -96,21 +96,23 @@ export default class DatasetInfoAlgorithms extends Component {
                     </tr>
                   );
                 })}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th colSpan='6'>
-                    <a href='#' onClick={this.toggleAll}>
-                      {algorithms.count() > 10 ?
-                        !this.state.showAll
+            </tbody>
+            {algorithms.count() > 10
+              ? (
+                <tfoot>
+                  <tr>
+                    <th colSpan='6'>
+                      <a href='#' onClick={this.toggleAll}>
+                        {!this.state.showAll
                           ? 'Show all algorithms'
                           : 'Show only first 10 algorithms'
-                        : null
-                      }
-                    </a>
-                  </th>
-                </tr>
-              </tfoot>
+                        }
+                      </a>
+                    </th>
+                  </tr>
+                </tfoot>
+              ) : null
+            }
           </table>
         </div>
       );
