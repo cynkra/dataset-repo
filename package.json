@@ -38,6 +38,7 @@
     "gulp-util": "3.0.6",
     "immutable": "3.7.4",
     "knex": "0.8.6",
+    "ladda": "0.9.8",
     "less": "2.5.1",
     "less-loader": "2.2.0",
     "mysql": "2.8.0",
