@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import immutable from 'immutable';
 import Component from '../common/component.react';
-import {getNameWithTooltip, getSizeWithUnit} from '../../lib/helpers';
+import {capitalize, getNameWithTooltip, getSizeWithUnit} from '../../lib/helpers';
 
 require('./statisticsSummary.styl');
 
@@ -46,7 +46,7 @@ export default class StatisticsSummary extends Component {
                 <td>{getSizeWithUnit(s.databaseSize)}</td>
                 <td>{s.isArtificial ? 'Synthetic' : 'Real'}</td>
                 <td>{s.domain}</td>
-                <td>{s.task}</td>
+                <td><abbr title={capitalize(s.task)}>{s.task.substr(0, 2).toUpperCase()}</abbr></td>
                 <td>{s.missingValues ? 'Yes' : 'No'}</td>
                 <td>{s.loops ? 'Yes' : 'No'}</td>
                 <td>{s.compoundKeys ? 'Yes' : 'No'}</td>
