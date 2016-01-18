@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import immutable from 'immutable';
 import Component from '../common/component.react';
 import {getNameWithTooltip, getSizeWithUnit} from '../../lib/helpers';
@@ -36,8 +37,8 @@ export default class StatisticsSummary extends Component {
         <tbody>
           {summary.map(s => {
             return (
-              <tr>
-                <td>{s.title}</td>
+              <tr key={s.title}>
+                <td><Link params={{title: s.title}} to='dataset'>{s.title}</Link></td>
                 <td>{s.tableCount}</td>
                 <td>{s.columnCount}</td>
                 <td>{s.rowCount}</td>
