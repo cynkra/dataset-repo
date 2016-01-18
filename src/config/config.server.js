@@ -10,7 +10,24 @@ var config = {
     host:     'relational.fit.cvut.cz',
     user:     'guest',
     password: 'relational',
-    database: 'meta'
+    database: 'meta',
+    featureFunction: {
+      data: {
+        user:     '',
+        password: '',
+        database: 'ctu_feature_data',
+      },
+      results: {
+        user:     '',
+        password: '',
+        database: 'ctu_feature_func'
+      },
+      temp: {
+        user:     '',
+        password: '',
+        database: 'ctu_feature_temp'
+      }
+    }
   },
   email: {
     auth: {

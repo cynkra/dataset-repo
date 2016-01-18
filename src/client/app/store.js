@@ -1,5 +1,6 @@
 import * as contactActions from '../contact/actions';
 import * as contributeActions from '../contribute/actions';
+import * as featureFunctionActions from '../featureFunction/actions';
 import {register} from '../lib/dispatcher';
 import {appCursor} from '../state';
 import Message from './message';
@@ -20,6 +21,7 @@ export const dispatchToken = register(({action, data}) => {
 
     case contactActions.submitContactFormError:
     case contributeActions.submitContributeFormError:
+    case featureFunctionActions.submitFeatureFunctionFormError:
       appCursor(app => {
         return app.set('message', new Message({
           text: data.message,

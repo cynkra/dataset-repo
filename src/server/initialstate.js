@@ -12,6 +12,10 @@ export default {
       list: []
     }
   },
+  featureFunctions: {
+    current: {},
+    pastResults: []
+  },
   search: {
     filter: {
       shrinked: []

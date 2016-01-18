@@ -11,6 +11,7 @@
     "node": "0.12.x"
   },
   "dependencies": {
+    "async": "^1.5.2",
     "autoprefixer-loader": "^2.0.0",
     "babel": "^5.8.21",
     "babel-core": "^5.8.21",
@@ -49,6 +50,7 @@
     "react-d3": "^0.3.1",
     "react-document-title": "^1.0.2",
     "react-hot-loader": "^1.2.8",
+    "react-ladda": "^3.0.0",
     "react-pure-render": "^1.0.2",
     "react-router": "^0.13.3",
     "sass-loader": "^2.0.0",

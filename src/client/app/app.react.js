@@ -8,6 +8,7 @@ import * as appState from '../state';
 import '../app/store';
 import '../contributors/store';
 import '../datasets/store';
+import '../featureFunction/store';
 import '../search/store';
 import '../statistics/store';
 
@@ -31,6 +32,7 @@ export default class App extends Component {
       pendingActions: appState.pendingActionsCursor(),
       contributors: appState.contributorsCursor(),
       datasets: appState.datasetsCursor(),
+      featureFunctions: appState.featureFunctionsCursor(),
       search: appState.searchCursor(),
       statistics: appState.statisticsCursor(),
       tags: appState.tagsCursor()
