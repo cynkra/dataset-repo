@@ -15,7 +15,7 @@ export default class ContributePage extends Component {
       <DocumentTitle title='Contribute'>
         <section className='content'>
           <h1>Contribute</h1>
-          <ContributeForm message={this.props.app.get('message')}/>
+          <ContributeForm message={this.props.app.get('message')} />
         </section>
       </DocumentTitle>
     );
