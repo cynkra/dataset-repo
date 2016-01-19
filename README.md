@@ -12,7 +12,12 @@ Then install [gulp.js](http://gulpjs.com/).
   npm install -g gulp
 ```
 
-For generating dataset schema images, there should be [graphviz](http://www.graphviz.org/) installed.
+Some npm modules are required.
+```shell
+  npm install async
+  npm install ladda
+```
+For dataset schema image generation, install [graphviz](http://www.graphviz.org/).
 
 ## Install
 
