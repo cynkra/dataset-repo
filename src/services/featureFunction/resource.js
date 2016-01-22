@@ -179,7 +179,7 @@ function prepareSql(sql, table, columns, featureName) {
 }
 
 function runChi2(table, featureName) {
-  return data
+  return temp
     .select('DATA_TYPE')
     .from('information_schema.columns')
     .where('TABLE_NAME', 'calculated_feature')
@@ -195,7 +195,7 @@ function runChi2(table, featureName) {
         .replace(/@column/g, '`' + featureName + '`')
         .replace(/@target/g, '`target`');
 
-      return data.raw(chi2).then((resp) => { return resp[0][0].chi2; });
+      return temp.raw(chi2).then((resp) => { return resp[0][0].chi2; });
     });
 }
 

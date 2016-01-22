@@ -30,10 +30,7 @@ export default class FeatureFunctionPage extends Component {
             Feature functions define construction of a feature.
             For example sum pattern, which sums column by subject in table could be described as:
             <pre className='FeatureFunctionPage-example'>
-              SELECT subject
-                   , SUM(COLUMN) AS feature
-              FROM TABLE
-              GROUP BY subject;
+              SELECT subject, SUM(COLUMN) AS feature FROM TABLE GROUP BY subject;
             </pre>
           </p>
           <p>
