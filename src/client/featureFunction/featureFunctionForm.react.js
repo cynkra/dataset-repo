@@ -86,7 +86,7 @@ export default class FeatureFunctionForm extends Component {
             className='FeatureFunctionForm-input'
             id='feature_name'
             name='feature_name'
-            placeholder='Aggregate_max'
+            placeholder='aggregate_max'
             ref='featureName'
             required
             type='text'
@@ -115,7 +115,7 @@ export default class FeatureFunctionForm extends Component {
             className='FeatureFunctionForm-input'
             id='sql'
             name='sql'
-            placeholder='select @id as @target, max(@col1) as @feature from @table group by @id'
+            placeholder='SELECT @id, @target, max(@col1) as @feature FROM @table GROUP BY @id, @target'
             ref='sql'
             required
           ></textarea>
