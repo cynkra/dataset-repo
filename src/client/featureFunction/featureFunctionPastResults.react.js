@@ -74,7 +74,6 @@ export default class FeatureFunctionPastResults extends Component {
               {this.renderHeaderCol('chi2Max', 'Chi2 (max)')}
               {this.renderHeaderCol('runTimeAvg', 'Run time (avg)')}
               {this.renderHeaderCol('runTimeMax', 'Run time (max)')}
-              {this.renderHeaderCol('sqlOriginalLen', 'Length')}
               {this.renderHeaderCol('sqlOriginal', 'SQL')}
             </tr>
           </thead>
@@ -99,7 +98,6 @@ export default class FeatureFunctionPastResults extends Component {
                     <td className='FeatureFunctionPastResults-chi2'>{r.chi2Max}</td>
                     <td className='FeatureFunctionPastResults-runTime'>{r.runTimeAvg} s</td>
                     <td className='FeatureFunctionPastResults-runTime'>{r.runTimeMax} s</td>
-                    <td className='FeatureFunctionPastResults-length'>{r.sqlOriginalLen}</td>
                     <td className='FeatureFunctionPastResults-sql' title={r.sqlOriginal}>{r.sqlOriginal}</td>
                   </tr>
                 );

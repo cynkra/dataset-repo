@@ -68,6 +68,7 @@ export default class FeatureFunctionDetails extends Component {
               {this.renderHeaderCol('col2DataType', '@col2 data type')}
               {this.renderHeaderCol('chi2', 'Chi2')}
               {this.renderHeaderCol('runTime', 'Run time')}
+              {this.renderHeaderCol('errorMessage', 'Error')}
               {this.renderHeaderCol('sql', 'SQL')}
             </tr>
           </thead>
@@ -93,6 +94,7 @@ export default class FeatureFunctionDetails extends Component {
                     <td>{r.col2DataType}</td>
                     <td>{r.chi2}</td>
                     <td>{r.runTime}</td>
+                    <td>{r.errorMessage}</td>
                     <td className='FeatureFunctionDetails-sql' title={r.sql}>{r.sql}</td>
                   </tr>
                 );

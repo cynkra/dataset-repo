@@ -1,15 +1,12 @@
 -- Detail results
 
-select sql_original
-	, t1.table_name
-	, 'id' as`id`
-	, 'target' as target
-	, 'timestamp' as `timestamp`
+select t1.table_name
 	, col1
 	, col2
 	, t2.DATA_TYPE as col1_data_type
 	, t3.DATA_TYPE as col2_data_type
 	, `sql`
+	, error_message
 	, chi2
 	, run_time
 from result_list t1
@@ -29,4 +26,4 @@ left join (
 	where TABLE_SCHEMA = 'ctu_feature_data'
 ) t3
 on t1.table_name = t3.TABLE_NAME and t1.col2 = t3.COLUMN_NAME
-where feature_id=@feature_id
+where feature_id = @feature_id

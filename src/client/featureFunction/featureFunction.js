@@ -3,16 +3,14 @@ import {round} from '../../lib/helpers';
 
 const ResultRecord = Record({
   tableName: '',
-  id: '',
-  target: '',
-  timestamp: '',
   col1: '',
   col2: '',
   col1DataType: '',
   col2DataType: '',
   sql: '',
   chi2: 0.0,
-  runTime: 0.0
+  runTime: 0.0,
+  errorMessage: ''
 });
 
 class Result extends ResultRecord {
@@ -87,16 +85,14 @@ export default class FeatureFunction extends FeatureFunctionRecord {
       results: props.get('results')
         ? props.get('results').map(result => new Result({
           tableName: result.get('table_name'),
-          id: result.get('id'),
-          target: result.get('target'),
-          timestamp: result.get('timestamp'),
           col1: result.get('col1'),
           col2: result.get('col2'),
           col1DataType: result.get('col1_data_type'),
           col2DataType: result.get('col2_data_type'),
           sql: result.get('sql'),
           chi2: round(result.get('chi2'), 2),
-          runTime: round(result.get('run_time'), 2)
+          runTime: round(result.get('run_time'), 2),
+          errorMessage: result.get('error_message')
         })) : List()
     });
   }

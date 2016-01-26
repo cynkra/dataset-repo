@@ -57,7 +57,7 @@ export default {
         .catch((err) => reject(err))
         .then((resp) => {
           if (resp[0].length < 1) return reject();
-          let featureFunction = JSON.parse(JSON.stringify(resp[0][0]));
+          let featureFunction = JSON.parse(JSON.stringify(resp[0][0]));          
           results
             .raw(resultsQuery)
             .catch((err) => reject(err))
@@ -76,7 +76,7 @@ export default {
   },
   getPastResults: () => {
     return new Promise((resolve, reject) => {
-      const query = fs.readFileSync(path.join(__dirname, 'queries', 'get_history.sql'), 'utf8');
+      const query = fs.readFileSync(path.join(__dirname, 'queries', 'get_history.sql'), 'utf8'); // Seems to work
       results
         .raw(query)
         .catch((err) => reject(err))
@@ -95,11 +95,11 @@ export default {
               async.eachSeries(columnPairs, (columns, next2) =>
                 runSql(values.sql, table, columns, values.featureName).then((res) =>
                   runChi2(table, values.featureName).then((chi2Value) =>
-                    writeResult(featureId, queryId++, values, res.query, table, columns, chi2Value, res.runTime).then(() => {
+                    writeResult(featureId, queryId++, values, res.query, table, columns, res.err, chi2Value, res.runTime).then(() => {
                       next2();
                     })
-                  ).catch((err) => reject(err))
-                ).catch((err) => reject(err)),
+                  )
+                ), 
                 ((done) => next())
               )
             ).catch((err) => reject(err)),
@@ -111,9 +111,10 @@ export default {
   }
 };
 
+// Subroutines
 function getFeatureId() {
   return results
-    .select(knex.raw('max(feature_id)+1 as feature_id'))
+    .select(knex.raw('coalesce(max(feature_id)+1, 1) as feature_id'))
     .from('result_list')
     .then((res) => { return res[0].feature_id; });
 }
@@ -162,7 +163,15 @@ function runSql(sql, table, columns, featureName) {
           .then(() => {
             return {
               query: query,
-              runTime: runTime
+              runTime: runTime,
+              err: null
+            };
+          })
+          .catch((err) => {
+            return {
+              query: query,
+              runTime: runTime,
+              err: err.code
             };
           });
 }
@@ -196,10 +205,11 @@ function runChi2(table, featureName) {
         .replace(/@target/g, '`target`');
 
       return temp.raw(chi2).then((resp) => { return resp[0][0].chi2; });
-    });
+    })
+    .catch(() => {return null});
 }
 
-function writeResult(featureId, queryId, values, newSql, table, columns, chi2Value, runTime) {
+function writeResult(featureId, queryId, values, newSql, table, columns, err, chi2Value, runTime) {
   return results
     .table('result_list')
     .insert({
@@ -215,12 +225,13 @@ function writeResult(featureId, queryId, values, newSql, table, columns, chi2Val
       'col1': columns.col1.name,
       'col2': columns.col2.name,
       'sql': newSql,
+      'error_message': err,
       'chi2': chi2Value,
       'run_time': runTime
     });
 }
 
-const continuousDataTypes = ['FLOAT', 'DOUBLE'];
+const continuousDataTypes = ['FLOAT', 'DOUBLE', 'DECIMAL', 'INT', 'DATE', 'DATETIME', 'TIMESTAMP'];
 
 function isContinuous(dataType) {
   return continuousDataTypes.indexOf(dataType) !== -1;

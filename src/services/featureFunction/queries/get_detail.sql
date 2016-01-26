@@ -12,4 +12,3 @@ select max(feature_id) as feature_id
   , max(sql_original) as sql_original
 from result_list
 where feature_id=@feature_id
-
