@@ -11,9 +11,16 @@ export default class AboutPage extends Component {
       <DocumentTitle title='About'>
         <section className='content'>
           <section className='About-section'>
-            <h1>Mission</h1>
+            <h2>Mission</h2>
             <p>
               To support growth of relational machine learning.
+            </p>
+          </section>
+
+          <section className='About-section'>
+            <h2>How to cite</h2>
+            <p>
+              Cite <a href="http://arxiv.org/abs/1511.03086">this article</a>.
             </p>
           </section>
 
