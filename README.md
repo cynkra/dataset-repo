@@ -7,9 +7,9 @@
 ## Prerequisites
 
 Install [iojs](https://iojs.org/) or [node.js](http://nodejs.org).
-Then install [gulp.js](http://gulpjs.com/).
+Then install [gulp.js](http://gulpjs.com/). The code relies on version 3.9.0.
 ```shell
-  npm install -g gulp
+  npm install -g gulp@3.9.0
 ```
 
 Some npm modules are required.
