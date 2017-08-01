@@ -76,7 +76,7 @@ export default {
   },
   getPastResults: () => {
     return new Promise((resolve, reject) => {
-      const query = fs.readFileSync(path.join(__dirname, 'queries', 'get_history.sql'), 'utf8'); // Seems to work
+      const query = fs.readFileSync(path.join(__dirname, 'queries', 'get_history.sql'), 'utf8');
       results
         .raw(query)
         .catch((err) => reject(err))
