@@ -31,7 +31,7 @@ var config = {
   },
   email: {
     auth: {
-      host: 'relay.vpn',
+      host: 'relay.fit.cvut.cz',
       port: 25
     },
     recipient: 'Jan Motl <jan.motl@fit.cvut.cz>, Oliver Schulte <oschulte@cs.sfu.ca>'
