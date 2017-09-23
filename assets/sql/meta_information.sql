@@ -173,7 +173,7 @@ on t1.database_name = t2.TABLE_SCHEMA
 and t1.target_table = t2.TABLE_NAME;
 
 
-/* Is the datset imbalanced? */
+/* Is the dataset imbalanced? */
 drop table if exists meta.balance;
 
 SET group_concat_max_len=1500000; -- By default the limit is too small
@@ -192,11 +192,53 @@ from meta.database
 where task = 'classification';
 set @sql = concat(@sql, @select);
 
--- select @sql; -- Print
-
 PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
+
+
+/* Does the target table contain duplicate tableID? */
+drop table if exists meta.duplicate_target_id;
+
+SET group_concat_max_len=1500000; -- By default the limit is small
+ 
+SET @SQL = 'create table meta.duplicate_target_id as ';
+
+select group_concat(' select ''', database_name, ''' as database_name, exists(
+	select count(*) 
+	from `', database_name, '`.`', target_table, '` GROUP BY `', replace(target_id, ', ', '`, `'), '` having count(*)>1) as duplicate_target_id' SEPARATOR '	
+    union all ')
+INTO @SELECT
+from meta.database;
+
+SET @SQL = concat(@SQL, @SELECT);
+ 
+PREPARE stmt FROM @SQL;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+/* Estimate, whether the problem is single entity problem or an edge property estimation */
+drop table if exists meta.has_target_table_loop;
+
+SET group_concat_max_len=1500000; -- By default the limit is small
+ 
+SET @SQL = 'create table meta.has_target_table_loop as ';
+
+select group_concat(' select ''', database_name, ''' as database_name, exists(
+	select 1 
+	from information_schema.KEY_COLUMN_USAGE where REFERENCED_TABLE_NAME is not null and TABLE_SCHEMA = ''', database_name, ''' and TABLE_NAME = ''', target_table, ''' group by REFERENCED_TABLE_NAME having count(*)>1) as has_target_table_loop' SEPARATOR '	
+    union all ')
+INTO @SELECT
+from meta.database;
+
+SET @SQL = concat(@SQL, @SELECT);
+ 
+PREPARE stmt FROM @SQL;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
 
 
 /* Join collected data and background data together */
@@ -234,6 +276,8 @@ select database_name
 	 , target_timestamp
 	 , task
 	 , instance_count
+	 , duplicate_target_id
+	 , has_target_table_loop
 	 , class_count
 	 , majority_class_ratio
 	 , uploader_name
@@ -275,6 +319,10 @@ left outer join meta.composite_key
 using (database_name)
 left outer join meta.balance
 using (database_name)
+left outer join meta.duplicate_target_id
+using (database_name)
+left outer join meta.has_target_table_loop
+using (database_name)
 left join meta.database
 using (database_name)
 left join meta.dataset
@@ -306,6 +354,8 @@ drop table if EXISTS meta.foreign_key_count;
 drop table if EXISTS meta.self_referencing_table_count;
 drop table if EXISTS meta.composite_key;
 drop table if EXISTS meta.balance;
+drop table if EXISTS meta.duplicate_target_id;
+drop table if EXISTS meta.has_target_table_loop;
 
 /** Summary and Quality Control **/
 
@@ -379,5 +429,7 @@ ALTER TABLE meta.information CHANGE `composite_foreign_key_count` `composite_for
 ALTER TABLE meta.information CHANGE `self_referencing_table_count` `self_referencing_table_count` bigint(21) DEFAULT NULL  COMMENT 'Count of tables, whose foreign key references the primary key of the table.';
 ALTER TABLE meta.information CHANGE `has_loop` `has_loop` int(1) DEFAULT NULL  COMMENT 'Does there exist a loop over more than a single table if we treat foreign keys as an undirected graph?' ;
 ALTER TABLE meta.information CHANGE `instance_count` `instance_count` bigint(21) unsigned DEFAULT NULL  COMMENT 'Count of rows in the target table.' ;
-ALTER TABLE meta.information CHANGE `class_count` `class_count` BIGINT(21) DEFAULT '0' COMMENT 'Count of unique values in the target column.';
+ALTER TABLE meta.information CHANGE `has_loop` `has_loop` int(1) DEFAULT NULL  COMMENT 'Does there exist a loop over more than a single table if we treat foreign keys as an undirected graph?' ;
+ALTER TABLE meta.information CHANGE `duplicate_target_id` `duplicate_target_id` int(1) DEFAULT NULL COMMENT 'Does the target table contain duplicate target_id?';
+ALTER TABLE meta.information CHANGE `has_target_table_loop` `has_target_table_loop` int(1) DEFAULT NULL COMMENT 'Does the target table and some other table create a loop?';
 ALTER TABLE meta.information CHANGE `majority_class_ratio` `majority_class_ratio` DECIMAL(24,4) DEFAULT NULL COMMENT 'Proportion of majority class in the target column.' ;

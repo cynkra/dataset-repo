@@ -7,9 +7,9 @@
 ## Prerequisites
 
 Install [iojs](https://iojs.org/) or [node.js](http://nodejs.org).
-Then install [gulp.js](http://gulpjs.com/).
+Then install [gulp.js](http://gulpjs.com/) (the code relies on version 3.9.0).
 ```shell
-  npm install -g gulp
+  npm install -g gulp@3.9.0
 ```
 
 Some npm modules are required.
@@ -32,6 +32,10 @@ For dataset schema image generation, install [graphviz](http://www.graphviz.org/
 - `gulp` start development
 - `gulp -p` run app in production mode
 - `gulp build -p` build in production mode
+ 
+
+## Quality control
+- Use [Broken Link Checker](http://www.brokenlinkcheck.com/) to validate that a user cannot accidentally kill the web.
 
 ## Upload datasets
 - Create a new database on the server.

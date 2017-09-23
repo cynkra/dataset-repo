@@ -196,10 +196,8 @@ function filterLoops(loops: Array) {
 function filterCompoundKeys(compoundKeys: Array) {
   compoundKeys = compoundKeys.filter((n) => { return ['With compound keys', 'Without compound keys'].indexOf(n) !== -1; });
   return function() {
-    if (compoundKeys.indexOf('With compound keys') !== -1) 
-this.orWhere('composite_foreign_key_count', '!=', 0);
-    if (compoundKeys.indexOf('Without compound keys') !== -1) 
-this.orWhere('composite_foreign_key_count', 0);
+    if (compoundKeys.indexOf('With compound keys') !== -1) this.orWhere('composite_foreign_key_count', '!=', 0);
+    if (compoundKeys.indexOf('Without compound keys') !== -1) this.orWhere('composite_foreign_key_count', 0);
     if (compoundKeys.length === 0) this.where(true);
   };
 }
