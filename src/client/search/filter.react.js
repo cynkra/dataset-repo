@@ -51,7 +51,7 @@ export default class Filter extends Component {
           name='domain'
           onChange={this.props.onFilterChange}
           shrinked={shrinked.includes('domain')}
-          values={['Education', 'Entertainment', 'Financial', 'Geography', 'Gouverment', 'Industry', 'Kinship', 'Medicine',  'Retail', 'Sport']}
+          values={['Education', 'Entertainment', 'Financial', 'Geography', 'Government', 'Industry', 'Kinship', 'Medicine',  'Retail', 'Sport']}
         />
 
         <FilterGroup
