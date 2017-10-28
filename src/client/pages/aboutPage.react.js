@@ -13,7 +13,7 @@ export default class AboutPage extends Component {
           <section className='About-section'>
             <h2>Mission</h2>
             <p>
-              To support growth of relational machine learning.
+              To support the growth of relational machine learning.
             </p>
           </section>
 
@@ -38,7 +38,7 @@ export default class AboutPage extends Component {
                 Just open one of the public workflows (like <a href="http://clowdflows.org/workflows/copy-workflow/2222">Wordification</a> or <a href="http://clowdflows.com/workflow/4018">Cross-validation</a>), change the credentials in "MySQL Connect" operator to the credentials from the repository and you are ready to go!
               </dd>
 
-              <dt>Why I am not able to connect to the database?</dt>
+              <dt>Why am I not able to connect to the database?</dt>
               <dd>
                 If you are connecting to the database over a corporate network, the corporate firewalls could be the culprit. <br />
                 Try to access the database with a different internet provider (e.g. with your cellular provider). If the problems persist, contact us.
