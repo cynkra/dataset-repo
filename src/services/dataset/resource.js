@@ -40,6 +40,7 @@ export default {
         .where('is_hidden', 0)
         .whereNotNull('dataset_name')
         .where('dataset_name', params.dataset)
+        .orderBy('is_primary_version', 'DESC')
         .catch((err) => reject(err))
         .then((rows) => {
           if (rows.length < 1) return reject();
