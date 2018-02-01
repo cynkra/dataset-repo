@@ -1,6 +1,7 @@
 .node_gyp/
 .npm/
 .idea
+.Rhistory
 build/
 log/
 node_modules/
