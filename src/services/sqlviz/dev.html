@@ -1,0 +1,116 @@
+<html>
+ <head>
+  <script type="text/javascript">
+function functionOne() { alert('You clicked the top text'); }
+
+
+function functionTwo() {
+
+	function RGB2HTML(red, green, blue)
+{
+    var decColor =0x1000000+ blue + 0x100 * green + 0x10000 *red ;
+    return '#'+decColor.toString(16).substr(1);
+}
+
+    var data = [
+        {
+            "table": "atom",
+            "column": "charge",
+            "relevance": 3.197
+        },
+        {
+            "table": "atom",
+            "column": "type",
+            "relevance": 7.074
+        },
+        {
+            "table": "bond",
+            "column": "type",
+            "relevance": 6.325
+        },
+        {
+            "table": "molecule",
+            "column": "ind1",
+            "relevance": 8.975
+        },
+        {
+            "table": "molecule",
+            "column": "inda",
+            "relevance": 0.091
+        },
+        {
+            "table": "molecule",
+            "column": "logp",
+            "relevance": 5.404
+        },
+        {
+            "table": "molecule",
+            "column": "lumo",
+            "relevance": 4.404
+        }
+    ];
+
+    // get minimal and maximal relevances
+    var maxValue = -1;
+    var minValue = 100000000000;
+    for (var prop in data) {
+        if (data.hasOwnProperty(prop)) {
+            var value = data[prop].relevance;
+            if (value > maxValue) {
+                maxValue = value;
+            }
+            if (value < minValue) {
+                minValue = value;
+            }
+        }
+    }
+
+    // normalize the relevance into range 0..255 and calculate the color
+    for (var prop in data) {
+        if (data.hasOwnProperty(prop)) {
+            data[prop].normRelevance = Math.floor((data[prop].relevance - minValue) / (maxValue-minValue) * 255);
+            data[prop].columnColor = "#ff"+(255-data[prop].normRelevance).toString(16)+(255-data[prop].normRelevance).toString(16);
+        }
+    }
+
+
+
+    console.log(data);
+}
+
+  </script>
+ </head>
+<body>
+ <p><a href="#" onClick="functionOne();">Top Text</a></p>
+ <p><a href="javascript:functionTwo();">Bottom Text</a></p>
+
+ <table align="left" cellspacing="0" frame="box">
+	<tbody>
+		<tr>
+			<td align="CENTER" bgcolor="Lavender" cellpadding="4" colspan="2"><font face="Helvetica-Bold">atom</font></td>
+		</tr>
+		<tr>
+			<td align="LEFT" bgcolor="White"><font face="Helvetica">atom_id</font></td>
+			<td align="LEFT" bgcolor="White"><font face="Helvetica">char</font></td>
+		</tr>
+		<tr>
+			<td align="LEFT" bgcolor="White"><font face="Helvetica">molecule_id</font></td>
+			<td align="LEFT" bgcolor="White"><font face="Helvetica">char</font></td>
+		</tr>
+		<tr>
+			<td align="LEFT" bgcolor="White"><font face="Helvetica">element</font></td>
+			<td align="LEFT" bgcolor="White"><font face="Helvetica">char</font></td>
+		</tr>
+		<tr>
+			<td align="LEFT" bgcolor="#ff3737"><font face="Helvetica">type</font></td>
+			<td align="LEFT" bgcolor="White"><font face="Helvetica">int</font></td>
+		</tr>
+		<tr>
+			<td align="LEFT" bgcolor="#ffa6a6"><font face="Helvetica">charge</font></td>
+			<td align="LEFT" bgcolor="White"><font face="Helvetica">double</font></td>
+		</tr>
+	</tbody>
+</table>
+
+ </body>
+</html>

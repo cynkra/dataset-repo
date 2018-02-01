@@ -59,7 +59,7 @@ export default class AboutPage extends Component {
                 Because they are also present in the real datasets.
               </dd>
 
-              <dt>What's the point of including artificial datasets?</dt>
+              <dt>What is the point of including artificial datasets?</dt>
               <dd>
                 While datasets like Adventure Works may not contain any pattern that could be found during modeling, they still increase the diversity of the repository. For example, the named Adventure Works dataset has the highest table count in the whole repository. <br />
                 If your algorithm can process all the tables present in Adventure Works, it may be able to process real-world datasets.
