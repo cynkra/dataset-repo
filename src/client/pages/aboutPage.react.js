@@ -40,8 +40,13 @@ export default class AboutPage extends Component {
 
               <dt>Why am I not able to connect to the database?</dt>
               <dd>
-                If you are connecting to the database over a corporate network, the corporate firewalls could be the culprit. <br />
-                Try to access the database with a different internet provider (e.g. with your cellular provider). If the problems persist, contact us.
+                If you are connecting to the database over a corporate network, the corporate firewalls could be the culprit (it may block port 3306). <br />
+                Try to access the database with a different internet provider (e.g. with your cellular provider). <br />
+                Also, keep in mind that database names are case sensitive. Database "mutagenesis" is not the same database as "Mutagenesis". <br />
+                If the problems persist, contact us and provide us with the following information: <ol>
+                  <li>Your database client and its version (e.g. MySQL Workbench 6.3.10).</li>
+                  <li>The database name you tried to connect to (e.g. mutagenesis).</li>
+                  </ol>
               </dd>
 
               <dt>Why MySQL Workbench complaints about incompatible/nonstandard server version?</dt>
@@ -51,7 +56,15 @@ export default class AboutPage extends Component {
 
               <dt>What to do if I want an ILP format?</dt>
               <dd>
-                See a collection of datasets at <a href="http://www-ai.ijs.si/~ilpnet2/apps/index.html">ILPnet2</a>.
+                See a collection of datasets at <a href="http://www-ai.ijs.si/~ilpnet2/apps/index.html">ILPnet2</a>. <br />
+                Or use a conversion <a href="http://www2.cs.sfu.ca/~oschulte/jbn/DataConversion/MLN.html">tool</a>, where you have to change the connection parameters in <code>src/Read.java</code> from:  <br />
+                  <code>
+                  &emsp; read.setConnection("jdbc:mysql://mantong01.dyndns.org:3306/mln","temp","Passw0rd");
+                  </code> <br />
+                to:  <br />
+                  <code>
+                  &emsp; read.setConnection("jdbc:mysql://relational.fit.cvut.cz:3306/mutagenesis","guest","relational"); 
+                  </code> <br />
               </dd>
 
               <dt>Why do the datasets contain missing values/composite keys/strange data types/any other ugly thing you may think of?</dt>
