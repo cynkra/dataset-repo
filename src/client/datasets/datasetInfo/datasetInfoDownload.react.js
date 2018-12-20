@@ -17,7 +17,7 @@ export default class DatasetInfoDownload extends Component {
         </p>
         <ol>
           <li>
-            Open your favourite MariaDB client (<a href='http://www.mysql.com/products/workbench/'>MySQL Workbench</a> works but see <a href="https://relational.fit.cvut.cz/about">FAQ</a>)
+            Open your favourite MariaDB client (<a href='http://www.mysql.com/products/workbench/'>MySQL Workbench</a> works, but see <a href="https://relational.fit.cvut.cz/about">FAQ</a>)
           </li>
           <li>
             Use following credentials:
