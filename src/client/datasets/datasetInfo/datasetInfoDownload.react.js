@@ -13,11 +13,11 @@ export default class DatasetInfoDownload extends Component {
       <div className='DatasetInfoDownload'>
         <h2>How to download the dataset</h2>
         <p>
-          The datasets are publicly available directly from MySQL database.
+          The datasets are publicly available directly from MariaDB database.
         </p>
         <ol>
           <li>
-            Open your favourite MySQL client (for example <a href='http://www.mysql.com/products/workbench/'>MySQL Workbench</a>)
+            Open your favourite MariaDB client (<a href='http://www.mysql.com/products/workbench/'>MySQL Workbench</a> works but see <a href="https://relational.fit.cvut.cz/about">FAQ</a>)
           </li>
           <li>
             Use following credentials:

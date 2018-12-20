@@ -32,7 +32,7 @@ export default class AboutPage extends Component {
                 Because CSV files do not store information about data types, PKs, FKs and other constraints.
               </dd>
 
-              <dt>Why MySQL database?</dt>
+              <dt>Why MariaDB database?</dt>
               <dd>
                 Because in combination with <a href="http://clowdflows.org">ClowdFlows</a> you can process the datasets online. <br />
                 Just open one of the public workflows (like <a href="http://clowdflows.org/workflows/copy-workflow/2222">Wordification</a> or <a href="http://clowdflows.com/workflow/4018">Cross-validation</a>), change the credentials in "MySQL Connect" operator to the credentials from the repository and you are ready to go!
@@ -52,6 +52,11 @@ export default class AboutPage extends Component {
               <dt>Why MySQL Workbench complaints about incompatible/nonstandard server version?</dt>
               <dd>
                 We are using open source version of MySQL called MariaDB, hence the warning. For all purposes that the public account permits it is safe to ignore the message.
+              </dd>
+
+              <dt>Why mysqldump cannot find COLUMN_STATISTICS in information_schema?</dt>
+              <dd>
+                MariaDB has the table in MYSQL.COLUMNM_STATS. Use one of the <a href="https://serverfault.com/questions/912162/mysqldump-throws-unknown-table-column-statistics-in-information-schema-1109">workarounds</a>.
               </dd>
 
               <dt>What to do if I want an ILP format?</dt>
