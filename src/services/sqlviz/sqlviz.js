@@ -49,7 +49,7 @@ export function getSchema(dbName: string) {
     })
     .then((res) => {
       return db
-        .select(knex.raw('TABLE_NAME, group_concat(COLUMN_NAME) as COLUMN_NAME, CONSTRAINT_NAME, REFERENCED_TABLE_NAME, group_concat(REFERENCED_COLUMN_NAME) as REFERENCED_COLUMN_NAME'))
+        .select(knex.raw('TABLE_NAME, min(COLUMN_NAME) as COLUMN_NAME, CONSTRAINT_NAME, REFERENCED_TABLE_NAME, min(REFERENCED_COLUMN_NAME) as REFERENCED_COLUMN_NAME'))
         .from('INFORMATION_SCHEMA.KEY_COLUMN_USAGE')
         .whereRaw('REFERENCED_TABLE_SCHEMA = database()')
         .groupByRaw('TABLE_NAME, CONSTRAINT_NAME, REFERENCED_TABLE_NAME')
