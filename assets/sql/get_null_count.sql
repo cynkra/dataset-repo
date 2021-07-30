@@ -10,7 +10,10 @@ select @subSQL := group_concat(replace(replace(replace(@subSQL, '@table_schema',
                                               ), '@column_name', column_name
                                       ) separator ' union all '
                               )
-from information_schema.columns; -- Consider adding where condition to get results just for selected databases.
+from information_schema.columns
+join meta.database 
+on database_name = table_schema
+where null_count is null; -- Only for databases where we miss the null count.
 
 set @SQL = concat('select table_schema, sum(cnt) as NumNulls from (',
                   @subSQL,

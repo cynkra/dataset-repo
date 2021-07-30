@@ -244,6 +244,9 @@ DEALLOCATE PREPARE stmt;
 /* Join collected data and background data together */
 drop table if EXISTS meta.information;
 
+/* Bypass bad join size estimate */
+SET SQL_BIG_SELECTS=1;
+
 create table meta.information as
 select database_name
 	 , dataset_name
