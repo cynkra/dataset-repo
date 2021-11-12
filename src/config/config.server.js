@@ -32,7 +32,7 @@ var config = {
   email: {
     auth: {
       user: "watchdog.jm@gmail.com",  // This is a throwaway account -> it is OK to use a hardcoded password
-      pass: "StrongHrad99"
+      pass: "StrongHrad99",
       host: 'smtp.gmail.com',
       port: 465
     },
