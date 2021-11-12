@@ -31,10 +31,12 @@ var config = {
   },
   email: {
     auth: {
-      host: 'relay.fit.cvut.cz',
-      port: 25
+      user: "watchdog.jm@gmail.com",  // This is a throwaway account -> it is OK to use a hardcoded password
+      pass: "StrongHrad99"
+      host: 'smtp.gmail.com',
+      port: 465
     },
-    recipient: 'Jan Motl <jan.motl@fit.cvut.cz>, Oliver Schulte <oschulte@cs.sfu.ca>'
+    recipient: 'Jan Motl <jan.motl@fit.cvut.cz>' // , Oliver Schulte <oschulte@cs.sfu.ca>
   },
   googleAnalyticsId: 'UA-61229872-1',
   isProduction: process.env.NODE_ENV === 'production',
