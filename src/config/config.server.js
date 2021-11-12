@@ -30,11 +30,12 @@ var config = {
     }
   },
   email: {
-    auth: {
-      user: "watchdog.jm@gmail.com",  // This is a throwaway account -> it is OK to use a hardcoded password
-      pass: "StrongHrad99",
-      host: 'smtp.gmail.com',
-      port: 465
+    transporter: {
+      service: 'Gmail',  // https://nodemailer.com/smtp/well-known/
+      auth: {
+        user: "watchdog.jm@gmail.com",  // This is a throwaway account -> it is OK to use hardcoded credentials
+        pass: "StrongHrad99"
+      }
     },
     recipient: 'Jan Motl <jan.motl@fit.cvut.cz>' // , Oliver Schulte <oschulte@cs.sfu.ca>
   },
