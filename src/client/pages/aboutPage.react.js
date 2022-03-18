@@ -68,7 +68,7 @@ export default class AboutPage extends Component {
                   </code> <br />
                 to:  <br />
                   <code>
-                  &emsp; read.setConnection("jdbc:mysql://relational.fit.cvut.cz:3306/mutagenesis","guest","relational"); 
+                  &emsp; read.setConnection("jdbc:mysql://relational.fit.cvut.cz:3306/mutagenesis","guest","relational");
                   </code> <br />
               </dd>
 
@@ -83,6 +83,15 @@ export default class AboutPage extends Component {
                 If your algorithm can process all the tables present in Adventure Works, it may be able to process real-world datasets.
               </dd>
             </dl>
+          </section>
+
+          <section className='About-section'>
+            <h2>Tools that use our repository</h2>
+            <p>
+              <a href="https://www.cynkra.com/blog/2020-04-02-dm/">dm: Relational Data Models</a>, a package for working with relational data in R. <br />
+              <a href="https://data-xtractor.com/blog/case-study/connect-to-public-datasets/">Data Xtractor</a>, a visual SQL query builder for Windows. <br />
+              <a href="https://nbviewer.org/github/getml/getml-demo/tree/1.0.0/">getML</a>, a propositionalization library in Python.
+            </p>
           </section>
         </section>
       </DocumentTitle>

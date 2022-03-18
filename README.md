@@ -6,7 +6,7 @@
 
 ## Prerequisites
 
-Install [iojs](https://iojs.org/) or [node.js](http://nodejs.org).
+Install [iojs](https://iojs.org/) or [node.js](http://nodejs.org) (version 6.10.3 works, version 12 does not work anymore).
 Then install [gulp.js](http://gulpjs.com/) (the code relies on version 3.9.0).
 ```shell
   npm install -g gulp@3.9.0
@@ -32,7 +32,7 @@ For dataset schema image generation, install [graphviz](http://www.graphviz.org/
 - `gulp` start development
 - `gulp -p` run app in production mode
 - `gulp build -p` build in production mode
- 
+
 
 ## Quality control
 - Use [Broken Link Checker](http://www.brokenlinkcheck.com/) to validate that a user cannot accidentally kill the web.
@@ -45,10 +45,10 @@ For dataset schema image generation, install [graphviz](http://www.graphviz.org/
 - Validate the change on the webpage.
 
 ## Useful links for developers
-- [React.js](http://facebook.github.io/react/). 
-- [What is the Flux application architecture](https://medium.com/brigade-engineering/what-is-the-flux-application-architecture-b57ebca85b9e). 
-- [Learn ES6](https://babeljs.io/docs/learn-es6/). 
-- [Immutable.js](http://facebook.github.io/immutable-js/) and [the case for immutability](https://github.com/facebook/immutable-js/#the-case-for-immutability). 
-- [Express.js](http://expressjs.com/) 
-- [Node.js](http://nodejs.org/api/) 
+- [React.js](http://facebook.github.io/react/).
+- [What is the Flux application architecture](https://medium.com/brigade-engineering/what-is-the-flux-application-architecture-b57ebca85b9e).
+- [Learn ES6](https://babeljs.io/docs/learn-es6/).
+- [Immutable.js](http://facebook.github.io/immutable-js/) and [the case for immutability](https://github.com/facebook/immutable-js/#the-case-for-immutability).
+- [Express.js](http://expressjs.com/)
+- [Node.js](http://nodejs.org/api/)
 - [Isomorphic javascript](http://isomorphic.net/javascript)
