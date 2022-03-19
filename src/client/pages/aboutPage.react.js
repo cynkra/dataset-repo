@@ -90,7 +90,7 @@ export default class AboutPage extends Component {
             <p>
               <a href="https://www.cynkra.com/blog/2020-04-02-dm/">dm: Relational Data Models</a>, a package for working with relational data in R. <br />
               <a href="https://data-xtractor.com/blog/case-study/connect-to-public-datasets/">Data Xtractor</a>, a visual SQL query builder for Windows. <br />
-              <a href="https://nbviewer.org/github/getml/getml-demo/tree/1.0.0/">getML</a>, a propositionalization library in Python.
+              <a href="https://docs.getml.com/0.10.0/tutorial/loans/loans.html">getML</a>, a propositionalization library in Python.
             </p>
           </section>
         </section>
