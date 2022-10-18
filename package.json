@@ -31,7 +31,7 @@
     "extract-text-webpack-plugin": "0.8.2",
     "file-loader": "0.11.2",
     "flux": "2.0.3",
-    "gulp": "3.9.0",
+    "gulp": "4.0.2",
     "gulp-bg": "0.0.7",
     "gulp-eslint": "1.0.0",
     "gulp-rename": "1.2.2",
