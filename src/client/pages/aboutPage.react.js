@@ -32,20 +32,19 @@ export default class AboutPage extends Component {
                 Because CSV files do not store information about data types, PKs, FKs and other constraints.
               </dd>
 
-              <dt>Why MariaDB database?</dt>
+              <dt>Do I have to install a database client?</dt>
               <dd>
-                Because in combination with <a href="http://clowdflows.org">ClowdFlows</a> you can process the datasets online. <br />
-                Just open one of the public workflows (like <a href="http://clowdflows.org/workflows/copy-workflow/2222">Wordification</a> or <a href="http://clowdflows.com/workflow/4018">Cross-validation</a>), change the credentials in "MySQL Connect" operator to the credentials from the repository and you are ready to go!
+                You can try a <a href="https://demo.dbgate.org/>web database client"</a> instead and open "Relational dataset repo".
               </dd>
 
               <dt>Why am I not able to connect to the database?</dt>
               <dd>
-                If you are connecting to the database over a corporate network, the corporate firewalls could be the culprit (it may block port 3306). <br />
-                Try to access the database with a different internet provider (e.g. with your cellular provider). <br />
+                If you are connecting to the database over a corporate/university network, firewalls could be the culprit (they may block port 3306). <br />
+                Try to access the database with a different internet provider (e.g., with your cellular provider). <br />
                 Also, keep in mind that database names are case sensitive. Database "mutagenesis" is not the same database as "Mutagenesis". <br />
                 If the problems persist, contact us and provide us with the following information: <ol>
-                  <li>Your database client and its version (e.g. MySQL Workbench 6.3.10).</li>
-                  <li>The database name you tried to connect to (e.g. mutagenesis).</li>
+                  <li>Your database client and its version (e.g., MySQL Workbench 6.3.10).</li>
+                  <li>The database name you tried to connect to (e.g., mutagenesis).</li>
                   </ol>
               </dd>
 
