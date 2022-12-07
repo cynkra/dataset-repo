@@ -34,7 +34,7 @@ export default class AboutPage extends Component {
 
               <dt>Do I have to install a database client?</dt>
               <dd>
-                You can try a <a href="https://demo.dbgate.org/>web database client"</a> instead and open "Relational dataset repo".
+                You can try a <a href="https://demo.dbgate.org/">web database client</a> instead and open "Relational dataset repo".
               </dd>
 
               <dt>Why am I not able to connect to the database?</dt>
