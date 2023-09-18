@@ -76,24 +76,17 @@ export default class ContactForm extends Component {
             >Send</button>
           </form>
         </div>
-
         <div className='ContactForm-half'>
           <address>
-          <strong>Jan Motl</strong><br />
-          Faculty of Information Technology<br />
-          Czech Technical University in Prague<br />
-          Thákurova 9, 160 00<br />
-          Czech Republic<br />
-          Phone: +420 603 885 753
+          <strong>Christoph Sax</strong><br />
+          Founder and partner at cynkra<br />
+          Zürich, Switzerland<br />
 
           <div className='sep' />
 
-          <strong>Oliver Schulte</strong><br />
-          School of Computing Science<br />
-          Simon Fraser University<br />
-          Burnaby, B.C. V5A 1S6<br />
-          Canada<br />
-          Phone: +1-778-782-3390 <br />
+          <strong>Kirill Müller</strong><br />
+          Founder and partner at cynkra<br />
+          Zürich, Switzerland<br />
           </address>
         </div>
       </div>

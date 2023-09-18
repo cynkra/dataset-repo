@@ -1,0 +1,14 @@
+[Unit]
+Description=dataset
+
+[Service]
+Environment=NODE_ENV=production
+Type=simple
+Restart=always
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/dataset-repo
+ExecStart=/usr/bin/npm start
+
+[Install]
+WantedBy=multi-user.target

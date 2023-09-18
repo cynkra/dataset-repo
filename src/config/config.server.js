@@ -7,7 +7,7 @@ var config = {
   },
   database: {
     client:   'mysql',
-    host:     'relational.fit.cvut.cz',
+    host:     'dataset-mysql.csahpyuhcodg.eu-central-1.rds.amazonaws.com',
     user:     'guest',
     password: 'relational',
     database: 'meta',
@@ -33,13 +33,13 @@ var config = {
     transporter: {
       service: 'Gmail',  // sets all the parameters: https://nodemailer.com/smtp/well-known/
       auth: {
-        user: "watchdog.jm@gmail.com",  // this is a throwaway account -> it is OK to use hardcoded credentials
-        pass: "StrongHrad99"
+        user: "admin@cynkra.com",  // this is a throwaway account -> it is OK to use hardcoded credentials
+        pass: ""
       }
     },
-    recipient: 'Jan Motl <jan.motl@fit.cvut.cz>, Oliver Schulte <oschulte@cs.sfu.ca>'
+    recipient: 'Kirill Müller <kirill@cynkra.com>'
   },
-  googleAnalyticsId: 'UA-61229872-1',
+  // googleAnalyticsId: 'UA-61229872-1',
   isProduction: process.env.NODE_ENV === 'production',
   piping: {
     ignore: /(\/\.|~$|\.(css|less|sass|scss|styl))/,

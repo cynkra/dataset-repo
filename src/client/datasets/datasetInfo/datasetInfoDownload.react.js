@@ -17,12 +17,12 @@ export default class DatasetInfoDownload extends Component {
         </p>
         <ol>
           <li>
-            Open your favourite MariaDB client (<a href='http://www.mysql.com/products/workbench/'>MySQL Workbench</a> works, but see <a href="https://relational.fit.cvut.cz/about">FAQ</a>)
+            Open your favourite MariaDB client (<a href='http://www.mysql.com/products/workbench/'>MySQL Workbench</a> works, but see <a href="https://18.198.96.193/about">FAQ</a>)
           </li>
           <li>
             Use following credentials:
             <ul>
-              <li>hostname: relational.fit.cvut.cz</li>
+              <li>hostname: dataset-mysql.csahpyuhcodg.eu-central-1.rds.amazonaws.com</li>
               <li>port: 3306</li>
               <li>username: guest</li>
               <li>password: relational</li>

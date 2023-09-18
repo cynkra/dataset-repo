@@ -60,7 +60,7 @@ export default class ContributeForm extends Component {
             className='ContributeForm-input'
             id='ContributeForm-name'
             name='name'
-            placeholder='John Doe'
+            // placeholder='John Doe'
             ref='name'
             type='text'
           />
@@ -70,7 +70,7 @@ export default class ContributeForm extends Component {
             className='ContributeForm-input'
             id='ContributeForm-origin'
             name='origin'
-            placeholder='http://relational.fit.cvut.cz'
+            // placeholder='http://relational.fit.cvut.cz'
             ref='origin'
             type='text'
           />
