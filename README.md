@@ -22,7 +22,7 @@ For dataset schema image generation, install [graphviz](http://www.graphviz.org/
 ## Install
 
 ```shell
-  git clone https://gitlab.fit.cvut.cz/ostrovac/dataset-repo.git
+  git clone https://github.com/cynkra/dataset-repo.git
   cd dataset-repo
   npm install
 ```
