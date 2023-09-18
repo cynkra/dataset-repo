@@ -7,9 +7,9 @@
 ## Prerequisites
 
 Install [iojs](https://iojs.org/) or [node.js](http://nodejs.org) (version 6.10.3 works, version 12 does not work anymore).
-Then install [gulp.js](http://gulpjs.com/) (the code relies on version 3.9.0).
+Then install [gulp.js](http://gulpjs.com/)
 ```shell
-  npm install -g gulp@3.9.0
+  npm install -g gulp
 ```
 
 Some npm modules are required.
@@ -27,11 +27,23 @@ For dataset schema image generation, install [graphviz](http://www.graphviz.org/
   npm install
 ```
 
+## Configure
+
+Update `src/config/config.server.js` with the correct credentials.
+
+```shell
+sudo cp etc/systemd/system/dataset.service /etc/systemd/system/
+sudo cp etc/nginx/sites-available/dataset /etc/nginx/sites-available/dataset
+sudo ln -s /etc/nginx/sites-available/dataset /etc/nginx/sites-enabled/dataset
+```
+
 ## Run
 
 - `gulp` start development
 - `gulp -p` run app in production mode
 - `gulp build -p` build in production mode
+- `sudo systemctl start nginx`
+- `sudo systemctl start dataset`
 
 
 ## Quality control
