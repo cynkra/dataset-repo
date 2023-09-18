@@ -32,6 +32,8 @@ For dataset schema image generation, install [graphviz](http://www.graphviz.org/
 Update `src/config/config.server.js` with the correct credentials.
 
 ```shell
+sudo apt install nginx
+sudo rm -f /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo cp etc/systemd/system/dataset.service /etc/systemd/system/
 sudo cp etc/nginx/sites-available/dataset /etc/nginx/sites-available/dataset
 sudo ln -s /etc/nginx/sites-available/dataset /etc/nginx/sites-enabled/dataset
