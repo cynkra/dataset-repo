@@ -66,3 +66,32 @@ sudo ln -s /etc/nginx/sites-available/dataset /etc/nginx/sites-enabled/dataset
 - [Express.js](http://expressjs.com/)
 - [Node.js](http://nodejs.org/api/)
 - [Isomorphic javascript](http://isomorphic.net/javascript)
+
+## Restore DB
+
+Create a dump file
+
+```bash
+mysqldump -u guest -f -p -h relational.fit.cvut.cz --databases Accidents Ad AdventureWorks2014 Airline Atherosclerosis AustralianFootball Basketball_men Basketball_women Bench Bench2 Bench3 Bench4 Bench5 Bench6 Biodegradability Bupa CDESchools CORA Carcinogenesis ChEMBL Chess Chinook CiteSeer ConsumerExpenditures Countries CraftBeer Credit DCG Dallas Dunur Elti ErgastF1 FNHK Facebook Financial_ijs Financial_std FlexiBee GOSales Grants Hepatitis_std Hockey Hockey_Yeti IMDB_1R KRK Mesh Mondial Mondial_Tutorial Mondial_geo Mooney_Family MuskLarge MuskSmall NBA NCAA OpenML_2016 PTE Pima PremierLeague PubMed_Diabetes Pyrimidine SAP SAT SFScores SalesDB Same_gen Seznam Shakespeare Simpsons Student_loan TalkingData Telstra Toxicology Triazine TubePricing UTube UW_std VisualGenome Walmart Walmart_2014 WebKP Yelp YelpDataset3 YelpDataset3_disc_clean arnaud_DSSTOX arnaud_NWEcensusMid2014 arnaud_citeseer ccs classicmodels cs ctu_20news ctu_KDD_Cup_2009 ctu_adult ctu_auta ctu_crossSchema1 ctu_crossSchema2 ctu_datatype_benchmark ctu_deals ctu_ecoli ctu_fairytale ctu_feature_data ctu_feature_func ctu_feature_temp ctu_financial ctu_gaussian ctu_metalearning ctu_mushrooms ctu_outliers ctu_phishing ctu_titanic ctu_vondreli employee financial ftp geneea genes imdb_MovieLens imdb_full imdb_ijs imdb_small lahman_2014 legalActs medical meta mutagenesis mutagenesis_188 mutagenesis_42 nations nhl_draft northwind pubs restbase sakila stats stats_CEB tmp tpcc tpcd tpcds tpce tpch trains twitterfromsearch4_20101001 university voc world --single-transaction --quick --skip-lock-tables > relational.sql
+```
+
+Resotre it to RDS version 5.
+Run the restore in a tmux session to avoid any network interruption.
+
+```bash
+sed -i 's/PAGE_CHECKSUM=0 ROW_FORMAT=PAGE TRANSACTIONAL=0//' relational.sql
+sed -i 's/ROW_FORMAT=FIXED/ROW_FORMAT=COMPACT/g' relational.sql
+mysql -u mysqldb -p -h hostname_of_the_DB < relational.sql
+```
+
+Create the guest user account.
+```bash
+CREATE USER 'guest'@'%' IDENTIFIED BY 'relational';
+GRANT SELECT, PROCESS, LOCK TABLES ON *.* TO 'guest'@'%';
+GRANT SELECT, LOCK TABLES ON `ctu_meta`.* TO 'guest'@'%';
+GRANT SELECT, LOCK TABLES ON `ctu_qsar`.* TO 'guest'@'%';
+GRANT SELECT, INSERT, DELETE, CREATE, DROP, INDEX, ALTER, LOCK TABLES, CREATE VIEW ON `predictor_factory`.* TO 'guest'@'%';
+GRANT SELECT, LOCK TABLES ON `ctu_pf%`.* TO 'guest'@'%';
+REVOKE SELECT ON mysql.* FROM 'guest'@'%' ;
+FLUSH PRIVILEGES;
+```
